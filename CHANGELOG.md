@@ -2,10 +2,30 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
-## [Unveröffentlicht]
+## [2.0.0] – 2026-10-20
+
+Vom Lohnrechner zur privaten Lohnanalyse.
+
+### Neu
+- Navigation mit eigenen Seiten: Lohnrechner, Jahresübersicht, Abrechnungen, Einstellungen (Zahnrad) und Hilfe; am Handy als Leiste unten
+- Ergebnisübersicht oben: Brutto, Netto (geschätzt), Abzüge und steuerfreie Bestandteile
+- Jahresübersicht mit Jahreskennzahlen, Netto je Monat, Zeitkonten-Verlauf und Monatstabelle; fehlende Monate zählen nicht als 0 €, Schätzungen sind gekennzeichnet
+- Soll-Ist-Vergleich des Lohnzettels je Lohnart, Auswertung nach Bereichen mit möglichen Ursachen und Markierung „geklärt“
+- Abrechnungen mit Status (offen, gespeichert, abgerechnet, geändert, veraltet), Monatsvergleich und bewusster Neuberechnung mit Verlauf
+- Automatisches Speichern und Wiederherstellen nach Browser-Neustart; Zeitkonten werden in den Folgemonat übertragen
+- Tagesdetails im Kalender: Normalarbeitszeit, Zuschläge und Auswirkung auf die Zeitkonten
+- Arbeitsmodelle fortlaufend über Monatsgrenzen, eigene Modelle speichern, Standardmodell, früheren Monat als Vorlage
+- Hinweise und Annahmen: Warnungen bei über 12 h am Tag, über 60 h pro Woche, vollem ZA-Topf, fehlendem Taggeld und nicht unterstützten Sonderfällen
+- Export als CSV und PDF für Monat und Jahr, Gesamtsicherung als Datei, vollständiges Löschen mit doppelter Bestätigung
+- Steuer- und SV-Werte je Gültigkeitsjahr (2025 und 2026)
+- Zulagen- und Zuschlagssätze in den erweiterten Einstellungen
 
 ### Geändert
 - Montage im Ausland: Es zählen nur noch die Feiertage des Einsatzlandes, nicht mehr zusätzlich die österreichischen
+- Kalender: Tagesarten mit gedämpften Farben und Kürzeln, Zuschlagstage mit Markierung
+- Einstellungen als eigene Seite; selten benötigte Optionen eingeklappt
+- Rechenkern von der Oberfläche getrennt; Berechnungen 2026 per Referenztest gegen v1.1 abgesichert
+- Datensätze der Vorversion werden automatisch übernommen
 
 ## [1.1.0] – 2026-10-16
 

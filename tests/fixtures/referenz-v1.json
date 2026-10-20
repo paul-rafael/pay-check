@@ -1,0 +1,1351 @@
+{
+ "leer": {
+  "input": {
+   "grundgehalt": 3000
+  },
+  "lz": {
+   "grundgehalt": 3000,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 0,
+   "ue68_2B": 0,
+   "ueGrundStd": 0,
+   "ueGrundStdBase": 0,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 0,
+   "onSiteStd": 0,
+   "onSiteB": 0,
+   "taggelder": 0,
+   "tgB": 0,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 0,
+   "tgStpfl": 0,
+   "topf68_1": 0,
+   "frei68_1": 0,
+   "topf68_2": 0,
+   "topf68_2Std": 0,
+   "frei68_2": 0,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1412,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 6000,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 3000,
+   "summeBrutto": 3000,
+   "stpflB": 3000,
+   "svBasis": 3000,
+   "svBasisRoh": 3000,
+   "svB": 542.1,
+   "svR": 0.1807,
+   "ls": 283.82,
+   "netto": 2174.08,
+   "zaTopfNeu": 0,
+   "zaTopfSaldo": 0,
+   "zaTopfEnde": 0,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 20.98,
+   "taggeld": 0
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ },
+ "buero52": {
+  "input": {
+   "grundgehalt": 3200,
+   "tage": {
+    "2026-10-01": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-02": {
+     "mode": "buero",
+     "stunden": 5.5
+    },
+    "2026-10-05": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-06": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-07": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-08": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-09": {
+     "mode": "buero",
+     "stunden": 5.5
+    },
+    "2026-10-12": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-13": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-14": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-15": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-16": {
+     "mode": "buero",
+     "stunden": 5.5
+    },
+    "2026-10-19": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-20": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-21": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-22": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-23": {
+     "mode": "buero",
+     "stunden": 5.5
+    },
+    "2026-10-26": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-27": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-28": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-29": {
+     "mode": "buero",
+     "stunden": 8.25
+    },
+    "2026-10-30": {
+     "mode": "buero",
+     "stunden": 5.5
+    }
+   }
+  },
+  "lz": {
+   "grundgehalt": 3200,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 8.25,
+   "ue68_2B": 184.64,
+   "ueGrundStd": 8.25,
+   "ueGrundStdBase": 8.25,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 184.64,
+   "onSiteStd": 0,
+   "onSiteB": 0,
+   "taggelder": 0,
+   "tgB": 0,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 0,
+   "tgStpfl": 0,
+   "topf68_1": 369.27,
+   "frei68_1": 369.27,
+   "topf68_2": 0,
+   "topf68_2Std": 0,
+   "frei68_2": 0,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1412,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 6400,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 3569.28,
+   "summeBrutto": 3569.28,
+   "stpflB": 3200.01,
+   "svBasis": 3569.28,
+   "svBasisRoh": 3569.28,
+   "svB": 644.97,
+   "svR": 0.1807,
+   "ls": 312.96,
+   "netto": 2611.35,
+   "zaTopfNeu": 0,
+   "zaTopfSaldo": 0,
+   "zaTopfEnde": 0,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 22.38,
+   "taggeld": 0
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ },
+ "ho_mehr": {
+  "input": {
+   "grundgehalt": 2800,
+   "tage": {
+    "2026-03-02": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-03": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-04": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-05": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-06": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-09": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-10": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-11": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-12": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-13": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-16": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-17": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-18": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-19": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-20": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-23": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-24": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-25": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-26": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-27": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-30": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    },
+    "2026-03-31": {
+     "mode": "homeoffice",
+     "stunden": 9.5
+    }
+   }
+  },
+  "lz": {
+   "grundgehalt": 2800,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 0,
+   "ue68_2B": 0,
+   "ueGrundStd": 0,
+   "ueGrundStdBase": 0,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 0,
+   "onSiteStd": 0,
+   "onSiteB": 0,
+   "taggelder": 0,
+   "tgB": 0,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 0,
+   "tgStpfl": 0,
+   "topf68_1": 0,
+   "frei68_1": 0,
+   "topf68_2": 0,
+   "topf68_2Std": 0,
+   "frei68_2": 0,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1412,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 5600,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 2800,
+   "summeBrutto": 2800,
+   "stpflB": 2800,
+   "svBasis": 2800,
+   "svBasisRoh": 2800,
+   "svB": 505.96,
+   "svR": 0.1807,
+   "ls": 234.66,
+   "netto": 2059.38,
+   "zaTopfNeu": 0,
+   "zaTopfSaldo": 0,
+   "zaTopfEnde": 0,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 19.58,
+   "taggeld": 0
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ },
+ "montage104": {
+  "input": {
+   "grundgehalt": 3575,
+   "taggeld": 40,
+   "tage": {
+    "2026-10-01": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": false
+    },
+    "2026-10-02": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": false
+    },
+    "2026-10-03": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": true
+    },
+    "2026-10-04": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": true
+    },
+    "2026-10-05": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": false
+    },
+    "2026-10-06": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": false
+    },
+    "2026-10-07": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": false
+    },
+    "2026-10-08": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": false
+    },
+    "2026-10-09": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": false
+    },
+    "2026-10-10": {
+     "mode": "montage",
+     "stunden": 11,
+     "fahrzeit": 0,
+     "land": "DE",
+     "region": "BY",
+     "tausch": true
+    }
+   }
+  },
+  "lz": {
+   "grundgehalt": 3575,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 15,
+   "ue68_2B": 375,
+   "ueGrundStd": 15,
+   "ueGrundStdBase": 15,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 375,
+   "onSiteStd": 110,
+   "onSiteB": 154,
+   "taggelder": 10,
+   "tgB": 400,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 353,
+   "tgStpfl": 47,
+   "topf68_1": 0,
+   "frei68_1": 0,
+   "topf68_2": 375,
+   "topf68_2Std": 15,
+   "frei68_2": 170,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1412,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 7150,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 4879,
+   "summeBrutto": 4879,
+   "stpflB": 4356,
+   "svBasis": 4526,
+   "svBasisRoh": 4526,
+   "svB": 817.85,
+   "svR": 0.1807,
+   "ls": 656.79,
+   "netto": 3404.36,
+   "zaTopfNeu": 18,
+   "zaTopfSaldo": 18,
+   "zaTopfEnde": 18,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 25,
+   "taggeld": 40
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ },
+ "montage_sonntag": {
+  "input": {
+   "grundgehalt": 3400,
+   "taggeld": 30,
+   "tage": {
+    "2026-11-01": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-02": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-03": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-04": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-05": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-06": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-07": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-08": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-09": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-10": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-11": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-12": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-13": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-14": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-15": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-11-16": {
+     "mode": "za",
+     "stunden": 8.25
+    },
+    "2026-11-17": {
+     "mode": "za",
+     "stunden": 8.25
+    },
+    "2026-11-18": {
+     "mode": "za",
+     "stunden": 8.25
+    }
+   },
+   "monat": 11
+  },
+  "lz": {
+   "grundgehalt": 3400,
+   "ue50Std": 20,
+   "ue50B": 237.8,
+   "ue68_1Std": 30,
+   "ue68_1B": 713.4,
+   "ue68_2Std": 0,
+   "ue68_2B": 0,
+   "ueGrundStd": 50,
+   "ueGrundStdBase": 50,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 1189,
+   "onSiteStd": 150,
+   "onSiteB": 210,
+   "taggelder": 15,
+   "tgB": 450,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 450,
+   "tgStpfl": 0,
+   "topf68_1": 713.4,
+   "frei68_1": 400,
+   "topf68_2": 237.8,
+   "topf68_2Std": 20,
+   "frei68_2": 170,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1412,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 6800,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 6200.2,
+   "summeBrutto": 6200.2,
+   "stpflB": 5180.2,
+   "svBasis": 5750.2,
+   "svBasisRoh": 5750.2,
+   "svB": 1039.06,
+   "svR": 0.1807,
+   "ls": 897.99,
+   "netto": 4263.15,
+   "zaTopfNeu": 23,
+   "zaTopfSaldo": 23,
+   "zaTopfEnde": 23,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 23.78,
+   "taggeld": 30
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 30,
+   "ruheVerbrauch": 24.75,
+   "ruheEnde": 5.25
+  }
+ },
+ "reise": {
+  "input": {
+   "grundgehalt": 3000,
+   "taggeld": 35,
+   "tage": {
+    "2026-10-05": {
+     "mode": "montage_reise",
+     "stunden": 4,
+     "fahrzeit": 6,
+     "land": "CH"
+    },
+    "2026-10-06": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0,
+     "land": "CH"
+    },
+    "2026-10-07": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0,
+     "land": "CH"
+    },
+    "2026-10-08": {
+     "mode": "montage_reise",
+     "stunden": 3,
+     "fahrzeit": 7,
+     "land": "CH"
+    }
+   }
+  },
+  "lz": {
+   "grundgehalt": 3000,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 4,
+   "ue68_2B": 83.92,
+   "ueGrundStd": 4,
+   "ueGrundStdBase": 4,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 83.92,
+   "onSiteStd": 31,
+   "onSiteB": 43.4,
+   "taggelder": 4,
+   "tgB": 140,
+   "lkStd": 3.5,
+   "lkB": 36.72,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 140,
+   "tgStpfl": 0,
+   "topf68_1": 0,
+   "frei68_1": 0,
+   "topf68_2": 83.92,
+   "topf68_2Std": 4,
+   "frei68_2": 41.96,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1412,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 6000,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 3387.96,
+   "summeBrutto": 3387.96,
+   "stpflB": 3206,
+   "svBasis": 3247.96,
+   "svBasisRoh": 3247.96,
+   "svB": 586.91,
+   "svR": 0.1807,
+   "ls": 332.18,
+   "netto": 2468.87,
+   "zaTopfNeu": 7,
+   "zaTopfSaldo": 7,
+   "zaTopfEnde": 7,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 20.98,
+   "taggeld": 35
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ },
+ "hochverdiener": {
+  "input": {
+   "grundgehalt": 7500,
+   "tage": {
+    "2026-10-01": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-02": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-05": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-06": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-07": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-08": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-09": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-12": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-13": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-14": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-15": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-16": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-19": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-20": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-21": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-22": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-23": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-26": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-27": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-28": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-29": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    },
+    "2026-10-30": {
+     "mode": "montage",
+     "stunden": 12,
+     "fahrzeit": 0
+    }
+   }
+  },
+  "lz": {
+   "grundgehalt": 7500,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 84,
+   "ue68_2B": 4405.8,
+   "ueGrundStd": 84,
+   "ueGrundStdBase": 84,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 4405.8,
+   "onSiteStd": 264,
+   "onSiteB": 369.6,
+   "taggelder": 22,
+   "tgB": 0,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 0,
+   "tgStpfl": 0,
+   "topf68_1": 1258.8,
+   "frei68_1": 400,
+   "topf68_2": 3776.4,
+   "topf68_2Std": 72,
+   "frei68_2": 170,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1412,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 15000,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 16681.2,
+   "summeBrutto": 16681.2,
+   "stpflB": 16111.2,
+   "svBasis": 6930,
+   "svBasisRoh": 16681.2,
+   "svB": 1252.25,
+   "svR": 0.1807,
+   "ls": 6026.04,
+   "netto": 9402.91,
+   "zaTopfNeu": 20.5,
+   "zaTopfSaldo": 20.5,
+   "zaTopfEnde": 20.5,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 52.45,
+   "taggeld": 0
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ },
+ "lehrling": {
+  "input": {
+   "grundgehalt": 1100,
+   "lehrling": true,
+   "tage": {
+    "2026-10-01": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-02": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-05": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-06": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-07": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-08": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-09": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-12": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-13": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-14": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-15": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-16": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-19": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-20": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-21": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-22": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-23": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-26": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-27": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-28": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-29": {
+     "mode": "buero",
+     "stunden": 8
+    },
+    "2026-10-30": {
+     "mode": "buero",
+     "stunden": 8
+    }
+   }
+  },
+  "lz": {
+   "grundgehalt": 1100,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 8,
+   "ue68_2B": 61.52,
+   "ueGrundStd": 8,
+   "ueGrundStdBase": 8,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 61.52,
+   "onSiteStd": 0,
+   "onSiteB": 0,
+   "taggelder": 0,
+   "tgB": 0,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 0,
+   "tgStpfl": 0,
+   "topf68_1": 123.04,
+   "frei68_1": 123.04,
+   "topf68_2": 0,
+   "topf68_2Std": 0,
+   "frei68_2": 0,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1192,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 2200,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 1223.04,
+   "summeBrutto": 1223.04,
+   "stpflB": 1100,
+   "svBasis": 1223.04,
+   "svBasisRoh": 1223.04,
+   "svB": 145.79,
+   "svR": 0.1192,
+   "ls": 0,
+   "netto": 1077.25,
+   "zaTopfNeu": 8.5,
+   "zaTopfSaldo": 8.5,
+   "zaTopfEnde": 8.5,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 7.69,
+   "taggeld": 0
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ },
+ "urlaubsgeld": {
+  "input": {
+   "grundgehalt": 3500,
+   "urlaubsgeld": 3500,
+   "extras": [
+    {
+     "id": 1,
+     "name": "Prämie",
+     "betrag": 300,
+     "steuer": "stpfl"
+    },
+    {
+     "id": 2,
+     "name": "Gutschein",
+     "betrag": 50,
+     "steuer": "steuerfrei"
+    },
+    {
+     "id": 3,
+     "name": "Bonus",
+     "betrag": 500,
+     "steuer": "begunstigt"
+    }
+   ]
+  },
+  "lz": {
+   "grundgehalt": 3500,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 0,
+   "ue68_2B": 0,
+   "ueGrundStd": 0,
+   "ueGrundStdBase": 0,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 0,
+   "onSiteStd": 0,
+   "onSiteB": 0,
+   "taggelder": 0,
+   "tgB": 0,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 0,
+   "tgStpfl": 0,
+   "topf68_1": 0,
+   "frei68_1": 0,
+   "topf68_2": 0,
+   "topf68_2Std": 0,
+   "frei68_2": 0,
+   "ugBrutto": 3500,
+   "extrasSZ": 500,
+   "szBrutto": 4000,
+   "szIn": 4000,
+   "szUeber": 0,
+   "szSV": 682.8,
+   "szSVR": 0.1707,
+   "szLS6": 161.83,
+   "szLSUeber": 0,
+   "jahressechstel": 7000,
+   "extrasCalc": [
+    {
+     "id": 1,
+     "name": "Prämie",
+     "betrag": 300,
+     "steuer": "stpfl",
+     "brutto": 300
+    },
+    {
+     "id": 2,
+     "name": "Gutschein",
+     "betrag": 50,
+     "steuer": "steuerfrei",
+     "brutto": 50
+    },
+    {
+     "id": 3,
+     "name": "Bonus",
+     "betrag": 500,
+     "steuer": "begunstigt",
+     "brutto": 500
+    }
+   ],
+   "extrasBruttoTotal": 850,
+   "extrasFrei": 50,
+   "extrasLfd": 300,
+   "lfdBrutto": 3800,
+   "summeBrutto": 7850,
+   "stpflB": 3800,
+   "svBasis": 3800,
+   "svBasisRoh": 3800,
+   "svB": 686.66,
+   "svR": 0.1807,
+   "ls": 486.87,
+   "netto": 5831.84,
+   "zaTopfNeu": 0,
+   "zaTopfSaldo": 0,
+   "zaTopfEnde": 0,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 24.48,
+   "taggeld": 0
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ },
+ "feiertag": {
+  "input": {
+   "grundgehalt": 3000,
+   "tage": {
+    "2026-10-26": {
+     "mode": "montage",
+     "stunden": 10,
+     "fahrzeit": 0
+    },
+    "2026-12-08": {
+     "mode": "montage",
+     "stunden": 9,
+     "fahrzeit": 0
+    }
+   }
+  },
+  "lz": {
+   "grundgehalt": 3000,
+   "ue50Std": 0,
+   "ue50B": 0,
+   "ue68_1Std": 0,
+   "ue68_1B": 0,
+   "ue68_2Std": 10,
+   "ue68_2B": 209.8,
+   "ueGrundStd": 10,
+   "ueGrundStdBase": 10,
+   "zaUeberlauf": 0,
+   "zaUeberlaufZuschlagB": 0,
+   "ueGrundB": 209.8,
+   "onSiteStd": 10,
+   "onSiteB": 14,
+   "taggelder": 1,
+   "tgB": 0,
+   "lkStd": 0,
+   "lkB": 0,
+   "hoTage": 0,
+   "hoPauschale": 0,
+   "hoFrei": 0,
+   "tgFrei": 0,
+   "tgStpfl": 0,
+   "topf68_1": 419.6,
+   "frei68_1": 400,
+   "topf68_2": 0,
+   "topf68_2Std": 0,
+   "frei68_2": 0,
+   "ugBrutto": 0,
+   "extrasSZ": 0,
+   "szBrutto": 0,
+   "szIn": 0,
+   "szUeber": 0,
+   "szSV": 0,
+   "szSVR": 0.1412,
+   "szLS6": 0,
+   "szLSUeber": 0,
+   "jahressechstel": 6000,
+   "extrasCalc": [],
+   "extrasBruttoTotal": 0,
+   "extrasFrei": 0,
+   "extrasLfd": 0,
+   "lfdBrutto": 3433.6,
+   "summeBrutto": 3433.6,
+   "stpflB": 3033.6,
+   "svBasis": 3433.6,
+   "svBasisRoh": 3433.6,
+   "svB": 620.45,
+   "svR": 0.1807,
+   "ls": 270.4,
+   "netto": 2542.75,
+   "zaTopfNeu": 0,
+   "zaTopfSaldo": 0,
+   "zaTopfEnde": 0,
+   "zaTopfMax": 0,
+   "zaTopfStart": 0,
+   "stundensatz": 20.98,
+   "taggeld": 0
+  },
+  "ruhe": {
+   "ruheStart": 0,
+   "ruheNeu": 0,
+   "ruheVerbrauch": 0,
+   "ruheEnde": 0
+  }
+ }
+}
