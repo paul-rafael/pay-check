@@ -2,6 +2,11 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [Unveröffentlicht]
+
+### Geändert
+- Montage im Ausland: Es zählen nur noch die Feiertage des Einsatzlandes, nicht mehr zusätzlich die österreichischen
+
 ## [1.1.0] – 2026-10-16
 
 ### Geändert

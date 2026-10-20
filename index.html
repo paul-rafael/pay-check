@@ -630,13 +630,14 @@ function landFeiertage(y,land,region){
 }
 function isMontageMode(m){return m==='montage'||m==='montage_reise'}
 function landLabel(land,region){return land==='DE'&&region?'DE-'+region:land}
-// Feiertag eines Tages: Österreich immer, bei Montage im Ausland zusätzlich das Einsatzland (beide zählen)
+// Feiertag eines Tages: bei Montage im Ausland nur die Feiertage des Einsatzlandes, sonst Österreich
 function dayFeiertag(date,dd){
+  if(dd&&isMontageMode(dd.mode)&&dd.land&&dd.land!=='AT'){
+    const lf=landFeiertage(date.getFullYear(),dd.land,dd.region)[(date.getMonth()+1)+'-'+date.getDate()]||null
+    return{ft:!!lf,name:lf?dd.land+': '+lf:null,at:null,lf}
+  }
   const at=getFeiertagName(date)
-  let lf=null
-  if(dd&&isMontageMode(dd.mode)&&dd.land&&dd.land!=='AT')lf=landFeiertage(date.getFullYear(),dd.land,dd.region)[(date.getMonth()+1)+'-'+date.getDate()]||null
-  const name=at&&lf?(at===lf?at:at+' / '+dd.land+': '+lf):at||(lf?dd.land+': '+lf:null)
-  return{ft:!!(at||lf),name,at,lf}
+  return{ft:!!at,name:at,at,lf:null}
 }
 
 // Quelltext der Seite im Originalzustand (vor jeder JS-Änderung) — Basis zum Zurückschreiben der Einstellungen
@@ -1514,7 +1515,7 @@ function syncLandRow(){
   ls.value=settings.land||'AT';rs.value=settings.region||''
   rs.style.display=ls.value==='DE'?'':'none'
   const hint={CH:'Schweiz: nur landesweit übliche Feiertage – kantonale Feiertage bitte prüfen.',ES:'Spanien: nur landesweite Feiertage – regionale bitte prüfen.',AT:'Neue Montage-Tage bekommen dieses Land.'}
-  document.getElementById('land-hint').textContent=hint[ls.value]||'Feiertage des Einsatzlandes und Österreichs zählen beide.'
+  document.getElementById('land-hint').textContent=hint[ls.value]||'An Montage-Tagen im Ausland zählen nur die Feiertage des Einsatzlandes.'
 }
 function setEinsatzland(){
   settings.land=document.getElementById('land-sel').value
