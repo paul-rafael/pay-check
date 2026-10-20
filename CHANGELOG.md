@@ -71,5 +71,5 @@ Erste Version.
 ### Qualität
 - Rechen-Tests und statische Prüfungen über GitHub Actions
 
-[1.1.0]: https://github.com/paul-rafael/gehaltspruefer/releases/tag/v1.1.0
-[1.0.0]: https://github.com/paul-rafael/gehaltspruefer/releases/tag/v1.0.0
+[1.1.0]: https://github.com/paul-rafael/einsatzrechner/releases/tag/v1.1.0
+[1.0.0]: https://github.com/paul-rafael/einsatzrechner/releases/tag/v1.0.0

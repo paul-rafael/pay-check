@@ -5,10 +5,10 @@
   "private": true,
   "license": "MIT",
   "author": "Paul-Rafael Hasan-Man",
-  "homepage": "https://paul-rafael.github.io/gehaltspruefer/",
+  "homepage": "https://paul-rafael.github.io/einsatzrechner/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/paul-rafael/gehaltspruefer.git"
+    "url": "https://github.com/paul-rafael/einsatzrechner.git"
   },
   "type": "module",
   "scripts": {

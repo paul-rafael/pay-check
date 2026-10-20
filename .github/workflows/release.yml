@@ -42,7 +42,7 @@ jobs:
           {
             awk -v v="$v" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md | sed '/^### /s/^### /#### /'
             echo
-            echo '**[Einsatzrechner öffnen →](https://paul-rafael.github.io/gehaltspruefer/)**'
+            echo '**[Einsatzrechner öffnen →](https://paul-rafael.github.io/einsatzrechner/)**'
             echo
             echo 'Offline nutzen: `einsatzrechner.html` herunterladen und im Browser öffnen.'
             echo

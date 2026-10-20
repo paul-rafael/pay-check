@@ -4,12 +4,12 @@
 
 Einsätze erfassen. Lohn nachrechnen. Lohnzettel prüfen.
 
-<a href="https://paul-rafael.github.io/gehaltspruefer/"><img alt="Live-Demo" src="https://img.shields.io/badge/Live--Demo-%C3%B6ffnen-8a0b18?style=for-the-badge"></a>
-<a href="https://github.com/paul-rafael/gehaltspruefer/releases/latest"><img alt="Version" src="https://img.shields.io/github/v/release/paul-rafael/gehaltspruefer?style=for-the-badge&color=0a0a0a&label=Version"></a>
-<a href="https://github.com/paul-rafael/gehaltspruefer/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/paul-rafael/gehaltspruefer/ci.yml?branch=main&style=for-the-badge&label=Tests&color=0a0a0a"></a>
+<a href="https://paul-rafael.github.io/einsatzrechner/"><img alt="Live-Demo" src="https://img.shields.io/badge/Live--Demo-%C3%B6ffnen-8a0b18?style=for-the-badge"></a>
+<a href="https://github.com/paul-rafael/einsatzrechner/releases/latest"><img alt="Version" src="https://img.shields.io/github/v/release/paul-rafael/einsatzrechner?style=for-the-badge&color=0a0a0a&label=Version"></a>
+<a href="https://github.com/paul-rafael/einsatzrechner/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/paul-rafael/einsatzrechner/ci.yml?branch=main&style=for-the-badge&label=Tests&color=0a0a0a"></a>
 <a href="LICENSE"><img alt="Lizenz MIT" src="https://img.shields.io/badge/Lizenz-MIT-0a0a0a?style=for-the-badge"></a>
 
-**[Einsatzrechner öffnen →](https://paul-rafael.github.io/gehaltspruefer/)**
+**[Einsatzrechner öffnen →](https://paul-rafael.github.io/einsatzrechner/)**
 
 <img alt="Einsatzrechner – Netto-Ergebnis, Kalender und Zeitkonten" src="docs/screenshot.png" width="760">
 
@@ -58,9 +58,9 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 
 ## Nutzung
 
-**Online:** [paul-rafael.github.io/gehaltspruefer](https://paul-rafael.github.io/gehaltspruefer/)
+**Online:** [paul-rafael.github.io/einsatzrechner](https://paul-rafael.github.io/einsatzrechner/)
 
-**Offline:** `einsatzrechner.html` aus dem [neuesten Release](https://github.com/paul-rafael/gehaltspruefer/releases/latest) herunterladen und im Browser öffnen.
+**Offline:** `einsatzrechner.html` aus dem [neuesten Release](https://github.com/paul-rafael/einsatzrechner/releases/latest) herunterladen und im Browser öffnen.
 
 1. In den **Einstellungen** (Zahnrad) einmal Grundgehalt, Taggeld, Standard-Stunden und Arbeitsmodell eintragen.
 2. Unter **Erfassen** Tage anklicken oder ein Arbeitsmodell setzen – Eingaben werden automatisch gespeichert, das Netto steht sofort oben.
