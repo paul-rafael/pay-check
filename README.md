@@ -84,7 +84,7 @@ index.html              Der Rechner (eine Datei): Rechenkern und Oberfläche als
 docs/                   Screenshots und Vorschaubild
 tests/                  Rechen- und Funktionstests (node:test + jsdom), Referenzwerte in tests/fixtures/
 scripts/check.mjs       Statische Prüfungen
-.github/                CI-Workflow, Issue- und PR-Vorlagen
+.github/                CI- und Release-Workflow, Issue- und PR-Vorlagen
 ```
 
 ## Dokumentation

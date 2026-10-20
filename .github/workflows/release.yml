@@ -1,0 +1,48 @@
+name: Release
+
+# Erstellt beim Push eines Versions-Tags (z.B. v2.0.0) ein GitHub-Release
+# mit gehaltspruefer.html zum Herunterladen und den Notizen aus CHANGELOG.md.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release erstellen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - name: Version prüfen
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          grep -q "const APP_VERSION='$v'" index.html || { echo "APP_VERSION in index.html passt nicht zu $GITHUB_REF_NAME"; exit 1; }
+          grep -q "\"version\": \"$v\"" package.json || { echo "version in package.json passt nicht zu $GITHUB_REF_NAME"; exit 1; }
+      - name: Release-Notizen aus CHANGELOG.md
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          {
+            awk -v v="$v" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md | sed '/^### /s/^### /#### /'
+            echo
+            echo '**[Gehaltsprüfer öffnen →](https://paul-rafael.github.io/gehaltspruefer/)**'
+            echo
+            echo 'Offline nutzen: `gehaltspruefer.html` herunterladen und im Browser öffnen.'
+            echo
+            echo 'Alle Werte sind Näherungswerte und ersetzen keine Lohn- oder Steuerberatung.'
+          } > notes.md
+          cat notes.md
+      - name: Release erstellen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp index.html gehaltspruefer.html
+          gh release create "$GITHUB_REF_NAME" gehaltspruefer.html --title "Gehaltsprüfer ${GITHUB_REF_NAME#v}" --notes-file notes.md --verify-tag
