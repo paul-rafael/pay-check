@@ -25,4 +25,4 @@ npm test        # Rechen-Tests
 - **Design:** nach dem PRH Design Kit – nur `--pr-`-Farbwerte, Dunkelrot als einziger Akzent, Hell- und Dunkelmodus prüfen, keine Emojis.
 - **Datenschutz:** Der Block `embedded-settings` in `index.html` muss im Repository immer `{}` bleiben.
 - **Changelog:** Nennenswerte Änderungen unter *Unreleased* in [`CHANGELOG.md`](CHANGELOG.md) eintragen.
-- **Release:** Version in `index.html` (`APP_VERSION`) und `package.json` erhöhen, Abschnitt in `CHANGELOG.md` anlegen, dann Tag `vX.Y.Z` pushen – der Release-Workflow erstellt das Release mit `gehaltspruefer.html`.
+- **Release:** Version in `index.html` (`APP_VERSION`) und `package.json` erhöhen, Abschnitt in `CHANGELOG.md` anlegen, dann Tag `vX.Y.Z` pushen oder unter *Actions → Release → Run workflow* starten – der Workflow erstellt das Release mit `gehaltspruefer.html`.

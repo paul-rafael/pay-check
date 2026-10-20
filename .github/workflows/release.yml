@@ -1,13 +1,22 @@
 name: Release
 
-# Erstellt beim Push eines Versions-Tags (z.B. v2.0.0) ein GitHub-Release
-# mit gehaltspruefer.html zum Herunterladen und den Notizen aus CHANGELOG.md.
+# Erstellt ein GitHub-Release mit gehaltspruefer.html zum Herunterladen und den
+# Notizen aus CHANGELOG.md – beim Push eines Versions-Tags (z.B. v2.0.0) oder von
+# Hand über „Run workflow“ (legt den Tag dann auf dem gewählten Branch an).
 on:
   push:
     tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Versions-Tag, z.B. v2.0.0'
+        required: true
 
 permissions:
   contents: write
+
+env:
+  TAG: ${{ inputs.version || github.ref_name }}
 
 jobs:
   release:
@@ -24,12 +33,12 @@ jobs:
       - run: npm test
       - name: Version prüfen
         run: |
-          v="${GITHUB_REF_NAME#v}"
-          grep -q "const APP_VERSION='$v'" index.html || { echo "APP_VERSION in index.html passt nicht zu $GITHUB_REF_NAME"; exit 1; }
-          grep -q "\"version\": \"$v\"" package.json || { echo "version in package.json passt nicht zu $GITHUB_REF_NAME"; exit 1; }
+          v="${TAG#v}"
+          grep -q "const APP_VERSION='$v'" index.html || { echo "APP_VERSION in index.html passt nicht zu $TAG"; exit 1; }
+          grep -q "\"version\": \"$v\"" package.json || { echo "version in package.json passt nicht zu $TAG"; exit 1; }
       - name: Release-Notizen aus CHANGELOG.md
         run: |
-          v="${GITHUB_REF_NAME#v}"
+          v="${TAG#v}"
           {
             awk -v v="$v" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md | sed '/^### /s/^### /#### /'
             echo
@@ -45,4 +54,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cp index.html gehaltspruefer.html
-          gh release create "$GITHUB_REF_NAME" gehaltspruefer.html --title "Gehaltsprüfer ${GITHUB_REF_NAME#v}" --notes-file notes.md --verify-tag
+          gh release create "$TAG" gehaltspruefer.html --title "Gehaltsprüfer ${TAG#v}" --notes-file notes.md --target "$GITHUB_SHA"
