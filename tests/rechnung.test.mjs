@@ -93,6 +93,12 @@ test('Feiertage: Pfingstmontag 2026 und Feiertag im Einsatzland', () => {
   assert.equal(lz.ue68_2Std, 10)
 })
 
+test('Feiertage: bei Montage im Ausland zählen nur die Feiertage des Einsatzlandes', () => {
+  // 26.10.2026: Nationalfeiertag in Österreich, in Deutschland normaler Arbeitstag
+  assert.equal(app.rechne({ tage: { '2026-10-26': montage(10, { land: 'DE', region: 'BY' }) } }).lz.ue68_2Std, 0)
+  assert.equal(app.rechne({ tage: { '2026-10-26': montage(10, { land: 'AT' }) } }).lz.ue68_2Std, 10)
+})
+
 test('Urlaubsgeld: eigener SV-Satz und 6 % nach 620 € Freibetrag', () => {
   const { lz } = app.rechne({ grundgehalt: 3500, urlaubsgeld: 3500 })
   assert.equal(lz.szSV, 597.45)       // 17,07 %

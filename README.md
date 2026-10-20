@@ -30,7 +30,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Arbeitszeit | Normalarbeitszeit Mo–Do 8,25 h, Fr 5,5 h; Mehrstunden in den ZA-Topf; Überstunden über 10 h/Tag und 50 h/Woche |
 | Zuschläge | Samstag 50 %, Sonntag und Feiertag 100 %, Lenkzeit, Zulagen, Prämien |
 | Zeitkonten | ZA-Topf mit Maximum und Überlauf, Ruhezeit-Topf aus Sonntagsarbeit |
-| Feiertage | Österreich sowie bei Einsätzen im Ausland zusätzlich DE (je Bundesland), CH, FR, IT, NL, BE, LU, ES |
+| Feiertage | Österreich; an Montage-Tagen im Ausland nur die Feiertage des Einsatzlandes: DE (je Bundesland), CH, FR, IT, NL, BE, LU, ES |
 | Netto 2026 | Sozialversicherung mit Höchstbeitragsgrundlage, Lohnsteuer-Tarif 2026, steuerfreie Zuschläge nach §68, Taggeld, Urlaubsgeld nach §67 |
 | Lehrlinge | Reduzierter SV-Satz per Schalter |
 | Datensätze | Monate speichern, laden, exportieren und importieren; Folgemonat mit Salden starten |
