@@ -1,6 +1,6 @@
 name: Release
 
-# Erstellt ein GitHub-Release mit gehaltspruefer.html zum Herunterladen und den
+# Erstellt ein GitHub-Release mit einsatzrechner.html zum Herunterladen und den
 # Notizen aus CHANGELOG.md – beim Push eines Versions-Tags (z.B. v2.0.0) oder von
 # Hand über „Run workflow“ (legt den Tag dann auf dem gewählten Branch an).
 on:
@@ -42,9 +42,9 @@ jobs:
           {
             awk -v v="$v" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md | sed '/^### /s/^### /#### /'
             echo
-            echo '**[Gehaltsprüfer öffnen →](https://paul-rafael.github.io/gehaltspruefer/)**'
+            echo '**[Einsatzrechner öffnen →](https://paul-rafael.github.io/gehaltspruefer/)**'
             echo
-            echo 'Offline nutzen: `gehaltspruefer.html` herunterladen und im Browser öffnen.'
+            echo 'Offline nutzen: `einsatzrechner.html` herunterladen und im Browser öffnen.'
             echo
             echo 'Alle Werte sind Näherungswerte und ersetzen keine Lohn- oder Steuerberatung.'
           } > notes.md
@@ -53,5 +53,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cp index.html gehaltspruefer.html
-          gh release create "$TAG" gehaltspruefer.html --title "Gehaltsprüfer ${TAG#v}" --notes-file notes.md --target "$GITHUB_SHA"
+          cp index.html einsatzrechner.html
+          gh release create "$TAG" einsatzrechner.html --title "Einsatzrechner ${TAG#v}" --notes-file notes.md --target "$GITHUB_SHA"

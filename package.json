@@ -1,7 +1,7 @@
 {
-  "name": "gehaltspruefer",
-  "version": "2.0.0",
-  "description": "Den eigenen Lohn nachrechnen – Brutto, Netto, Stunden. Für Österreich.",
+  "name": "einsatzrechner",
+  "version": "2.1.0",
+  "description": "Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen.",
   "private": true,
   "license": "MIT",
   "author": "Paul-Rafael Hasan-Man",

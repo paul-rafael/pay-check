@@ -1,10 +1,10 @@
 # Mitwirken
 
-Danke für dein Interesse am Gehaltsprüfer! Fehlermeldungen, Verbesserungsvorschläge und Pull Requests sind willkommen.
+Danke für dein Interesse am Einsatzrechner! Fehlermeldungen, Verbesserungsvorschläge und Pull Requests sind willkommen.
 
 ## Fehler melden oder Ideen einbringen
 
-- **Rechenfehler:** Bitte ein [Issue „Rechenfehler“](../../issues/new?template=rechenfehler.yml) anlegen – am besten mit dem Monat als Datei (Lohnrechner → Menü „…“ → *Monat als Datei (JSON)*) und dem erwarteten Wert laut echtem Lohnzettel. **Vorher persönliche Daten wie Namen entfernen.**
+- **Rechenfehler:** Bitte ein [Issue „Rechenfehler“](../../issues/new?template=rechenfehler.yml) anlegen – am besten mit dem Monat als Datei (Erfassen → Menü „…“ → *Monat als Datei (JSON)*) und dem erwarteten Wert laut echtem Lohnzettel. **Vorher persönliche Daten wie Namen entfernen.**
 - **Neue Funktion:** [Issue „Funktionswunsch“](../../issues/new?template=funktionswunsch.yml) anlegen.
 
 ## Lokal entwickeln
@@ -25,4 +25,4 @@ npm test        # Rechen-Tests
 - **Design:** nach dem PRH Design Kit – nur `--pr-`-Farbwerte, Dunkelrot als einziger Akzent, Hell- und Dunkelmodus prüfen, keine Emojis.
 - **Datenschutz:** Der Block `embedded-settings` in `index.html` muss im Repository immer `{}` bleiben.
 - **Changelog:** Nennenswerte Änderungen unter *Unreleased* in [`CHANGELOG.md`](CHANGELOG.md) eintragen.
-- **Release:** Version in `index.html` (`APP_VERSION`) und `package.json` erhöhen, Abschnitt in `CHANGELOG.md` anlegen, dann Tag `vX.Y.Z` pushen oder unter *Actions → Release → Run workflow* starten – der Workflow erstellt das Release mit `gehaltspruefer.html`.
+- **Release:** Version in `index.html` (`APP_VERSION`) und `package.json` erhöhen, Abschnitt in `CHANGELOG.md` anlegen, dann Tag `vX.Y.Z` pushen oder unter *Actions → Release → Run workflow* starten – der Workflow erstellt das Release mit `einsatzrechner.html`.
