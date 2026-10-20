@@ -185,6 +185,14 @@ test('Datensätze der Vorversion werden einmalig übernommen', () => {
   assert.ok(a.storage().lzr_datasets, 'alte Daten bleiben erhalten')
 })
 
+test('Einführung nur beim ersten Besuch', () => {
+  const a = ladeApp()
+  assert.equal(a.run(`document.getElementById('intro').hidden`), false)
+  a.run('introSchliessen()')
+  assert.equal(ladeApp({ storage: a.storage() }).run(`document.getElementById('intro').hidden`), true)
+  assert.equal(ladeApp({ storage: { lzr_settings: { _saved: 1 }, lzr_monate: { '2026-10': { status: 'offen', draft: { data: { monat: 10, jahr: 2026, dayMap: {} } } } } } }).run(`document.getElementById('intro').hidden`), true)
+})
+
 test('Alle Daten löschen entfernt Monate und Einstellungen', () => {
   const a = ladeApp()
   setzeMonat(a, 10, 2026, { '2026-10-06': montage(10) })
@@ -198,13 +206,19 @@ test('Alle Daten löschen entfernt Monate und Einstellungen', () => {
 test('Alle Seiten lassen sich ohne Fehler anzeigen', () => {
   const a = ladeApp()
   setzeMonat(a, 10, 2026, { '2026-10-06': montage(11, { land: 'DE', region: 'BY' }), '2026-10-11': montage(6) })
-  for (const v of ['rechner', 'jahr', 'abrechnungen', 'einstellungen', 'hilfe']) {
+  for (const v of ['erfassen', 'ergebnis', 'monate', 'einstellungen', 'hilfe']) {
     a.run(`location.hash='${v}';zeigeView()`)
     assert.ok(a.run(`document.getElementById('view-${v}').classList.contains('active')`), v)
   }
-  a.run(`location.hash='rechner';zeigeView()`)
+  a.run(`location.hash='erfassen';zeigeView()`)
   assert.equal(a.run(`document.querySelectorAll('#cal-grid .day-btn').length`), 31)
-  assert.match(a.run(`document.getElementById('kpis').textContent`), /Netto geschätzt/)
+  assert.equal(a.run(`document.getElementById('res-netto').textContent`), a.run(`fmt(state._res.lz.netto)+'€'`))
+  assert.equal(a.run(`document.getElementById('monat-kopf').hidden`), false)
+  a.run(`location.hash='monate';zeigeView()`)
+  assert.equal(a.run(`document.getElementById('monat-kopf').hidden`), true, 'Monatskopf nur bei Erfassen und Ergebnis')
+  a.run(`location.hash='jahr';zeigeView()`)
+  assert.equal(a.run('aktiveView()'), 'monate', 'alte Adressen bleiben gültig')
+  a.run(`location.hash='erfassen';zeigeView()`)
   a.run(`openDD('2026-10-06',document.querySelector('[data-key="2026-10-06"]'))`)
   assert.match(a.run(`document.getElementById('dd-content').textContent`), /ZA-Konto\+1,75 h/)
 })

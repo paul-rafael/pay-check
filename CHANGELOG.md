@@ -2,6 +2,24 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.1.0] – 2026-10-20
+
+Neuer Name: **Einsatzrechner** (vorher Gehaltsprüfer). Gespeicherte Daten bleiben erhalten.
+
+### Geändert
+- Navigation nach dem Arbeitsablauf: Erfassen, Ergebnis, Gespeicherte Monate, Einstellungen; Hilfe über das Fragezeichen
+- Ergebnisleiste: Netto als größte Zahl, Brutto und Abzüge daneben, steuerfreie Anteile separat ausgewiesen
+- Am Handy bleibt das Netto beim Scrollen in einer schmalen Leiste sichtbar
+- Bessere Lesbarkeit: dunklere Grautöne für Beschriftungen, Hinweise und Tabellenköpfe (mindestens 4,5:1 Kontrast)
+- Kalender: deutlichere Farben je Tagesart, klar markierter ausgewählter Tag, heutiger Tag, Wochenenden und Feiertage subtil abgesetzt, Legende am Handy in Spalten
+- Gespeicherte Monate: Jahresübersicht und Monatsliste auf einer Seite, Jahresnetto zuerst
+- Datenverwaltung (Sichern, Importieren, Löschen) in den Einstellungen
+- Hinweise & Annahmen standardmäßig eingeklappt, Warnungen rot gezählt
+
+### Neu
+- Kurze Einführung beim ersten Besuch
+- Erklärungen direkt an den Eingaben (Fragezeichen neben Stundensatz, Taggeld, Arbeitsmodell, Einsatzland, Zeitkonten)
+
 ## [2.0.0] – 2026-10-20
 
 Vom Lohnrechner zur privaten Lohnanalyse.

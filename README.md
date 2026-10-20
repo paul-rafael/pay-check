@@ -1,23 +1,23 @@
 <div align="center">
 
-# Gehaltsprüfer
+# Einsatzrechner
 
-Den eigenen Lohn nachrechnen – Brutto, Netto, Stunden. Für Österreich.
+Einsätze erfassen. Lohn nachrechnen. Lohnzettel prüfen.
 
 <a href="https://paul-rafael.github.io/gehaltspruefer/"><img alt="Live-Demo" src="https://img.shields.io/badge/Live--Demo-%C3%B6ffnen-8a0b18?style=for-the-badge"></a>
 <a href="https://github.com/paul-rafael/gehaltspruefer/releases/latest"><img alt="Version" src="https://img.shields.io/github/v/release/paul-rafael/gehaltspruefer?style=for-the-badge&color=0a0a0a&label=Version"></a>
 <a href="https://github.com/paul-rafael/gehaltspruefer/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/paul-rafael/gehaltspruefer/ci.yml?branch=main&style=for-the-badge&label=Tests&color=0a0a0a"></a>
 <a href="LICENSE"><img alt="Lizenz MIT" src="https://img.shields.io/badge/Lizenz-MIT-0a0a0a?style=for-the-badge"></a>
 
-**[Gehaltsprüfer öffnen →](https://paul-rafael.github.io/gehaltspruefer/)**
+**[Einsatzrechner öffnen →](https://paul-rafael.github.io/gehaltspruefer/)**
 
-<img alt="Gehaltsprüfer – Ergebnis, Kalender und Zeitkonten" src="docs/screenshot.png" width="760">
+<img alt="Einsatzrechner – Netto-Ergebnis, Kalender und Zeitkonten" src="docs/screenshot.png" width="760">
 
 </div>
 
 ---
 
-Der Gehaltsprüfer ist eine private Lohnanalyse für Österreich. Du trägst die Arbeitstage eines Monats in einen Kalender ein – Büro, Homeoffice, Montage, Reise, Zeitausgleich – und siehst sofort den voraussichtlichen Lohnzettel mit Zuschlägen, Zulagen, Zeitkonten und einer Netto-Schätzung. Danach vergleichst du ihn mit deinem echten Lohnzettel und behältst in der Jahresübersicht Einkommen und Zeitkonten im Blick.
+Der Einsatzrechner ist ein privates Werkzeug für alle, die auf Montage, auf Reise oder im Schichtmodell arbeiten und ihren Lohn nach österreichischem Recht nachrechnen wollen. Du trägst die Arbeitstage eines Monats in einen Kalender ein – Büro, Homeoffice, Montage, Reise, Zeitausgleich – und siehst sofort den voraussichtlichen Lohnzettel mit Zuschlägen, Zulagen, Zeitkonten und einer Netto-Schätzung. Danach vergleichst du ihn mit deinem echten Lohnzettel und behältst in der Jahresübersicht Einkommen und Zeitkonten im Blick.
 
 Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Konto.
 
@@ -25,7 +25,8 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 
 | Bereich | Beschreibung |
 | --- | --- |
-| Lohnrechner | Ergebnis oben (Brutto, Netto, Abzüge, steuerfrei), Kalender mit Tagesdetails, Lohnzettel und Brutto-Netto-Rechnung |
+| Erfassen | Kalender mit Tagesdetails, Arbeitsmodelle, Einsatzland, Bezahlung und Zeitkonten – das geschätzte Netto steht immer oben |
+| Ergebnis | Netto als Hauptzahl, Brutto, Abzüge und steuerfreie Anteile; vollständiger Lohnzettel, Brutto-Netto-Rechnung und Soll-Ist-Vergleich |
 | Kalender | Büro, Homeoffice, Montage, Montage mit Reise, Zeitausgleich und Ruhezeit mit Farbe und Kürzel; Tage kopieren und einfügen |
 | Arbeitsmodelle | 5/2, 10/4, 6/1/4/3 und eigene Modelle; einmalig oder fortlaufend über Monatsgrenzen; früheren Monat als Vorlage |
 | Arbeitszeit | Normalarbeitszeit Mo–Do 8,25 h, Fr 5,5 h; Mehrstunden in den ZA-Topf; Überstunden über 10 h/Tag und 50 h/Woche |
@@ -35,7 +36,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Netto | SV mit Höchstbeitragsgrundlage, Lohnsteuer-Tarif, steuerfreie Zuschläge nach §68, Taggeld, Urlaubsgeld nach §67 – Werte je Steuerjahr (2025, 2026) |
 | Soll-Ist-Vergleich | Beträge des echten Lohnzettels je Lohnart eintragen, Differenzen nach Bereichen mit möglichen Ursachen, Abweichungen als geklärt markieren |
 | Jahresübersicht | Jahresbrutto, -netto, Taggeld, SV, Lohnsteuer, Zuschläge; Netto je Monat, Zeitkonten-Verlauf, Monatstabelle; fehlende Monate zählen nicht als 0 € |
-| Abrechnungen | Status offen / gespeichert / abgerechnet / geändert / veraltet; Monate vergleichen; bewusste Neuberechnung mit Verlauf |
+| Gespeicherte Monate | Jahresübersicht und alle Monate mit Status offen / gespeichert / abgerechnet / geändert / veraltet; Monate vergleichen; bewusste Neuberechnung mit Verlauf |
 | Hinweise | Warnungen bei über 12 h am Tag, über 60 h pro Woche, vollem ZA-Topf, fehlendem Taggeld; alle Annahmen sichtbar |
 | Daten | Automatisches Speichern im Browser, CSV und PDF für Monat und Jahr, Gesamtsicherung, Import, vollständiges Löschen |
 | Lehrlinge | Reduzierter SV-Satz per Schalter |
@@ -59,13 +60,13 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 
 **Online:** [paul-rafael.github.io/gehaltspruefer](https://paul-rafael.github.io/gehaltspruefer/)
 
-**Offline:** `gehaltspruefer.html` aus dem [neuesten Release](https://github.com/paul-rafael/gehaltspruefer/releases/latest) herunterladen und im Browser öffnen.
+**Offline:** `einsatzrechner.html` aus dem [neuesten Release](https://github.com/paul-rafael/gehaltspruefer/releases/latest) herunterladen und im Browser öffnen.
 
 1. In den **Einstellungen** (Zahnrad) einmal Grundgehalt, Taggeld, Standard-Stunden und Arbeitsmodell eintragen.
-2. Im **Lohnrechner** Tage anklicken oder ein Arbeitsmodell setzen – Eingaben werden automatisch gespeichert.
+2. Unter **Erfassen** Tage anklicken oder ein Arbeitsmodell setzen – Eingaben werden automatisch gespeichert, das Netto steht sofort oben.
 3. Bei Einsätzen im Ausland das **Einsatzland** wählen.
-4. Monat **speichern**, im **Soll-Ist-Vergleich** mit dem Lohnzettel prüfen und als **abgerechnet** markieren.
-5. In der **Jahresübersicht** Einkommen und Zeitkonten verfolgen.
+4. Unter **Ergebnis** den Monat speichern, im **Soll-Ist-Vergleich** mit dem Lohnzettel prüfen und als **abgerechnet** markieren.
+5. Unter **Gespeicherte Monate** Jahr, Einkommen und Zeitkonten verfolgen.
 
 ## Entwicklung
 
@@ -106,7 +107,7 @@ Quellen: [ÖGK – Veränderliche Werte 2026](https://www.oegk.at/cdscontent/?co
 
 **Weitere Dokumente:** [CHANGELOG.md](CHANGELOG.md) · [CONTRIBUTING.md](CONTRIBUTING.md) · [LICENSE](LICENSE)
 
-**Haftungsausschluss:** Alle Ergebnisse sind Näherungswerte. Kollektivverträge, Betriebsvereinbarungen und persönliche Absetzbeträge (z. B. Pendlerpauschale, Familienbonus Plus) können zu Abweichungen führen. Der Gehaltsprüfer ersetzt keine Lohn- oder Steuerberatung; verbindlich ist ausschließlich die Abrechnung des Arbeitgebers.
+**Haftungsausschluss:** Alle Ergebnisse sind Näherungswerte. Kollektivverträge, Betriebsvereinbarungen und persönliche Absetzbeträge (z. B. Pendlerpauschale, Familienbonus Plus) können zu Abweichungen führen. Der Einsatzrechner ersetzt keine Lohn- oder Steuerberatung; verbindlich ist ausschließlich die Abrechnung des Arbeitgebers.
 
 ---
 
