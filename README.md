@@ -11,13 +11,13 @@ Den eigenen Lohn nachrechnen – Brutto, Netto, Stunden. Für Österreich.
 
 **[Gehaltsprüfer öffnen →](https://paul-rafael.github.io/gehaltspruefer/)**
 
-<img alt="Gehaltsprüfer – Kalender und Lohnzettel" src="docs/screenshot.png" width="760">
+<img alt="Gehaltsprüfer – Ergebnis, Kalender und Zeitkonten" src="docs/screenshot.png" width="760">
 
 </div>
 
 ---
 
-Der Gehaltsprüfer ist ein Lohnrechner für Österreich. Du trägst die Arbeitstage eines Monats in einen Kalender ein – Büro, Homeoffice, Einsatz, Reise, Zeitausgleich – und siehst daraus den voraussichtlichen Lohnzettel mit Zuschlägen, Zulagen, Zeitkonten und einer Netto-Schätzung nach den Werten 2026. So kannst du deine Abrechnung Zeile für Zeile nachvollziehen.
+Der Gehaltsprüfer ist eine private Lohnanalyse für Österreich. Du trägst die Arbeitstage eines Monats in einen Kalender ein – Büro, Homeoffice, Montage, Reise, Zeitausgleich – und siehst sofort den voraussichtlichen Lohnzettel mit Zuschlägen, Zulagen, Zeitkonten und einer Netto-Schätzung. Danach vergleichst du ihn mit deinem echten Lohnzettel und behältst in der Jahresübersicht Einkommen und Zeitkonten im Blick.
 
 Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Konto.
 
@@ -25,29 +25,34 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 
 | Bereich | Beschreibung |
 | --- | --- |
-| Kalender | Büro, Homeoffice, Einsatz, Einsatz mit Reise, Zeitausgleich und Ruhezeit; Tage kopieren und einfügen |
-| Arbeitsmodelle | 5/2, 10/4, 6/1/4/3 und ein eigenes Modell per Klick |
+| Lohnrechner | Ergebnis oben (Brutto, Netto, Abzüge, steuerfrei), Kalender mit Tagesdetails, Lohnzettel und Brutto-Netto-Rechnung |
+| Kalender | Büro, Homeoffice, Montage, Montage mit Reise, Zeitausgleich und Ruhezeit mit Farbe und Kürzel; Tage kopieren und einfügen |
+| Arbeitsmodelle | 5/2, 10/4, 6/1/4/3 und eigene Modelle; einmalig oder fortlaufend über Monatsgrenzen; früheren Monat als Vorlage |
 | Arbeitszeit | Normalarbeitszeit Mo–Do 8,25 h, Fr 5,5 h; Mehrstunden in den ZA-Topf; Überstunden über 10 h/Tag und 50 h/Woche |
-| Zuschläge | Samstag 50 %, Sonntag und Feiertag 100 %, Lenkzeit, Zulagen, Prämien |
-| Zeitkonten | ZA-Topf mit Maximum und Überlauf, Ruhezeit-Topf aus Sonntagsarbeit |
+| Zuschläge | Samstag 50 %, Sonntag und Feiertag 100 %, Lenkzeit, Zulagen, Prämien; Sätze in den erweiterten Einstellungen änderbar |
+| Zeitkonten | ZA- und Ruhezeit-Topf mit Start, Zugängen, Entnahmen und Ende; automatischer Übertrag in den Folgemonat |
 | Feiertage | Österreich; an Montage-Tagen im Ausland nur die Feiertage des Einsatzlandes: DE (je Bundesland), CH, FR, IT, NL, BE, LU, ES |
-| Netto 2026 | Sozialversicherung mit Höchstbeitragsgrundlage, Lohnsteuer-Tarif 2026, steuerfreie Zuschläge nach §68, Taggeld, Urlaubsgeld nach §67 |
+| Netto | SV mit Höchstbeitragsgrundlage, Lohnsteuer-Tarif, steuerfreie Zuschläge nach §68, Taggeld, Urlaubsgeld nach §67 – Werte je Steuerjahr (2025, 2026) |
+| Soll-Ist-Vergleich | Beträge des echten Lohnzettels je Lohnart eintragen, Differenzen nach Bereichen mit möglichen Ursachen, Abweichungen als geklärt markieren |
+| Jahresübersicht | Jahresbrutto, -netto, Taggeld, SV, Lohnsteuer, Zuschläge; Netto je Monat, Zeitkonten-Verlauf, Monatstabelle; fehlende Monate zählen nicht als 0 € |
+| Abrechnungen | Status offen / gespeichert / abgerechnet / geändert / veraltet; Monate vergleichen; bewusste Neuberechnung mit Verlauf |
+| Hinweise | Warnungen bei über 12 h am Tag, über 60 h pro Woche, vollem ZA-Topf, fehlendem Taggeld; alle Annahmen sichtbar |
+| Daten | Automatisches Speichern im Browser, CSV und PDF für Monat und Jahr, Gesamtsicherung, Import, vollständiges Löschen |
 | Lehrlinge | Reduzierter SV-Satz per Schalter |
-| Datensätze | Monate speichern, laden, exportieren und importieren; Folgemonat mit Salden starten |
-| Einstellungen | Grundgehalt, Stundenteiler und Standard-Stunden je Tagesart, optional fest in der Datei gespeichert |
 
 ## Highlights
 
 - **Nachvollziehbar** – steuerfreie Anteile werden einzeln ausgewiesen, z. B. „von 1.272,96 € – Rest 1.102,96 € steuerpflichtig“.
-- **Aktuelle Werte** – Sozialversicherung, Lohnsteuer, §68-Grenzen und Taggeld-Sätze nach Stand 2026, mit Quellen.
+- **Aktuelle Werte** – Sozialversicherung, Lohnsteuer und §68-Grenzen je Steuerjahr, Taggeld-Sätze je Land, mit Quellen.
+- **Ehrlich** – Schätzungen sind gekennzeichnet, Annahmen werden angezeigt, gespeicherte Abrechnungen ändern sich nie von selbst.
 - **Privat** – keine Anmeldung, kein Tracking, keine externen Skripte. Daten bleiben im eigenen Browser.
 - **Offline** – die Datei funktioniert auch ohne Internet, z. B. auf Montage.
 - **Geprüft** – Rechen-Tests laufen bei jeder Änderung automatisch.
 
 <details>
-<summary>Stundenübersicht mit Wochensummen</summary>
+<summary>Jahresübersicht</summary>
 <br>
-<img alt="Stundenübersicht" src="docs/stundenuebersicht.png" width="760">
+<img alt="Jahresübersicht mit Netto je Monat" src="docs/jahresuebersicht.png" width="760">
 </details>
 
 ## Nutzung
@@ -56,17 +61,18 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 
 **Offline:** `gehaltspruefer.html` aus dem [neuesten Release](https://github.com/paul-rafael/gehaltspruefer/releases/latest) herunterladen und im Browser öffnen.
 
-1. Unter **Einstellungen** einmal Grundgehalt, Taggeld und Standard-Stunden eintragen.
-2. Monat wählen und Tage anklicken – oder ein **Arbeitsmodell** auf den ersten Arbeitstag setzen.
+1. In den **Einstellungen** (Zahnrad) einmal Grundgehalt, Taggeld, Standard-Stunden und Arbeitsmodell eintragen.
+2. Im **Lohnrechner** Tage anklicken oder ein Arbeitsmodell setzen – Eingaben werden automatisch gespeichert.
 3. Bei Einsätzen im Ausland das **Einsatzland** wählen.
-4. Ergebnis mit dem eigenen Lohnzettel vergleichen und den Monat als **Datensatz** speichern.
+4. Monat **speichern**, im **Soll-Ist-Vergleich** mit dem Lohnzettel prüfen und als **abgerechnet** markieren.
+5. In der **Jahresübersicht** Einkommen und Zeitkonten verfolgen.
 
 ## Entwicklung
 
 ```bash
 npm install      # Test-Umgebung
 npm run check    # Syntax-, Datenschutz- und Emoji-Prüfung
-npm test         # Rechen-Tests
+npm test         # Rechen- und Funktionstests
 ```
 
 Tests laufen bei jedem Push über GitHub Actions. Hinweise zum Mitwirken stehen in [CONTRIBUTING.md](CONTRIBUTING.md).
@@ -74,16 +80,16 @@ Tests laufen bei jedem Push über GitHub Actions. Hinweise zum Mitwirken stehen 
 ## Projektstruktur
 
 ```
-index.html              Der Rechner (eine Datei, inkl. PRH Design Kit, Logo und Favicon)
+index.html              Der Rechner (eine Datei): Rechenkern und Oberfläche als getrennte Skripte, inkl. PRH Design Kit
 docs/                   Screenshots und Vorschaubild
-tests/                  Rechen-Tests (node:test + jsdom)
+tests/                  Rechen- und Funktionstests (node:test + jsdom), Referenzwerte in tests/fixtures/
 scripts/check.mjs       Statische Prüfungen
 .github/                CI-Workflow, Issue- und PR-Vorlagen
 ```
 
 ## Dokumentation
 
-**Rechengrundlagen 2026**
+**Rechengrundlagen 2026** (die Werte 2025 sind ebenfalls hinterlegt und unter Einstellungen einsehbar)
 
 | Thema | Wert |
 | --- | --- |

@@ -4,7 +4,7 @@ Danke für dein Interesse am Gehaltsprüfer! Fehlermeldungen, Verbesserungsvorsc
 
 ## Fehler melden oder Ideen einbringen
 
-- **Rechenfehler:** Bitte ein [Issue „Rechenfehler“](../../issues/new?template=rechenfehler.yml) anlegen – am besten mit dem Monat als exportiertem Datensatz (Datensätze → *Als Datei exportieren*) und dem erwarteten Wert laut echtem Lohnzettel. **Vorher persönliche Daten wie Namen entfernen.**
+- **Rechenfehler:** Bitte ein [Issue „Rechenfehler“](../../issues/new?template=rechenfehler.yml) anlegen – am besten mit dem Monat als Datei (Lohnrechner → Menü „…“ → *Monat als Datei (JSON)*) und dem erwarteten Wert laut echtem Lohnzettel. **Vorher persönliche Daten wie Namen entfernen.**
 - **Neue Funktion:** [Issue „Funktionswunsch“](../../issues/new?template=funktionswunsch.yml) anlegen.
 
 ## Lokal entwickeln
