@@ -2,6 +2,21 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.3.0] – 2026-10-21
+
+### Geändert
+- Ruhigeres Layout: Kalender über die volle Breite, Zeitkonten kompakt darunter (am Handy untereinander)
+- Hellere Farben: heller Hintergrund, weiße Flächen mit feiner Kontur statt Schatten, Bordeaux nur noch für aktive Navigation, ausgewählte Tage und wichtige Aktionen; ruhigere Farben für Montage, Zeitausgleich und Büro/Homeoffice
+- Ergebnisleiste kompakt: Netto und Arbeitsstunden oben, daneben Brutto, Abzüge und steuerfreie Anteile
+- Kalender-Aktionen gebündelt: Arbeitsmodell und Einsatzland als Auswahl, seltene Aktionen im Menü „Kalender“
+- Bezahlung: Grundgehalt, Stundensatz, Taggeld und Lohnzettel-Monat in einer Reihe, Sonderzahlungen eingeklappt
+- Einheitliche Schriftgrößen, Abstände und Feldhöhen; Darstellung startet hell (Einstellung „automatisch“ bleibt wählbar)
+
+### Neu
+- Info-Symbol „i“ in der Ecke jeder Funktion, das per Klick erklärt, was sie macht
+
+Berechnung, gespeicherte Daten und Navigation sind unverändert.
+
 ## [2.2.1] – 2026-10-21
 
 ### Behoben

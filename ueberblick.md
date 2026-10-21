@@ -1,6 +1,6 @@
 # Einsatzrechner – Funktionsüberblick
 
-Stand: Version 2.2.1 · Live: <https://paul-rafael.github.io/einsatzrechner/>
+Stand: Version 2.3.0 · Live: <https://paul-rafael.github.io/einsatzrechner/>
 
 Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichischem Recht, vollständig im Browser, ohne Konto und ohne Server.
 
@@ -10,19 +10,19 @@ Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichisc
 
 | Bereich | Inhalt |
 | --- | --- |
-| **Erfassen** | Monat wählen, Arbeitskalender, Bezahlung, Zeitkonten, Hinweise |
+| **Erfassen** | Monat wählen, Arbeitskalender (volle Breite) mit Zeitkonten darunter, Bezahlung, Hinweise |
 | **Ergebnis** | Lohnzettel (berechnet), Brutto-Netto-Rechnung, Soll-Ist-Vergleich, Lohnzettel einlesen, Stundenübersicht |
 | **Gespeicherte Monate** | Jahresübersicht, alle Monate mit Status, Monatsvergleich |
 | **Einstellungen** | Standardwerte, Arbeitsmodelle, Zeitkonten, Steuerjahr, Zulagensätze, Daten, Darstellung |
 | **Hilfe** (Fragezeichen oben) | Anleitung, Status-Erklärung, Feiertage & Taggeld-Sätze, was nicht berücksichtigt wird |
 
-Am Handy gibt es eine Navigationsleiste unten. Alte Adressen (`#rechner`, `#jahr`, `#abrechnungen`) leiten weiter.
+Jede Funktion hat rechts oben ein kleines **„i“**, das per Klick erklärt, wofür sie da ist; einzelne Felder haben ein eigenes „i“. Am Handy gibt es eine Navigationsleiste unten. Alte Adressen (`#rechner`, `#jahr`, `#abrechnungen`) leiten weiter.
 
 ---
 
 ## Ergebnisleiste (Erfassen und Ergebnis)
 
-- **Netto geschätzt** als größte Zahl, daneben Brutto und Abzüge (SV und Lohnsteuer)
+- **Netto geschätzt** als größte Zahl, daneben Arbeitsstunden, Brutto und Abzüge (SV und Lohnsteuer)
 - **davon steuerfrei**, aufgeschlüsselt nach Taggeld, §68-Zuschlägen, Pauschalen und Prämien
 - Kurzinfos: Stunden, ZA-Saldo, Ruhezeit, Montage-Tage, Steuerjahr, Anzahl der Warnungen
 - Ist ein Lohnzettel verglichen, steht das echte Netto samt Differenz darunter
@@ -36,7 +36,8 @@ Am Handy gibt es eine Navigationsleiste unten. Alte Adressen (`#rechner`, `#jahr
 - Monat und Jahr wählen, mit Pfeilen blättern
 - Eingaben werden **automatisch gespeichert** und nach einem Browser-Neustart wiederhergestellt
 - Leere, nur angesehene Monate werden nicht gespeichert
-- Menü „…“: als abgerechnet markieren, früheren Monat als Vorlage, Arbeitsmodell fortführen, PDF/CSV/JSON-Export, alle Kalendereinträge löschen
+- Menü „…“: als abgerechnet markieren, PDF/CSV/JSON-Export
+- Menü „Kalender“ im Kalender: Einsatzland auf alle Montage-Tage anwenden, Arbeitsmodell fortführen, früheren Monat als Vorlage, alle Kalendereinträge löschen
 
 ### Arbeitskalender
 - **Tagesarten** mit Farbe und Kürzel: Büro (B), Homeoffice (HO), Montage (M), Montage + Reise (M+R), Zeitausgleich (ZA), Ruhezeit (RZ), frei
@@ -130,7 +131,7 @@ Am Handy gibt es eine Navigationsleiste unten. Alte Adressen (`#rechner`, `#jahr
 - Berechnungsannahmen: hinterlegte Werte je Steuerjahr, Toleranz für den Soll-Ist-Vergleich
 - Erweitert: On-Site-Zulage, Homeoffice-Pauschale, Samstags-, Lenkzeit- und Überlauf-Zuschlag
 - **Daten**: alles sichern, Sicherung oder Monat importieren, alles löschen (doppelte Bestätigung)
-- Darstellung (automatisch, hell, dunkel); Einstellungen optional fest in die HTML-Datei schreiben
+- Darstellung (automatisch, hell, dunkel; Standard: hell); Einstellungen optional fest in die HTML-Datei schreiben
 - Gespeicherte Monate bleiben bei Änderungen unverändert
 
 ---
