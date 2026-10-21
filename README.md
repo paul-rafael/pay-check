@@ -35,6 +35,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Feiertage | Österreich; an Montage-Tagen im Ausland nur die Feiertage des Einsatzlandes: DE (je Bundesland), CH, FR, IT, NL, BE, LU, ES |
 | Netto | SV mit Höchstbeitragsgrundlage, Lohnsteuer-Tarif, steuerfreie Zuschläge nach §68, Taggeld, Urlaubsgeld nach §67 – Werte je Steuerjahr (2025, 2026) |
 | Soll-Ist-Vergleich | Beträge des echten Lohnzettels je Lohnart eintragen, Differenzen nach Bereichen mit möglichen Ursachen, Abweichungen als geklärt markieren |
+| Lohnzettel einlesen | PDF, Scan oder Foto lokal im Browser auslesen (PDF-Textebene bzw. Texterkennung), Werte im Kontrollfenster prüfen und mit der Berechnung vergleichen – Vorschau-Funktion, siehe unten |
 | Jahresübersicht | Jahresbrutto, -netto, Taggeld, SV, Lohnsteuer, Zuschläge; Netto je Monat, Zeitkonten-Verlauf, Monatstabelle; fehlende Monate zählen nicht als 0 € |
 | Gespeicherte Monate | Jahresübersicht und alle Monate mit Status offen / gespeichert / abgerechnet / geändert / veraltet; Monate vergleichen; bewusste Neuberechnung mit Verlauf |
 | Hinweise | Warnungen bei über 12 h am Tag, über 60 h pro Woche, vollem ZA-Topf, fehlendem Taggeld; alle Annahmen sichtbar |
@@ -71,10 +72,23 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 ## Entwicklung
 
 ```bash
-npm install      # Test-Umgebung
-npm run check    # Syntax-, Datenschutz- und Emoji-Prüfung
-npm test         # Rechen- und Funktionstests
+npm install      # Test-Umgebung und Bibliotheken für den Lohnzettel-Abgleich
+npm start        # lokale Vorschau auf http://localhost:3000
+npm run check    # Syntax-, Datenschutz-, Emoji- und Bibliotheksprüfung
+npm test         # Rechen-, Funktions- und Parsertests
+npm run vendor   # nach einem Versionswechsel von Tesseract.js oder PDF.js: vendor/ neu erzeugen
 ```
+
+**Kein Build-Schritt, Deployment über GitHub Pages:** Pages liefert den Branch `main` unverändert aus (`.nojekyll` schaltet Jekyll ab). Die Bibliotheken für den Lohnzettel-Abgleich liegen deshalb fertig in `vendor/` im Repository – feste Versionen, Prüfsummen in `vendor/manifest.json`, von `npm run check` kontrolliert. Nach einem Push auf `main` ist die neue Version nach ein bis zwei Minuten online.
+
+**Lokale Vorschau:** `index.html` lässt sich direkt öffnen. Für „Lohnzettel einlesen“ braucht es aber einen Webserver (`npm start` oder `python3 -m http.server`), weil Browser JavaScript-Module und Worker nicht aus `file://` laden. Aus demselben Grund funktioniert diese Funktion nicht in der heruntergeladenen Einzeldatei `einsatzrechner.html`.
+
+### Lohnzettel einlesen (Vorschau)
+
+- Läuft vollständig im Browser: PDF.js liest digitale PDFs über ihre Textebene, gescannte Seiten und Fotos erkennt Tesseract.js (deutsch, LSTM). Es gibt keinen Server, keinen Upload und keine externen Dienste; alle Bibliotheken, Worker und Sprachdaten kommen aus `vendor/`.
+- Module in `lohnzettel/`: `konfiguration.mjs` (Zuordnungsregeln), `parser.mjs` (Zahlenformat, Zeilen, Zuordnung, Vergleich – ohne Browser testbar), `ocr.mjs` (Laden, Bildaufbereitung, Texterkennung, Freigabe), `ui.mjs` (Kontrollfenster und Vergleich).
+- Zuordnung: Lohnart-Codes am Zeilenanfang, die auch im berechneten Lohnzettel vorkommen; für Brutto, Sozialversicherung, Lohnsteuer und Netto allgemeine Begriffe. Keine Seitenkoordinaten. Mehrdeutige, unsichere oder fehlende Werte werden gekennzeichnet, nie geraten.
+- **Noch nicht an echten Lohnzetteln geprüft.** Getestet ist der Ablauf mit synthetischen Testdokumenten. Für die Anpassung von `lohnzettel/konfiguration.mjs` wird ein geschwärzter echter Lohnzettel benötigt (Namen, Adresse, SV-Nummer, Bankdaten unkenntlich; Positionsbezeichnungen und Beträge lesbar).
 
 Tests laufen bei jedem Push über GitHub Actions. Hinweise zum Mitwirken stehen in [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -82,9 +96,12 @@ Tests laufen bei jedem Push über GitHub Actions. Hinweise zum Mitwirken stehen 
 
 ```
 index.html              Der Rechner (eine Datei): Rechenkern und Oberfläche als getrennte Skripte, inkl. PRH Design Kit
+lohnzettel/             Lohnzettel einlesen: Konfiguration, Parser, OCR, Oberfläche (ES-Module, nur bei Bedarf geladen)
+vendor/                 Tesseract.js, Sprachdaten deu, PDF.js – feste Versionen, erzeugt von scripts/vendor.mjs
 docs/                   Screenshots und Vorschaubild
 tests/                  Rechen- und Funktionstests (node:test + jsdom), Referenzwerte in tests/fixtures/
 scripts/check.mjs       Statische Prüfungen
+scripts/vendor.mjs      Kopiert die Bibliotheken aus node_modules nach vendor/
 .github/                CI- und Release-Workflow, Issue- und PR-Vorlagen
 ```
 

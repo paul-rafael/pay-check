@@ -25,4 +25,6 @@ npm test        # Rechen-Tests
 - **Design:** nach dem PRH Design Kit – nur `--pr-`-Farbwerte, Dunkelrot als einziger Akzent, Hell- und Dunkelmodus prüfen, keine Emojis.
 - **Datenschutz:** Der Block `embedded-settings` in `index.html` muss im Repository immer `{}` bleiben.
 - **Changelog:** Nennenswerte Änderungen unter *Unreleased* in [`CHANGELOG.md`](CHANGELOG.md) eintragen.
+- **Bibliotheken:** Tesseract.js und PDF.js liegen in `vendor/`. Version in `package.json` ändern, `npm install` und `npm run vendor` ausführen, `vendor/` mitcommitten.
+- **Lohnzettel-Zuordnung:** Regeln in `lohnzettel/konfiguration.mjs` nur anhand echter, geschwärzter Lohnzettel ändern – keine Bezeichnungen oder Koordinaten erfinden. Jede Änderung braucht einen Test in `tests/lohnzettel.test.mjs`.
 - **Release:** Version in `index.html` (`APP_VERSION`) und `package.json` erhöhen, Abschnitt in `CHANGELOG.md` anlegen, dann Tag `vX.Y.Z` pushen oder unter *Actions → Release → Run workflow* starten – der Workflow erstellt das Release mit `einsatzrechner.html`.

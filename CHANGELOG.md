@@ -2,6 +2,20 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.2.0] – 2026-10-21
+
+### Neu
+- Lohnzettel einlesen (Vorschau): PDF, Scan oder Foto lokal im Browser auslesen und mit der Berechnung vergleichen
+  - digitale PDFs über die Textebene, Scans und Fotos per Texterkennung (Tesseract.js, PDF.js) – ohne Server, ohne Upload, ohne externe Dienste
+  - bearbeitbares Kontrollfenster: unsichere, mehrdeutige und fehlende Werte sind gekennzeichnet, nichts wird geraten
+  - Vergleich von Soll, Ist und Differenz je Position und für das Netto, Hinweis bei abweichendem Abrechnungsmonat
+  - Datei und erkannte Werte werden nicht gespeichert; übernommen wird nur auf ausdrücklichen Klick
+  - Zuordnung noch nicht an echten Lohnzetteln geprüft
+- Statische Prüfung: Lohnzettel-Module ohne externe Adressen, Bibliotheken in `vendor/` mit Prüfsummen
+
+### Geändert
+- Soll-Ist-Vergleich auf der Ergebnisseite immer aufgeklappt
+
 ## [2.1.0] – 2026-10-20
 
 Neuer Name: **Einsatzrechner** (vorher Gehaltsprüfer). Gespeicherte Daten bleiben erhalten.

@@ -505,6 +505,52 @@ tr.clickable:hover td{background:var(--pr-surface-2);}
   .res-sticky a{padding:8px 16px;}
 }
 @media print{.res-sticky{display:none !important;}.result{break-inside:avoid;}}
+/* ===== Lohnzettel einlesen (lokal) ===== */
+.lz-start{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;margin:0 0 14px;}
+.lz-bg{position:fixed;inset:0;z-index:10000;background:color-mix(in srgb,var(--pr-bg) 70%,transparent);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:flex-start;justify-content:center;padding:5vh 16px;overflow-y:auto;}
+.lz-dlg{background:var(--pr-surface);border:1px solid var(--pr-border);border-radius:var(--pr-radius-lg);box-shadow:0 20px 60px rgba(0,0,0,.18);width:100%;max-width:820px;padding:22px 24px;}
+.lz-kopf{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.lz-kopf h2{font-size:20px;letter-spacing:-.02em;}
+.lz-privacy{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--pr-text-2);background:var(--pr-ink-soft);border-left:2px solid var(--pr-ink);border-radius:var(--pr-radius-sm);padding:10px 14px;}
+.lz-privacy svg{width:18px;height:18px;flex:none;margin-top:1px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;color:var(--pr-text);}
+.lz-privacy b{color:var(--pr-text);}
+.lz-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;margin-top:14px;padding:32px 16px;border:1.5px dashed var(--pr-border-strong);border-radius:var(--pr-radius);cursor:pointer;text-align:center;transition:border-color .2s,background .2s;}
+.lz-drop:hover,.lz-drop:focus-visible,.lz-drop.ziel{border-color:var(--pr-red);background:var(--pr-red-soft);}
+.lz-drop b{font-size:15px;}.lz-drop span{font-size:13px;color:var(--pr-text-3);}
+.lz-progress{padding:24px 0 8px;}
+.lz-bar{height:6px;border-radius:999px;background:var(--pr-border);overflow:hidden;}
+.lz-bar div{height:100%;width:0;background:var(--pr-ink);transition:width .2s;}
+.lz-bar.unbestimmt div{width:30% !important;animation:lz-lauf 1.2s ease-in-out infinite;}
+@keyframes lz-lauf{0%{transform:translateX(-100%)}100%{transform:translateX(340%)}}
+.lz-schritt{font-size:14px;color:var(--pr-text-2);margin-top:10px;}
+.lz-fuss{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--pr-border);}
+.lz-tab td{vertical-align:top;}
+.lz-tab input[type=text]{height:34px;width:140px;text-align:right;font-variant-numeric:tabular-nums;}
+.lz-tab select{display:block;width:100%;max-width:260px;margin-bottom:6px;}
+.lz-tab .mono{font-family:var(--pr-mono);font-size:12px;color:var(--pr-text-3);}
+.lz-quelle{font-family:var(--pr-mono);font-size:11.5px;color:var(--pr-text-3);margin-top:3px;word-break:break-word;}
+.lz-hinweis{font-size:12.5px;color:var(--pr-text-2);margin-top:2px;}
+.lz-st-mehrdeutig td:first-child,.lz-st-unsicher td:first-child,.lz-st-fehler td:first-child{box-shadow:inset 2px 0 0 var(--pr-red);padding-left:8px;}
+.lz-trenner td{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--pr-text-2);background:var(--pr-surface-2);padding:6px 8px;}
+input.lz-ungueltig{border-color:var(--pr-red);box-shadow:0 0 0 3px var(--pr-red-ring);}
+.lz-zusatz{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--pr-border);}
+.lz-text{font-family:var(--pr-mono);font-size:12px;line-height:1.5;white-space:pre-wrap;background:var(--pr-code-bg);border-radius:var(--pr-radius-sm);padding:10px 12px;max-height:260px;overflow:auto;}
+.lz-netto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--pr-border);border-radius:var(--pr-radius);margin-bottom:14px;overflow:hidden;}
+.lz-netto>div{padding:12px 16px;border-left:1px solid var(--pr-border);}
+.lz-netto>div:first-child{border-left:none;}
+.lz-netto span{display:block;font-size:12.5px;font-weight:600;color:var(--pr-text-2);}
+.lz-netto b{display:block;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:4px;}
+.lz-netto .abw b{color:var(--pr-red-text);}
+.lz-abw{color:var(--pr-red-text);font-weight:600;}
+@media (max-width:560px){
+  .lz-bg{padding:0;}
+  .lz-dlg{border-radius:0;min-height:100%;padding:16px;}
+  .lz-zusatz{grid-template-columns:1fr;}
+  .lz-netto{grid-template-columns:1fr;}
+  .lz-netto>div{border-left:none;border-top:1px solid var(--pr-border);}
+  .lz-netto>div:first-child{border-top:none;}
+  .lz-tab input[type=text]{width:110px;}
+}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none !important;}}
 
 /* ===== Druck / PDF ===== */
@@ -728,6 +774,10 @@ tr.clickable:hover td{background:var(--pr-surface-2);}
       <summary>Lohnzettel prüfen: Soll-Ist-Vergleich <span class="sum-meta" id="si-meta"></span></summary>
       <div class="fold-body">
         <p class="hint" style="margin:0 0 12px;">Trage die Beträge deines tatsächlichen Lohnzettels ein. Abweichungen bedeuten nicht automatisch einen Fehler: Der Rechner schätzt und kennt nicht alle Regeln deines Kollektivvertrags oder Betriebs. Ungeklärte Abweichungen am besten mit der Lohnverrechnung besprechen.</p>
+        <div class="lz-start no-print">
+          <button class="btn secondary" onclick="lohnzettelEinlesen()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 9h10M7 12h10M7 15h6"/></svg>Lohnzettel einlesen</button>
+          <span class="small muted">PDF, Scan oder Foto – wird nur lokal in diesem Browser gelesen, nichts wird hochgeladen.</span>
+        </div>
         <div class="table-wrap" id="si-table"></div>
         <div id="si-zusatz" style="margin-top:10px;"></div>
         <h3 class="section-label" style="margin-top:20px;">Auswertung nach Bereichen</h3>
@@ -955,6 +1005,10 @@ tr.clickable:hover td{background:var(--pr-surface-2);}
         <p>Es zählen die österreichischen Feiertage. An Montage-Tagen im Ausland zählen nur die Feiertage des Einsatzlandes – in Deutschland je Bundesland. In der Schweiz und in Spanien sind nur landesweite Feiertage hinterlegt.</p>
         <p style="margin-top:8px;">Taggeld ist bis zu diesen Sätzen steuer- und SV-frei angenommen:</p>
         <div class="table-wrap" id="taggeld-table" style="margin-top:6px;"></div>
+      </div>
+      <div class="pr-card">
+        <h3>Lohnzettel einlesen</h3>
+        <p>Unter Ergebnis → Soll-Ist-Vergleich kannst du deinen Lohnzettel als PDF, Scan oder Foto einlesen. Die Datei wird nur in diesem Browser gelesen – nichts wird hochgeladen oder gespeichert. Prüfe jeden erkannten Wert, bevor du vergleichst: Die Funktion ist noch nicht an echten Lohnzetteln geprüft. In der heruntergeladenen Einzeldatei steht sie nicht zur Verfügung.</p>
       </div>
       <div class="pr-card">
         <h3>Was nicht berücksichtigt wird</h3>
@@ -1489,6 +1543,33 @@ function sollIst(lz,ist,toleranz=1){
     geprueft:list.filter(c=>c.status!=='leer').length}
 }
 
+// ── Lohnzettel einlesen (Modul lohnzettel/, wird erst bei Bedarf geladen) ────
+// Das Modul erhält nur die berechneten Soll-Werte; die Berechnung selbst bleibt unverändert.
+function lohnzettelApi(){
+  return{
+    soll(){
+      const {lz}=state._res,{monat,jahr}=state,lzKey=monat===12?monatKey(1,jahr+1):monatKey(monat+1,jahr)
+      return{zeilen:lohnartZeilen(lz).map(({la,bez,betrag})=>({la,bez,betrag})),brutto:lz.summeBrutto,sv:r(lz.svB+lz.szSV),lst:r(lz.ls+lz.szLS6+lz.szLSUeber),netto:lz.netto,
+        arbeitsMonat:{key:curKey(),name:monatName(curKey())},lohnzettelMonat:{key:lzKey,name:monatName(lzKey)},monatName}
+    },
+    toleranz:()=>settings.toleranz,
+    // Nur auf ausdrücklichen Wunsch: bestätigte Werte in den Soll-Ist-Vergleich des Monats schreiben
+    uebernehmen(ist){
+      const vorh=istWerte(),n=Object.keys(vorh.werte||{}).length+(vorh.zusatz||[]).length
+      if(n&&!confirm('Für '+monatName(curKey())+' sind bereits '+n+' Ist-Werte eingetragen. Durch die Werte aus dem Lohnzettel ersetzen?'))return false
+      const werte={...ist.werte};delete werte.brutto
+      updateIst(x=>{x.werte=werte;x.zusatz=(ist.zusatz||[]).map(z=>({name:z.name,betrag:z.betrag,kat:'sonder'}))})
+      renderSollIst();$('si-card').open=true;toast('Werte übernommen – Soll-Ist-Vergleich aktualisiert')
+    }
+  }
+}
+async function lohnzettelEinlesen(){
+  let m
+  try{m=await import('./lohnzettel/ui.mjs')}
+  catch(e){toast(location.protocol==='file:'?'Lohnzettel einlesen geht nur online oder über einen lokalen Webserver, nicht in der heruntergeladenen Einzeldatei':'Lohnzettel einlesen konnte nicht geladen werden');return}
+  m.oeffne(lohnzettelApi())
+}
+
 // ── Arbeitsmodelle ───────────────────────────────────────────────────────────
 // seg: [[Arbeitstage, freie Tage], ...]  tausch: Sa/So im Block = normaler Arbeitstag, freie Tage ohne ZA-Abzug
 const MODELLE=[{l:'5/2',seg:[[5,2]]},{l:'10/4',seg:[[10,4]],tausch:true},{l:'6/1/4/3',seg:[[6,1],[4,3]],tausch:true}]
@@ -1530,7 +1611,7 @@ function rhythmusMonat(modell,start,monat,jahr,t,land,region){
 // ═══════════════════════════════════════════════════════════════════════════
 // App – Oberfläche, Speicherung, Navigation
 // ═══════════════════════════════════════════════════════════════════════════
-const APP_VERSION='2.1.0'
+const APP_VERSION='2.2.0'
 
 // Quelltext der Seite im Originalzustand (vor jeder JS-Änderung) — Basis zum Zurückschreiben der Einstellungen
 const SOURCE_HTML=(()=>{const c=document.documentElement.cloneNode(true);c.removeAttribute('data-theme');return'<!DOCTYPE html>\n'+c.outerHTML})()
@@ -1679,8 +1760,6 @@ function ladeMonat(m,j){
   lsSet(AKTIV_KEY,key)
   render()
   $('sz-fold').open=state.urlaubsgeldAktiv||state.extras.length>0
-  const ist=rec&&rec.ist&&rec.ist.werte&&Object.keys(rec.ist.werte).length
-  $('si-card').open=!!ist
 }
 function monatWechseln(delta){
   let m=state.monat+delta,j=state.jahr
