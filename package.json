@@ -1,14 +1,14 @@
 {
-  "name": "einsatzrechner",
-  "version": "2.3.3",
+  "name": "pay-check",
+  "version": "3.0.0",
   "description": "Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen.",
   "private": true,
-  "license": "MIT",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "author": "Paul-Rafael Hasan-Man",
-  "homepage": "https://paul-rafael.github.io/einsatzrechner/",
+  "homepage": "https://paul-rafael.github.io/pay-check/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/paul-rafael/einsatzrechner.git"
+    "url": "https://github.com/paul-rafael/pay-check.git"
   },
   "type": "module",
   "scripts": {

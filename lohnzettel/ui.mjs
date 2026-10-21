@@ -6,7 +6,7 @@ import { werteAusDokument, vergleiche, parseBetrag } from './parser.mjs'
 import { erkenneDokument, pruefeAuswahl, Abbruch } from './ocr.mjs'
 
 const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
-const fmt = (n) => (n ?? 0).toLocaleString('de-AT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+const fmt = (n) => (n ?? 0).toLocaleString(globalThis.PC_LOCALE||'de-AT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 const fmtE = (n) => (n == null ? '—' : fmt(n) + ' €')
 const fmtD = (n) => (n == null ? '—' : (n > 0 ? '+' : n < 0 ? '−' : '±') + fmt(Math.abs(n)) + ' €')
 // Eingabe im Kontrollfenster: österreichisches Format, zusätzlich ganze Zahlen und Kommazahlen ohne Tausenderpunkt
@@ -126,7 +126,7 @@ function zeigeKontrolle() {
     const wahl = st === 'mehrdeutig' || (f.kandidaten.length > 1 && st !== 'fehlt')
       ? `<select data-k="${i}" class="input-sm" aria-label="Betrag wählen"><option value="">– Betrag wählen –</option>${f.kandidaten.map((k, j) => `<option value="${j}">${fmtE(k.wert)} · ${esc(k.text.slice(0, 48))}</option>`).join('')}</select>` : ''
     return `<tr class="lz-st-${st}"><td><b>${esc(f.label)}</b>${f.art === 'lohnart' ? ` <span class="mono">${esc(f.key)}</span>` : ''}
-        ${f.quelle.length ? `<div class="lz-quelle">${esc(f.quelle[0])}${f.quelle.length > 1 ? ` <i>(+${f.quelle.length - 1})</i>` : ''}</div>` : ''}
+        ${f.quelle.length ? `<div class="lz-quelle" translate="no">${esc(f.quelle[0])}${f.quelle.length > 1 ? ` <i>(+${f.quelle.length - 1})</i>` : ''}</div>` : ''}
         ${f.hinweis ? `<div class="lz-hinweis">${esc(f.hinweis)}</div>` : ''}</td>
       <td>${wahl}<input type="text" inputmode="decimal" data-i="${i}" value="${esc(f.eingabe)}" placeholder="leer" aria-label="Ist-Betrag ${esc(f.label)}"></td>
       <td><span class="badge ${cls}" data-b="${i}">${lbl}</span></td></tr>`
@@ -144,14 +144,14 @@ function zeigeKontrolle() {
     </tbody></table></div>` +
     (zusatz.length ? `<details class="fold" ${zusatz.some((z) => z.code) ? 'open' : ''} style="margin-top:8px;"><summary>Weitere Zeilen mit Beträgen <span class="sum-meta">${zusatz.length} nicht zugeordnet</span></summary><div class="fold-body">
       <p class="hint" style="margin:0 0 8px;">Diese Zeilen ließen sich keiner berechneten Position eindeutig zuordnen. Nur übernehmen, wenn es tatsächlich Bezüge dieses Monats sind – sie werden dann als „nur am Lohnzettel“ angezeigt und nicht mit der Berechnung verrechnet.</p>
-      ${zusatz.map((z, i) => `<div class="lz-zusatz"><div><div class="lz-quelle">${esc(z.text)}</div><div class="lz-hinweis">${esc(z.grund)}</div></div>
+      ${zusatz.map((z, i) => `<div class="lz-zusatz"><div><div class="lz-quelle" translate="no">${esc(z.text)}</div><div class="lz-hinweis">${esc(z.grund)}</div></div>
         <select data-z="${i}" class="input-sm" aria-label="Zeile übernehmen"><option value="">ignorieren</option>${z.betraege.map((b, j) => `<option value="${j}">als weitere Position: ${fmtE(b)}</option>`).join('')}</select></div>`).join('')}
       </div></details>` : '') +
     (e.andereMonate.length ? `<details class="fold" style="margin-top:8px;"><summary>Andere Bezugsmonate <span class="sum-meta">${e.andereMonate.length} nicht verglichen</span></summary><div class="fold-body">
       <p class="hint" style="margin:0 0 8px;">Diese Zeilen betreffen einen anderen Monat als die Berechnung (z.B. Korrekturen aus der Aufrollung) und werden deshalb nicht verglichen.</p>
-      ${e.andereMonate.map((z) => `<div class="lz-zusatz"><div><div class="lz-quelle">${esc(z.text)}</div><div class="lz-hinweis">${esc(z.grund)}</div></div><div class="r">${fmtE(z.betraege[0])}</div></div>`).join('')}
+      ${e.andereMonate.map((z) => `<div class="lz-zusatz"><div><div class="lz-quelle" translate="no">${esc(z.text)}</div><div class="lz-hinweis">${esc(z.grund)}</div></div><div class="r">${fmtE(z.betraege[0])}</div></div>`).join('')}
     </div></details>` : '') +
-    `<details class="fold" style="margin-top:4px;"><summary>Erkannten Text anzeigen <span class="sum-meta">${e.text.split('\n').length} Zeilen</span></summary><div class="fold-body"><pre class="lz-text">${esc(e.text) || '(kein Text erkannt)'}</pre></div></details>
+    `<details class="fold" style="margin-top:4px;"><summary>Erkannten Text anzeigen <span class="sum-meta">${e.text.split('\n').length} Zeilen</span></summary><div class="fold-body"><pre class="lz-text" translate="no">${esc(e.text) || '(kein Text erkannt)'}</pre></div></details>
     <div class="lz-fuss"><button class="btn" data-lz="neu">Andere Datei</button><span class="spacer"></span><button class="btn" data-lz="schliessen">Verwerfen</button><button class="btn primary" data-lz="bestaetigen">Werte bestätigen und vergleichen</button></div>`
   binde()
   const dlg = offen.dlg
@@ -195,7 +195,7 @@ function zeigeVergleich() {
     : z.status === 'kein-ist' ? 'nicht auf dem Lohnzettel erkannt' : 'nur am Lohnzettel – nicht vergleichbar'
   const cls = { ok: 'b-ok', abweichung: 'b-veraltet', eingeschraenkt: 'b-offen', 'kein-ist': 'b-fehlt', 'nur-ist': 'b-offen' }
   const n = v.netto
-  offen.dlg.innerHTML = kopf('Vergleich: Berechnung und Lohnzettel', `Soll = Berechnung des Einsatzrechners für ${esc(s.arbeitsMonat.name)}, Ist = deine bestätigten Werte.`) +
+  offen.dlg.innerHTML = kopf('Vergleich: Berechnung und Lohnzettel', `Soll = Berechnung von Pay-Check für ${esc(s.arbeitsMonat.name)}, Ist = deine bestätigten Werte.`) +
     (zr.typ !== 'ok' ? `<div class="callout" style="margin-bottom:10px;">${esc(zr.text)}</div>` : '') +
     (s.leer ? `<div class="callout" style="margin-bottom:10px;">Für ${esc(s.arbeitsMonat.name)} ist noch nichts erfasst – die Differenzen sind daher nicht aussagekräftig.</div>` : '') +
     `<div class="lz-netto"><div><span>Netto berechnet</span><b>${fmtE(n.soll)}</b></div><div><span>Netto laut Lohnzettel</span><b>${fmtE(n.ist)}</b></div><div class="${n.status === 'abweichung' ? 'abw' : ''}"><span>Differenz${n.status === 'eingeschraenkt' ? ' (eingeschränkt vergleichbar)' : ''}</span><b>${n.ist == null ? '—' : fmtD(n.diff)}</b></div></div>` +
@@ -204,7 +204,7 @@ function zeigeVergleich() {
     </tbody></table></div>
     ${ist.eingeschraenkt.length ? `<p class="hint">„Eingeschränkt vergleichbar“: ${ist.eingeschraenkt.map((k) => esc(v.zeilen.find((z) => z.key === k)?.label) + ' – ' + esc(ist.hinweise[k])).join('; ')}.</p>` : ''}
     <p class="hint">Toleranz für „stimmt“: ±${fmt(KONFIGURATION.toleranz.position)} € je Position, ±${fmt(api.toleranz())} € bei Brutto, SV, Lohnsteuer und Netto (Einstellungen). Die Differenz wird immer genau angezeigt.</p>
-    <p class="hint">Eine Abweichung ist ein Hinweis, kein Beleg für einen Fehler des Arbeitgebers: Der Einsatzrechner schätzt und kennt nicht alle Regeln deines Kollektivvertrags oder Betriebs. Mögliche Ursachen zeigt der Soll-Ist-Vergleich nach dem Übernehmen.</p>
+    <p class="hint">Eine Abweichung ist ein Hinweis, kein Beleg für einen Fehler des Arbeitgebers: Pay-Check schätzt und kennt nicht alle Regeln deines Kollektivvertrags oder Betriebs. Mögliche Ursachen zeigt der Soll-Ist-Vergleich nach dem Übernehmen.</p>
     <div class="lz-fuss"><button class="btn" data-lz="zurueck">Zurück zur Kontrolle</button><span class="spacer"></span><button class="btn" data-lz="schliessen">Schließen ohne Speichern</button><button class="btn primary" data-lz="uebernehmen">In den Soll-Ist-Vergleich übernehmen</button></div>`
   binde()
   offen.dlg.querySelector('[data-lz="zurueck"]').onclick = zeigeKontrolle

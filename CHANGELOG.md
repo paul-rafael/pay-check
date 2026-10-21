@@ -2,6 +2,16 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.0.0] – 2026-10-21
+
+### Geändert
+- Neuer Name: **Pay-Check** (vorher Einsatzrechner). Neue Adresse: https://paul-rafael.github.io/pay-check/ – gespeicherte Daten bleiben erhalten, weil sie im Browser unter derselben Domain liegen.
+- Lizenz: [PolyForm Noncommercial 1.0.0](LICENSE) statt MIT. Private und gemeinnützige Nutzung bleibt frei, kommerzielle Nutzung nur mit Zustimmung. Bereits unter MIT veröffentlichte Versionen (bis 2.3.3) bleiben MIT-lizenziert.
+- Release-Datei heißt jetzt `pay-check.html`, Exporte beginnen mit `Pay-Check_`.
+
+### Neu
+- Sprache in den Einstellungen: Deutsch (Standard) oder Englisch. Englisch übersetzt alle Texte, Hilfen, Meldungen und Rückfragen, zeigt Zahlen und Datum im englischen Format und schreibt CSV-Dateien mit Komma als Trenner und Punkt als Dezimalzeichen.
+
 ## [2.3.3] – 2026-10-21
 
 ### Geändert

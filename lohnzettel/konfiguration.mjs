@@ -3,7 +3,7 @@
 // Allgemeine Zuordnung (KONFIGURATION): noch NICHT an einem echten Lohnzettel geprüft.
 // Layout „Abrechnungsbeleg“ (LAYOUTS): an einem echten, digitalen Beleg geprüft (nicht im Repository).
 // Sie enthält bewusst keine Seitenkoordinaten und keine erfundenen Positionsbezeichnungen:
-//  - Lohnart-Codes stammen ausschließlich aus der Berechnung des Einsatzrechners (lohnartZeilen),
+//  - Lohnart-Codes stammen ausschließlich aus der Berechnung von Pay-Check (lohnartZeilen),
 //    erkannt wird nur ein Code am Zeilenanfang, der im berechneten Lohnzettel des Monats vorkommt.
 //  - Für Summenfelder werden nur allgemeine Begriffe gesucht. Trifft ein Begriff in mehreren
 //    Zeilen zu, gilt das Feld als mehrdeutig – es wird nichts geraten.

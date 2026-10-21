@@ -1,23 +1,23 @@
 <div align="center">
 
-# Einsatzrechner
+# Pay-Check
 
 Einsätze erfassen. Lohn nachrechnen. Lohnzettel prüfen.
 
-<a href="https://paul-rafael.github.io/einsatzrechner/"><img alt="Live-Demo" src="https://img.shields.io/badge/Live--Demo-%C3%B6ffnen-8a0b18?style=for-the-badge"></a>
-<a href="https://github.com/paul-rafael/einsatzrechner/releases/latest"><img alt="Version" src="https://img.shields.io/github/v/release/paul-rafael/einsatzrechner?style=for-the-badge&color=0a0a0a&label=Version"></a>
-<a href="https://github.com/paul-rafael/einsatzrechner/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/paul-rafael/einsatzrechner/ci.yml?branch=main&style=for-the-badge&label=Tests&color=0a0a0a"></a>
-<a href="LICENSE"><img alt="Lizenz MIT" src="https://img.shields.io/badge/Lizenz-MIT-0a0a0a?style=for-the-badge"></a>
+<a href="https://paul-rafael.github.io/pay-check/"><img alt="Live-Demo" src="https://img.shields.io/badge/Live--Demo-%C3%B6ffnen-8a0b18?style=for-the-badge"></a>
+<a href="https://github.com/paul-rafael/pay-check/releases/latest"><img alt="Version" src="https://img.shields.io/github/v/release/paul-rafael/pay-check?style=for-the-badge&color=0a0a0a&label=Version"></a>
+<a href="https://github.com/paul-rafael/pay-check/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/paul-rafael/pay-check/ci.yml?branch=main&style=for-the-badge&label=Tests&color=0a0a0a"></a>
+<a href="LICENSE"><img alt="Lizenz: nicht kommerziell" src="https://img.shields.io/badge/Lizenz-nicht%20kommerziell-0a0a0a?style=for-the-badge"></a>
 
-**[Einsatzrechner öffnen →](https://paul-rafael.github.io/einsatzrechner/)**
+**[Pay-Check öffnen →](https://paul-rafael.github.io/pay-check/)**
 
-<img alt="Einsatzrechner – Netto-Ergebnis, Arbeitskalender und Zeitkonten" src="docs/screenshot.png" width="760">
+<img alt="Pay-Check – Netto-Ergebnis, Arbeitskalender und Zeitkonten" src="docs/screenshot.png" width="760">
 
 </div>
 
 ---
 
-Der Einsatzrechner ist ein privates Werkzeug für alle, die auf Montage, auf Reise oder im Schichtmodell arbeiten und ihren Lohn nach österreichischem Recht nachrechnen wollen. Du trägst die Arbeitstage eines Monats in einen Kalender ein – Büro, Homeoffice, Montage, Reise, Zeitausgleich – und siehst sofort den voraussichtlichen Lohnzettel mit Zuschlägen, Zulagen, Zeitkonten und einer Netto-Schätzung. Danach vergleichst du ihn mit deinem echten Lohnzettel und behältst in der Jahresübersicht Einkommen und Zeitkonten im Blick.
+Pay-Check ist ein privates Werkzeug für alle, die auf Montage, auf Reise oder im Schichtmodell arbeiten und ihren Lohn nach österreichischem Recht nachrechnen wollen. Du trägst die Arbeitstage eines Monats in einen Kalender ein – Büro, Homeoffice, Montage, Reise, Zeitausgleich – und siehst sofort den voraussichtlichen Lohnzettel mit Zuschlägen, Zulagen, Zeitkonten und einer Netto-Schätzung. Danach vergleichst du ihn mit deinem echten Lohnzettel und behältst in der Jahresübersicht Einkommen und Zeitkonten im Blick.
 
 Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Konto.
 
@@ -43,6 +43,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Lehrlinge | Reduzierter SV-Satz per Schalter |
 | Erklärungen | Ein kleines „i“ in der Ecke jeder Funktion und neben wichtigen Feldern erklärt per Klick, wofür sie da ist |
 | Darstellung | Ruhiges, helles Design mit Bordeaux als Akzent; dunkle Darstellung wählbar; am Handy eigene Navigationsleiste |
+| Sprache | Deutsch (Standard) oder Englisch, umschaltbar in den Einstellungen – inklusive Zahlenformat und CSV-Export |
 
 ## Highlights
 
@@ -62,10 +63,10 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 </tr>
 <tr>
 <td><b>Info-Symbol</b> – jede Funktion erklärt sich per Klick auf „i“<br><br><img alt="Erklärung zum Arbeitskalender über das Info-Symbol" src="docs/info.png"></td>
-<td><b>Am Handy</b> – Ergebnis oben, Kalender und Zeitkonten untereinander<br><br><img alt="Einsatzrechner am Handy" src="docs/handy.png"></td>
+<td><b>Am Handy</b> – Ergebnis oben, Kalender und Zeitkonten untereinander<br><br><img alt="Pay-Check am Handy" src="docs/handy.png"></td>
 </tr>
 <tr>
-<td colspan="2"><b>Dunkle Darstellung</b> – fast schwarzer Hintergrund, umschaltbar über das Sonnen-/Mond-Symbol oben rechts<br><br><img alt="Einsatzrechner in dunkler Darstellung" src="docs/dunkel.png"></td>
+<td colspan="2"><b>Dunkle Darstellung</b> – fast schwarzer Hintergrund, umschaltbar über das Sonnen-/Mond-Symbol oben rechts<br><br><img alt="Pay-Check in dunkler Darstellung" src="docs/dunkel.png"></td>
 </tr>
 </table>
 
@@ -73,9 +74,9 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 
 ## Nutzung
 
-**Online:** [paul-rafael.github.io/einsatzrechner](https://paul-rafael.github.io/einsatzrechner/)
+**Online:** [paul-rafael.github.io/pay-check](https://paul-rafael.github.io/pay-check/)
 
-**Offline:** `einsatzrechner.html` aus dem [neuesten Release](https://github.com/paul-rafael/einsatzrechner/releases/latest) herunterladen und im Browser öffnen.
+**Offline:** `pay-check.html` aus dem [neuesten Release](https://github.com/paul-rafael/pay-check/releases/latest) herunterladen und im Browser öffnen.
 
 1. In den **Einstellungen** (Zahnrad) einmal Grundgehalt, Taggeld, Standard-Stunden und Arbeitsmodell eintragen.
 2. Unter **Erfassen** Tage anklicken oder ein Arbeitsmodell setzen – Eingaben werden automatisch gespeichert, das Netto steht sofort oben. Unklar, wofür etwas da ist? Auf das kleine **„i“** klicken.
@@ -95,7 +96,11 @@ npm run vendor   # nach einem Versionswechsel von Tesseract.js oder PDF.js: vend
 
 **Kein Build-Schritt, Deployment über GitHub Pages:** Pages liefert den Branch `main` unverändert aus (`.nojekyll` schaltet Jekyll ab). Die Bibliotheken für den Lohnzettel-Abgleich liegen deshalb fertig in `vendor/` im Repository – feste Versionen, Prüfsummen in `vendor/manifest.json`, von `npm run check` kontrolliert. Nach einem Push auf `main` ist die neue Version nach ein bis zwei Minuten online.
 
-**Lokale Vorschau:** `index.html` lässt sich direkt öffnen. Für „Lohnzettel einlesen“ braucht es aber einen Webserver (`npm start` oder `python3 -m http.server`), weil Browser JavaScript-Module und Worker nicht aus `file://` laden. Aus demselben Grund funktioniert diese Funktion nicht in der heruntergeladenen Einzeldatei `einsatzrechner.html`.
+**Lokale Vorschau:** `index.html` lässt sich direkt öffnen. Für „Lohnzettel einlesen“ braucht es aber einen Webserver (`npm start` oder `python3 -m http.server`), weil Browser JavaScript-Module und Worker nicht aus `file://` laden. Aus demselben Grund funktioniert diese Funktion nicht in der heruntergeladenen Einzeldatei `pay-check.html`.
+
+### Sprachen
+
+Deutsch ist die Quelle: Alle Texte stehen deutsch im Code. Für Englisch liegt in `index.html` ein Wörterbuch (`<script id="i18n-en">`), das beim Anzeigen jeden Text und jedes Hilfe-Attribut ersetzt – auch später eingefügte Texte, Meldungen und Rückfragen. Zahlen, Monatsnamen und Namen in „…“ sind im Wörterbuch Platzhalter `{}`, damit ein Eintrag für alle Werte passt. Neue Texte: deutschen Text verwenden und den englischen Eintrag ergänzen; `tests/sprache.test.mjs` prüft die Platzhalter. Nicht übersetzt werden Inhalte mit `translate="no"` (z. B. der erkannte Text eines Lohnzettels).
 
 ### Lohnzettel einlesen (Vorschau)
 
@@ -138,9 +143,13 @@ scripts/vendor.mjs      Kopiert die Bibliotheken aus node_modules nach vendor/
 
 Quellen: [ÖGK – Veränderliche Werte 2026](https://www.oegk.at/cdscontent/?contentid=10007.908421&portal=oegkdgportal) · [WKO – Beitragswesen 2026](https://www.wko.at/entlohnung/beitragswesen-dienstnehmer-2026) · [WKO – Auslandsreisesätze](https://www.wko.at/entlohnung/auslandsreise-kostensaetze) · [Sozialversicherung – Lehrlinge](https://www.sozialversicherung.gv.at/cdscontent/?contentid=10007.905068)
 
+## Lizenz
+
+[PolyForm Noncommercial 1.0.0](LICENSE): Jede und jeder darf Pay-Check kostenlos benutzen, kopieren, verändern und weitergeben – für private Zwecke und für gemeinnützige Organisationen, Schulen oder Behörden. **Kommerzielle Nutzung** (z. B. im Unternehmen, als Teil eines kostenpflichtigen Angebots oder zur Lohnverrechnung für andere) ist nur mit vorheriger schriftlicher Zustimmung erlaubt – Anfragen bitte über ein [Issue](https://github.com/paul-rafael/pay-check/issues). Versionen bis 2.3.3 wurden unter der MIT-Lizenz veröffentlicht und bleiben für diese Kopien MIT-lizenziert.
+
 **Weitere Dokumente:** [CHANGELOG.md](CHANGELOG.md) · [CONTRIBUTING.md](CONTRIBUTING.md) · [LICENSE](LICENSE)
 
-**Haftungsausschluss:** Alle Ergebnisse sind Näherungswerte. Kollektivverträge, Betriebsvereinbarungen und persönliche Absetzbeträge (z. B. Pendlerpauschale, Familienbonus Plus) können zu Abweichungen führen. Der Einsatzrechner ersetzt keine Lohn- oder Steuerberatung; verbindlich ist ausschließlich die Abrechnung des Arbeitgebers.
+**Haftungsausschluss:** Alle Ergebnisse sind Näherungswerte. Kollektivverträge, Betriebsvereinbarungen und persönliche Absetzbeträge (z. B. Pendlerpauschale, Familienbonus Plus) können zu Abweichungen führen. Pay-Check ersetzt keine Lohn- oder Steuerberatung; verbindlich ist ausschließlich die Abrechnung des Arbeitgebers.
 
 ---
 

@@ -1,6 +1,6 @@
-# Einsatzrechner – Funktionsüberblick
+# Pay-Check – Funktionsüberblick
 
-Stand: Version 2.3.3 · Live: <https://paul-rafael.github.io/einsatzrechner/>
+Stand: Version 3.0.0 · Live: <https://paul-rafael.github.io/pay-check/>
 
 Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichischem Recht, vollständig im Browser, ohne Konto und ohne Server.
 
@@ -13,7 +13,7 @@ Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichisc
 | **Erfassen** | Monat wählen, Arbeitskalender (volle Breite) mit Zeitkonten darunter, Bezahlung, Hinweise |
 | **Ergebnis** | Lohnzettel (berechnet), Brutto-Netto-Rechnung, Soll-Ist-Vergleich, Lohnzettel einlesen, Stundenübersicht |
 | **Gespeicherte Monate** | Jahresübersicht, alle Monate mit Status, Monatsvergleich |
-| **Einstellungen** | Standardwerte, Arbeitsmodelle, Zeitkonten, Steuerjahr, Zulagensätze, Daten, Darstellung |
+| **Einstellungen** | Standardwerte, Arbeitsmodelle, Zeitkonten, Steuerjahr, Zulagensätze, Daten, Darstellung, Sprache |
 | **Hilfe** (Fragezeichen oben) | Anleitung, Status-Erklärung, Feiertage & Taggeld-Sätze, was nicht berücksichtigt wird |
 
 Jede Funktion hat rechts oben ein kleines **„i“**, das per Klick erklärt, wofür sie da ist; einzelne Felder haben ein eigenes „i“. Am Handy gibt es eine Navigationsleiste unten. Alte Adressen (`#rechner`, `#jahr`, `#abrechnungen`) leiten weiter.
@@ -132,6 +132,7 @@ Jede Funktion hat rechts oben ein kleines **„i“**, das per Klick erklärt, w
 - Erweitert: On-Site-Zulage, Homeoffice-Pauschale, Samstags-, Lenkzeit- und Überlauf-Zuschlag
 - **Daten**: alles sichern, Sicherung oder Monat importieren, alles löschen (doppelte Bestätigung)
 - Darstellung (automatisch, hell, dunkel; Standard: hell); Einstellungen optional fest in die HTML-Datei schreiben
+- **Sprache:** Deutsch (Standard) oder Englisch – wirkt sofort auf alle Texte, Zahlen- und Datumsformat (1,234.56) sowie CSV-Exporte (Komma als Trenner, Punkt als Dezimalzeichen). Berechnung und gespeicherte Daten sind in beiden Sprachen gleich
 - Gespeicherte Monate bleiben bei Änderungen unverändert
 
 ---
@@ -177,5 +178,5 @@ Nicht berücksichtigt: Pendlerpauschale, Familienbonus Plus, AVAB/AEAB, Aufrollu
 - Kein Build-Schritt; GitHub Pages liefert `main` direkt aus
 - 63 automatische Tests: Referenzwerte der Berechnung, Zeitkonten, Status, Monatsübertrag, Schaltjahr, Steuerjahre, Export, Parser (Zahlenformate, negative Werte, Rundung, fehlerhafte Texterkennung, Belegstruktur)
 - Statische Prüfungen: Syntax, keine persönlichen Einstellungen in der Datei, keine Emojis, keine externen Adressen, Prüfsummen der Bibliotheken
-- Releases mit Download `einsatzrechner.html` über den Release-Workflow
+- Releases mit Download `pay-check.html` über den Release-Workflow
 - Browser: getestet in Chromium; für Safari wird eine fehlende Stream-Funktion für PDF.js ergänzt (in Chromium nachgestellt geprüft)
