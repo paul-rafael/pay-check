@@ -2,6 +2,12 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.3.2] – 2026-10-21
+
+### Geändert
+- Schrift fast schwarz (#111214), Nebentexte deutlich dunkler – besser lesbar, auch im Freien
+- Screenshots in der README aktualisiert
+
 ## [2.3.1] – 2026-10-21
 
 ### Geändert
