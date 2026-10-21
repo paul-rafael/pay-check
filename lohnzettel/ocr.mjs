@@ -2,6 +2,7 @@
 // Alle Bibliotheken, Worker und Sprachdaten kommen aus ../vendor/ (gleiche Herkunft, feste Versionen).
 // Es werden keine Dokumentinhalte übertragen und nichts dauerhaft gespeichert.
 import { KONFIGURATION } from './konfiguration.mjs'
+import './stream-polyfill.mjs'   // Safari: ReadableStream mit for await (PDF.js)
 
 const VENDOR = new URL('../vendor/', import.meta.url)
 const vendor = (p) => new URL(p, VENDOR).href
@@ -119,7 +120,8 @@ async function bildZuLeinwand(datei, konf) {
 
 let pdfjsPromise = null
 const ladePdfjs = () => (pdfjsPromise ||= import(vendor('pdfjs/pdf.min.mjs')).then((m) => {
-  m.GlobalWorkerOptions.workerSrc = vendor('pdfjs/pdf.worker.min.mjs'); return m
+  // Worker über ein eigenes Startmodul, damit die Stream-Ergänzung auch im Worker gilt
+  m.GlobalWorkerOptions.workerSrc = new URL('./pdf-worker.mjs', import.meta.url).href; return m
 }))
 let tesseractPromise = null
 const ladeTesseract = () => (tesseractPromise ||= new Promise((ok, fehler) => {

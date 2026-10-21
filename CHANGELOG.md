@@ -2,6 +2,11 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.2.1] – 2026-10-21
+
+### Behoben
+- Lohnzettel einlesen in Safari: PDFs brachen mit „undefined is not a function“ ab, weil Safari Datenströme nicht mit `for await` durchlaufen kann, was PDF.js beim Lesen der Textebene und beim Entpacken nutzt. Die fehlende Methode wird jetzt im Hauptfenster und im PDF.js-Worker ergänzt, nur wenn sie fehlt.
+
 ## [2.2.0] – 2026-10-21
 
 ### Neu
