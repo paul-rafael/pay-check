@@ -1,6 +1,6 @@
 # Einsatzrechner – Funktionsüberblick
 
-Stand: Version 2.3.2 · Live: <https://paul-rafael.github.io/einsatzrechner/>
+Stand: Version 2.3.3 · Live: <https://paul-rafael.github.io/einsatzrechner/>
 
 Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichischem Recht, vollständig im Browser, ohne Konto und ohne Server.
 

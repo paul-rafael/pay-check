@@ -1,6 +1,6 @@
 {
   "name": "einsatzrechner",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen.",
   "private": true,
   "license": "MIT",

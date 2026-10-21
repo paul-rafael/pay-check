@@ -64,6 +64,9 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 <td><b>Info-Symbol</b> – jede Funktion erklärt sich per Klick auf „i“<br><br><img alt="Erklärung zum Arbeitskalender über das Info-Symbol" src="docs/info.png"></td>
 <td><b>Am Handy</b> – Ergebnis oben, Kalender und Zeitkonten untereinander<br><br><img alt="Einsatzrechner am Handy" src="docs/handy.png"></td>
 </tr>
+<tr>
+<td colspan="2"><b>Dunkle Darstellung</b> – fast schwarzer Hintergrund, umschaltbar über das Sonnen-/Mond-Symbol oben rechts<br><br><img alt="Einsatzrechner in dunkler Darstellung" src="docs/dunkel.png"></td>
+</tr>
 </table>
 
 <sub>Alle Screenshots zeigen Beispieldaten.</sub>
