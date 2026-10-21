@@ -2,8 +2,8 @@
 // Die App übergibt über `api` nur die berechneten Soll-Werte und eine Übernahmefunktion.
 // Hochgeladene Dateien und erkannte Werte werden nicht gespeichert, außer der Nutzer übernimmt sie ausdrücklich.
 import { KONFIGURATION } from './konfiguration.mjs'
-import { gruppiereZeilen, werteAus, vergleiche, parseBetrag } from './parser.mjs'
-import { erkenneDokument, pruefeDatei, Abbruch } from './ocr.mjs'
+import { werteAusDokument, vergleiche, parseBetrag } from './parser.mjs'
+import { erkenneDokument, pruefeAuswahl, Abbruch } from './ocr.mjs'
 
 const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
 const fmt = (n) => (n ?? 0).toLocaleString('de-AT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -54,26 +54,27 @@ function zeigeStart(fehler) {
   const { api } = offen, s = api.soll(), g = KONFIGURATION.grenzen
   offen.dlg.innerHTML = kopf('Lohnzettel einlesen', `Berechnet für ${esc(s.arbeitsMonat.name)} – passend ist meist der Lohnzettel ${esc(s.lohnzettelMonat.name)}.`) +
     DATENSCHUTZ +
+    (s.leer ? `<div class="callout" style="margin-top:12px;">Für ${esc(s.arbeitsMonat.name)} ist noch nichts erfasst. Ohne erfasste Tage gibt es nichts zu vergleichen – trage zuerst den Monat im Kalender ein.</div>` : '') +
     (fehler ? `<div class="callout" style="margin-top:12px;">${esc(fehler)}</div>` : '') +
     `<label class="lz-drop" tabindex="0">
-      <input type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" hidden>
-      <b>PDF, Foto oder Scan auswählen</b>
-      <span>PDF, JPG oder PNG · bis ${g.maxDateiMB} MB · PDFs bis ${g.maxSeiten} Seiten</span>
+      <input type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" multiple hidden>
+      <b>PDF oder Fotos auswählen</b>
+      <span>ein PDF (bis ${g.maxSeiten} Seiten) oder bis zu ${g.maxSeiten} Fotos – eines pro Seite · JPG oder PNG · zusammen bis ${g.maxDateiMB} MB</span>
     </label>
     <p class="hint">Tipp: Digitale PDFs aus der Lohnverrechnung werden direkt gelesen und sind am genauesten. Fotos möglichst gerade, scharf und gut ausgeleuchtet aufnehmen.</p>
-    ${KONFIGURATION.geprueft ? '' : '<p class="hint"><b>Vorschau-Funktion:</b> Die Zuordnung ist noch nicht an echten Lohnzetteln geprüft. Bitte jeden erkannten Wert kontrollieren.</p>'}
+    <p class="hint"><b>Vorschau-Funktion:</b> Abgestimmt auf den Abrechnungsbeleg mit den Spalten Lohnart · Einheiten · Satz/BMG · Abzüge · Bezüge. Andere Lohnzettel werden nur allgemein zugeordnet. Bitte jeden erkannten Wert kontrollieren.</p>
     <div class="lz-fuss"><button class="btn" data-lz="schliessen">Abbrechen</button></div>`
   binde()
   const inp = offen.dlg.querySelector('input[type=file]'), drop = offen.dlg.querySelector('.lz-drop')
-  inp.onchange = () => { const f = inp.files[0]; inp.value = ''; if (f) verarbeite(f) }
+  inp.onchange = () => { const f = [...inp.files]; inp.value = ''; if (f.length) verarbeite(f) }
   drop.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inp.click() } }
   drop.ondragover = (e) => { e.preventDefault(); drop.classList.add('ziel') }
   drop.ondragleave = () => drop.classList.remove('ziel')
-  drop.ondrop = (e) => { e.preventDefault(); drop.classList.remove('ziel'); const f = e.dataTransfer.files[0]; if (f) verarbeite(f) }
+  drop.ondrop = (e) => { e.preventDefault(); drop.classList.remove('ziel'); const f = [...e.dataTransfer.files]; if (f.length) verarbeite(f) }
 }
 
-async function verarbeite(datei) {
-  const p = pruefeDatei(datei)
+async function verarbeite(dateien) {
+  const p = pruefeAuswahl(dateien)
   if (p.fehler) return zeigeStart(p.fehler)
   const ctrl = new AbortController(); offen.ctrl = ctrl
   offen.dlg.innerHTML = kopf('Lohnzettel wird gelesen', 'Alles passiert lokal in diesem Browser.') +
@@ -83,7 +84,7 @@ async function verarbeite(datei) {
   binde()
   const balken = offen.dlg.querySelector('.lz-bar div'), text = offen.dlg.querySelector('.lz-schritt')
   try {
-    const erg = await erkenneDokument(datei, { signal: ctrl.signal, fortschritt: (f) => {
+    const erg = await erkenneDokument(p.liste, { signal: ctrl.signal, fortschritt: (f) => {
       if (!offen || offen.ctrl !== ctrl) return
       text.textContent = f.schritt + (f.seiten > 1 ? ` (Seite ${f.seite} von ${f.seiten})` : '') + (f.anteil != null ? ` – ${Math.round(f.anteil * 100)} %` : ' …')
       balken.style.width = f.anteil != null ? Math.round(f.anteil * 100) + '%' : ''
@@ -92,8 +93,8 @@ async function verarbeite(datei) {
     if (!offen || offen.ctrl !== ctrl) return
     offen.ctrl = null
     const s = offen.api.soll()
-    const aus = werteAus(gruppiereZeilen(erg.woerter), s.zeilen)
-    offen.ergebnis = { ...aus, quelle: erg.quelle, hinweise: erg.hinweise, woerter: erg.woerter.length }
+    const aus = werteAusDokument(erg.woerter, s.zeilen, { arbeitsMonat: s.arbeitsMonat })
+    offen.ergebnis = { ...aus, quelle: erg.quelle, hinweise: [...erg.hinweise, ...(aus.hinweise || [])], woerter: erg.woerter.length }
     offen.felder = aus.felder.map((f) => ({ ...f, erkanntStatus: f.status, eingabe: f.wert != null ? fmt(f.wert) : '' }))
     offen.zusatz = aus.unzugeordnet.map((u) => ({ ...u, wahl: '' }))
     zeigeKontrolle()
@@ -118,7 +119,8 @@ function zeigeKontrolle() {
   const { ergebnis: e, felder, zusatz, api } = offen, s = api.soll()
   e.zeitraeume.forEach((z) => (z.name = s.monatName(z.key)))
   const zr = zeitraumHinweis(e.zeitraeume, s)
-  const quelle = { text: 'Textebene des PDFs (digital, ohne Texterkennung)', ocr: 'Texterkennung (OCR)', gemischt: 'Textebene und Texterkennung' }[e.quelle]
+  const quelle = { text: 'Textebene des PDFs (digital, ohne Texterkennung)', ocr: 'Texterkennung (OCR)', gemischt: 'Textebene und Texterkennung' }[e.quelle] +
+    (e.layout ? ' · Layout: ' + e.layout : ' · Layout nicht erkannt, allgemeine Zuordnung')
   const zeile = (f, i) => {
     const st = f.status, [cls, lbl] = STATUS[st]
     const wahl = st === 'mehrdeutig' || (f.kandidaten.length > 1 && st !== 'fehlt')
@@ -145,6 +147,10 @@ function zeigeKontrolle() {
       ${zusatz.map((z, i) => `<div class="lz-zusatz"><div><div class="lz-quelle">${esc(z.text)}</div><div class="lz-hinweis">${esc(z.grund)}</div></div>
         <select data-z="${i}" class="input-sm" aria-label="Zeile übernehmen"><option value="">ignorieren</option>${z.betraege.map((b, j) => `<option value="${j}">als weitere Position: ${fmtE(b)}</option>`).join('')}</select></div>`).join('')}
       </div></details>` : '') +
+    (e.andereMonate.length ? `<details class="fold" style="margin-top:8px;"><summary>Andere Bezugsmonate <span class="sum-meta">${e.andereMonate.length} nicht verglichen</span></summary><div class="fold-body">
+      <p class="hint" style="margin:0 0 8px;">Diese Zeilen betreffen einen anderen Monat als die Berechnung (z.B. Korrekturen aus der Aufrollung) und werden deshalb nicht verglichen.</p>
+      ${e.andereMonate.map((z) => `<div class="lz-zusatz"><div><div class="lz-quelle">${esc(z.text)}</div><div class="lz-hinweis">${esc(z.grund)}</div></div><div class="r">${fmtE(z.betraege[0])}</div></div>`).join('')}
+    </div></details>` : '') +
     `<details class="fold" style="margin-top:4px;"><summary>Erkannten Text anzeigen <span class="sum-meta">${e.text.split('\n').length} Zeilen</span></summary><div class="fold-body"><pre class="lz-text">${esc(e.text) || '(kein Text erkannt)'}</pre></div></details>
     <div class="lz-fuss"><button class="btn" data-lz="neu">Andere Datei</button><span class="spacer"></span><button class="btn" data-lz="schliessen">Verwerfen</button><button class="btn primary" data-lz="bestaetigen">Werte bestätigen und vergleichen</button></div>`
   binde()
@@ -174,7 +180,9 @@ function bestaetigteWerte() {
   const werte = {}
   offen.felder.forEach((f) => { const p = parseEingabe(f.eingabe); if (p.wert != null) werte[f.key] = f.art === 'summe' && KONFIGURATION.summen[f.key]?.abzug ? Math.abs(p.wert) : p.wert })
   const zusatz = offen.zusatz.filter((z) => z.wahl !== '').map((z) => ({ name: z.text.slice(0, 60), betrag: z.betraege[+z.wahl] }))
-  return { werte, zusatz }
+  // laut Beleg nur eingeschränkt vergleichbare Summen (z.B. inkl. Aufrollung) samt Begründung
+  const eing = offen.felder.filter((f) => f.eingeschraenkt && werte[f.key] != null)
+  return { werte, zusatz, eingeschraenkt: eing.map((f) => f.key), hinweise: Object.fromEntries(eing.map((f) => [f.key, f.hinweis])) }
 }
 
 function zeigeVergleich() {
@@ -183,15 +191,18 @@ function zeigeVergleich() {
   const zr = zeitraumHinweis(offen.ergebnis.zeitraeume, s)
   const hinweis = (z) => z.status === 'ok' ? (z.diff === 0 ? 'stimmt überein' : 'stimmt – Rundungsdifferenz')
     : z.status === 'abweichung' ? 'Abweichung – bitte prüfen'
+    : z.status === 'eingeschraenkt' ? 'eingeschränkt vergleichbar'
     : z.status === 'kein-ist' ? 'nicht auf dem Lohnzettel erkannt' : 'nur am Lohnzettel – nicht vergleichbar'
-  const cls = { ok: 'b-ok', abweichung: 'b-veraltet', 'kein-ist': 'b-fehlt', 'nur-ist': 'b-offen' }
+  const cls = { ok: 'b-ok', abweichung: 'b-veraltet', eingeschraenkt: 'b-offen', 'kein-ist': 'b-fehlt', 'nur-ist': 'b-offen' }
   const n = v.netto
   offen.dlg.innerHTML = kopf('Vergleich: Berechnung und Lohnzettel', `Soll = Berechnung des Einsatzrechners für ${esc(s.arbeitsMonat.name)}, Ist = deine bestätigten Werte.`) +
     (zr.typ !== 'ok' ? `<div class="callout" style="margin-bottom:10px;">${esc(zr.text)}</div>` : '') +
-    `<div class="lz-netto"><div><span>Netto berechnet</span><b>${fmtE(n.soll)}</b></div><div><span>Netto laut Lohnzettel</span><b>${fmtE(n.ist)}</b></div><div class="${n.status === 'abweichung' ? 'abw' : ''}"><span>Differenz</span><b>${n.ist == null ? '—' : fmtD(n.diff)}</b></div></div>` +
+    (s.leer ? `<div class="callout" style="margin-bottom:10px;">Für ${esc(s.arbeitsMonat.name)} ist noch nichts erfasst – die Differenzen sind daher nicht aussagekräftig.</div>` : '') +
+    `<div class="lz-netto"><div><span>Netto berechnet</span><b>${fmtE(n.soll)}</b></div><div><span>Netto laut Lohnzettel</span><b>${fmtE(n.ist)}</b></div><div class="${n.status === 'abweichung' ? 'abw' : ''}"><span>Differenz${n.status === 'eingeschraenkt' ? ' (eingeschränkt vergleichbar)' : ''}</span><b>${n.ist == null ? '—' : fmtD(n.diff)}</b></div></div>` +
     `<div class="table-wrap"><table class="lz-tab"><thead><tr><th>Position</th><th class="r">Soll</th><th class="r">Ist</th><th class="r">Differenz</th><th>Hinweis</th></tr></thead><tbody>
       ${v.zeilen.map((z) => `<tr class="${z.art === 'summe' ? 'sum' : ''}"><td>${esc(z.label)}${z.art === 'lohnart' ? ` <span class="mono">${esc(z.key)}</span>` : ''}</td><td class="r">${fmtE(z.soll)}</td><td class="r">${fmtE(z.ist)}</td><td class="r ${z.status === 'abweichung' ? 'lz-abw' : ''}">${z.diff == null ? '—' : fmtD(z.diff)}</td><td><span class="badge ${cls[z.status]}">${hinweis(z)}</span></td></tr>`).join('')}
     </tbody></table></div>
+    ${ist.eingeschraenkt.length ? `<p class="hint">„Eingeschränkt vergleichbar“: ${ist.eingeschraenkt.map((k) => esc(v.zeilen.find((z) => z.key === k)?.label) + ' – ' + esc(ist.hinweise[k])).join('; ')}.</p>` : ''}
     <p class="hint">Toleranz für „stimmt“: ±${fmt(KONFIGURATION.toleranz.position)} € je Position, ±${fmt(api.toleranz())} € bei Brutto, SV, Lohnsteuer und Netto (Einstellungen). Die Differenz wird immer genau angezeigt.</p>
     <p class="hint">Eine Abweichung ist ein Hinweis, kein Beleg für einen Fehler des Arbeitgebers: Der Einsatzrechner schätzt und kennt nicht alle Regeln deines Kollektivvertrags oder Betriebs. Mögliche Ursachen zeigt der Soll-Ist-Vergleich nach dem Übernehmen.</p>
     <div class="lz-fuss"><button class="btn" data-lz="zurueck">Zurück zur Kontrolle</button><span class="spacer"></span><button class="btn" data-lz="schliessen">Schließen ohne Speichern</button><button class="btn primary" data-lz="uebernehmen">In den Soll-Ist-Vergleich übernehmen</button></div>`

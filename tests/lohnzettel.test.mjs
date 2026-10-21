@@ -165,3 +165,201 @@ test('Konfiguration: als ungeprüft gekennzeichnet, keine Koordinaten', () => {
   assert.equal(KONFIGURATION.geprueft, false)
   assert.ok(!JSON.stringify(KONFIGURATION, (k, v) => (v instanceof RegExp ? String(v) : v)).match(/"(x|y|x0|y0|left|top)"/))
 })
+
+// ── Layout „Abrechnungsbeleg“ – SYNTHETISCHE Testdaten mit der Struktur eines echten Belegs ──
+// Spaltenköpfe rechtsbündig: Einheiten | Satz / BMG | Abzüge | Bezüge. Alle Namen und Beträge erfunden.
+import { werteAusDokument, zellen, erkenneLayout, parseBetragUnsicher } from '../lohnzettel/parser.mjs'
+const K = { code: [60, 85], bez: [95, 260], einheiten: [300, 340], satz: [360, 410], abzuege: [455, 490], bezuege: [530, 570] }
+function beleg(seiten) {
+  const w = []
+  seiten.forEach((zeilen, si) => zeilen.forEach((z, zi) => {
+    const y = 100 + zi * 14
+    for (const [text, sp] of z) {
+      const [a, b] = Array.isArray(sp) ? sp : K[sp]
+      const breite = text.length * 5
+      const rechts = ['einheiten', 'satz', 'abzuege', 'bezuege'].includes(sp)   // Zahlen rechtsbündig
+      w.push({ text, conf: 100, seite: si + 1, bbox: { x0: rechts ? b - breite : a, y0: y - 10, x1: rechts ? b : a + breite, y1: y } })
+    }
+  }))
+  return w
+}
+const kopf = [['A B R E C H N U N G S B E L E G', [50, 300]]]
+const spaltenKopf = [['Lohnart Bezeichnung', [55, 150]], ['Einheiten', 'einheiten'], ['Satz / BMG', 'satz'], ['Abzüge', 'abzuege'], ['Bezüge', 'bezuege']]
+const seiteRollung = [kopf, [['Summe aller Rollungsmonate 2026', [50, 250]]], spaltenKopf,
+  [['1060', 'code'], ['01*HO Pauschale frei', 'bez'], ['2,00-', 'einheiten'], ['1,00', 'satz'], ['2,00-', 'bezuege']],
+  [['1060', 'code'], ['02*HO Pauschale frei', 'bez'], ['4,00', 'einheiten'], ['1,00', 'satz'], ['4,00', 'bezuege']],
+  [['1520', 'code'], ['02*ÜStd.Zuschl.100%(68/1)', 'bez'], ['8,00', 'einheiten'], ['20,00', 'satz'], ['160,00', 'bezuege']],
+  [['5040', 'code'], ['02*Taggeld Ausl. frei', 'bez'], ['70,60', 'bezuege']],
+  [['5041', 'code'], ['02*Taggeld Ausl. pfl.', 'bez'], ['29,40', 'bezuege']],
+  [['1641', 'code'], ['12*On-Site Zulage', 'bez'], ['10,00', 'einheiten'], ['1,40', 'satz'], ['14,00', 'bezuege']],
+  [['9200', 'code'], ['02*MV Bemessung gesamt', 'bez'], ['300,00', 'satz']],
+  [['Summe Bezüge', [418, 492]], ['196,00', 'bezuege']],
+  [['SV Gesamt', [491, 540]]], [['30,00-', 'bezuege']],
+  [['LSt lfd', [491, 530]]], [['20,00-', 'bezuege']],
+  [['Auszahlung', [434, 490]]],
+  [['Jahressummen', [53, 120]]], [['SV Gesamt', [491, 540]]], [['999,99-', 'bezuege']]]
+const seiteLaufend = [kopf, [['für den Zeitraum März 2026', [50, 250]]], spaltenKopf,
+  [['1000', 'code'], ['Gehalt', 'bez'], ['3.000,00', 'bezuege']],
+  [['8022', 'code'], ['Zukunfts. § 3/15', 'bez'], ['30,00', 'satz']],
+  [['8023', 'code'], ['Bez. Umwandl. § 3/15', 'bez'], ['30,00-', 'abzuege']],
+  [['Summe Bezüge', [418, 492]], ['3.000,00', 'bezuege']],
+  [['SV Gesamt', [491, 540]]], [['540,00-', 'bezuege']],
+  [['LSt lfd', [491, 530]]], [['300,00-', 'bezuege']],
+  [['Differenz aus Vormonaten', [403, 480]]], [['146,00', [430, 480]]],
+  [['Auszahlung', [434, 490]], ['2.281,00', 'bezuege']],
+  [['Dienstgeberanteile', [53, 130]]], [['SV Gesamt', [491, 540]]], [['888,88', 'bezuege']]]
+const SOLL_FEB = ['1000', '1520', '1641', '5040', '9010'].map((la) => ({ la, bez: 'LA ' + la }))
+const feld = (e, k) => e.felder.find((f) => f.key === k)
+
+test('Beleg: Layout wird erkannt, Zellen bleiben zusammen', () => {
+  const w = beleg([seiteLaufend])
+  assert.ok(erkenneLayout(gruppiereZeilen(w).map((z) => z.text).join('\n')))
+  assert.equal(erkenneLayout('Netto 1.000,00'), null)
+  const z = gruppiereZeilen([{ text: 'Summe', conf: 90, bbox: { x0: 0, y0: 0, x1: 30, y1: 10 } }, { text: 'Bezüge', conf: 90, bbox: { x0: 34, y0: 0, x1: 70, y1: 10 } }, { text: '1,00', conf: 90, bbox: { x0: 200, y0: 0, x1: 220, y1: 10 } }])[0]
+  assert.deepEqual(zellen(z).map((c) => c.text), ['Summe Bezüge', '1,00'])
+})
+
+test('Beleg: Positionen des Arbeitsmonats aus der Aufrollung, Aliase addiert, Spalten richtig', () => {
+  const e = werteAusDokument(beleg([seiteRollung, seiteLaufend]), SOLL_FEB, { arbeitsMonat: { key: '2026-02' } })
+  assert.match(e.layout, /Abrechnungsbeleg/)
+  assert.deepEqual(e.zeitraeume.map((z) => z.key), ['2026-03'])
+  assert.equal(feld(e, '1520').wert, 160, 'Bezüge-Spalte, nicht Satz oder Einheiten')
+  assert.equal(feld(e, '5040').wert, 100, '5040 + 5041')
+  assert.match(feld(e, '5040').hinweis, /5040 \+ 5041/)
+  assert.equal(feld(e, '9010').wert, 4, 'Alias 1060 → 9010, nur Februar')
+  assert.equal(feld(e, '1000').wert, 3000)
+  assert.match(feld(e, '1000').hinweis, /laufender Monat/)
+  assert.equal(feld(e, '1641').wert, null, 'On-Site nur im Dezember des Vorjahres')
+  assert.ok(e.andereMonate.some((u) => u.code === '1060' && u.betraege[0] === -2 && /Jänner 2026/.test(u.grund)))
+  assert.ok(e.andereMonate.some((u) => u.code === '1641' && /Dezember 2025/.test(u.grund)), 'Kennung 12* im März → Vorjahr')
+  assert.ok(e.unzugeordnet.some((u) => u.code === '8023' && u.betraege[0] === -30 && u.art === 'Abzug'))
+  assert.ok(!e.unzugeordnet.some((u) => ['8022', '9200'].includes(u.code)), 'nur Bemessungsgrundlage bzw. Dienstgeber')
+})
+
+test('Beleg: Summen aus dem Raster, Jahres- und Dienstgeberwerte ausgeschlossen', () => {
+  const e = werteAusDokument(beleg([seiteRollung, seiteLaufend]), SOLL_FEB, { arbeitsMonat: { key: '2026-02' } })
+  assert.equal(feld(e, 'brutto').wert, 3196)
+  assert.equal(feld(e, 'sv').wert, 570, 'Vorzeichen entfernt, Seiten addiert, Jahressumme 999,99 ignoriert')
+  assert.equal(feld(e, 'lst').wert, 320)
+  assert.equal(feld(e, 'netto').wert, 2281, 'leeres Auszahlungsfeld der Aufrollung zählt nicht')
+  for (const k of ['brutto', 'sv', 'lst', 'netto']) assert.equal(feld(e, k).eingeschraenkt, true, k)
+  const ohneDifferenz = seiteLaufend.filter((z) => !['Differenz aus Vormonaten', '146,00'].includes(z[0][0]))
+  const nurLaufend = werteAusDokument(beleg([ohneDifferenz]), SOLL_FEB, { arbeitsMonat: { key: '2026-03' } })
+  assert.equal(feld(nurLaufend, 'sv').eingeschraenkt, false, 'Beleg ohne Aufrollung ist direkt vergleichbar')
+})
+
+test('Beleg: unlesbarer Betrag wird nicht geraten', () => {
+  const kaputt = seiteLaufend.map((z) => (z[0][0] === '1000' ? [['1000', 'code'], ['Gehalt', 'bez'], ['3.0O0,00', 'bezuege']] : z))
+  const e = werteAusDokument(beleg([kaputt]), SOLL_FEB, { arbeitsMonat: { key: '2026-03' } })
+  assert.equal(feld(e, '1000').wert, null)
+  assert.match(feld(e, '1000').hinweis, /nicht lesbar/)
+})
+
+test('Vergleich: eingeschränkt vergleichbare Summen sind keine Abweichung', () => {
+  const v = vergleiche({ zeilen: [], brutto: 0, sv: 500, lst: 0, netto: 0 }, { werte: { sv: 570 }, eingeschraenkt: ['sv'] }, { position: 0.05, summe: 1 })
+  assert.equal(v.zeilen.find((z) => z.key === 'sv').status, 'eingeschraenkt')
+  assert.equal(v.zeilen.find((z) => z.key === 'sv').diff, 70)
+  assert.equal(v.abweichungen, 0)
+})
+
+test('OCR-Korrektur nur bei eindeutigen Fällen und immer als unsicher', () => {
+  assert.deepEqual(parseBetragUnsicher('180,40'), { wert: 180.4, unsicher: false })
+  assert.deepEqual(parseBetragUnsicher('180.40'), { wert: 180.4, unsicher: true }, 'Punkt statt Komma')
+  assert.deepEqual(parseBetragUnsicher('1.234.56'), { wert: 1234.56, unsicher: true })
+  assert.deepEqual(parseBetragUnsicher('0.00‘'), { wert: 0, unsicher: true })
+  assert.deepEqual(parseBetragUnsicher('512,77-'), { wert: -512.77, unsicher: false })
+  for (const s of ['4.512', '1234', '12.3', '1.2O4,56', '25,0', '2.50.20']) assert.equal(parseBetragUnsicher(s).wert, null, s)
+})
+
+test('Beleg per Texterkennung: Linienreste, verklebte Zellen, verlesene Kennungen', () => {
+  const ocr = (seite) => seite.map((z) => z.map(([t, sp]) => [t
+    .replace(/^02\*/, '02°').replace(/^Summe Bezüge$/, '|Summe Bezüge|').replace(/^LSt lfd$/, 'LSt Ifd'), sp]))
+  const verklebt = (seite) => seite.map((z) => (z[0][0] === '1520' ? [['1520 |' + z[1][0], [60, 260]], ...z.slice(2)] : z))
+  const s1 = verklebt(ocr(seiteRollung)).map((z) => z.map(([t, sp]) => [t === '4,00' && sp === 'bezuege' ? '4.00' : t, sp]))
+  const w = beleg([s1, ocr(seiteLaufend)]).map((x) => ({ ...x, conf: 90 }))
+  const e = werteAusDokument(w, SOLL_FEB, { arbeitsMonat: { key: '2026-02' } })
+  assert.match(e.layout, /Abrechnungsbeleg/)
+  assert.equal(feld(e, '1520').wert, 160, 'Code und Bezeichnung getrennt, Kennung 02° erkannt')
+  assert.match(feld(e, '1520').hinweis, /Februar 2026/)
+  assert.equal(feld(e, '9010').wert, 4); assert.equal(feld(e, '9010').status, 'unsicher', 'Punkt statt Komma')
+  assert.equal(feld(e, 'brutto').wert, 3196)
+  assert.equal(feld(e, 'lst').wert, 320, '„Ifd“ statt „lfd“')
+})
+
+test('Beleg: Summe fehlt auf einer Seite → keine Teilsumme', () => {
+  const ohneSV = seiteRollung.filter((z) => !(z[0][0] === 'SV Gesamt' || z[0][0] === '30,00-'))
+  const e = werteAusDokument(beleg([ohneSV, seiteLaufend]), SOLL_FEB, { arbeitsMonat: { key: '2026-02' } })
+  assert.equal(feld(e, 'sv').wert, null)
+  assert.match(feld(e, 'sv').hinweis, /1 von 2 Seiten/)
+  assert.equal(feld(e, 'lst').wert, 320, 'andere Summen unberührt')
+})
+
+test('Beleg: Linienreste zwischen Spalten stören die Beträge nicht', () => {
+  const mitStrich = seiteLaufend.map((z) => (z[0][0] === '1000' ? [...z, ['|', [500, 503]]] : z))
+  const e = werteAusDokument(beleg([mitStrich]), SOLL_FEB, { arbeitsMonat: { key: '2026-03' } })
+  assert.equal(feld(e, '1000').wert, 3000)
+})
+
+test('Schräglage: Zeilenprofil findet den Drehwinkel synthetischer Textzeilen', async () => {
+  const { schaetzeSchraeglage } = await import('../lohnzettel/ocr.mjs')
+  for (const grad of [0, 1.6, -2.4]) {
+    const a = (grad * Math.PI) / 180, p = []
+    for (let zeile = 0; zeile < 30; zeile++) for (let x = 0; x < 600; x += 3) if ((x / 3 + zeile) % 4) {
+      const y = 20 + zeile * 25
+      p.push(Math.round(x * Math.cos(a) - y * Math.sin(a)), Math.round(x * Math.sin(a) + y * Math.cos(a)))
+    }
+    assert.ok(Math.abs(schaetzeSchraeglage(p) - grad) <= 0.2, `${grad}° → ${schaetzeSchraeglage(p)}`)
+  }
+})
+
+test('Beleg: Jahreswerte werden nie zu Monatswerten addiert', () => {
+  // Überschrift „Jahressummen“ mit OCR-Störzeichen davor
+  const gestoert = seiteLaufend.map((z) => (z[0][0] === 'Dienstgeberanteile' ? [['5 Jahressummen', [53, 130]]] : z))
+  let e = werteAusDokument(beleg([gestoert]), SOLL_FEB, { arbeitsMonat: { key: '2026-03' } })
+  assert.equal(feld(e, 'sv').wert, 540)
+  // Abschnittsüberschrift gar nicht erkannt → SV Gesamt zweimal auf der Seite → mehrdeutig statt Summe
+  const ohneEnde = seiteLaufend.filter((z) => z[0][0] !== 'Dienstgeberanteile')
+  e = werteAusDokument(beleg([ohneEnde]), SOLL_FEB, { arbeitsMonat: { key: '2026-03' } })
+  assert.equal(feld(e, 'sv').wert, null)
+  assert.equal(feld(e, 'sv').status, 'mehrdeutig')
+  assert.deepEqual(feld(e, 'sv').kandidaten.map((k) => k.wert), [540, 888.88])
+})
+
+test('Beleg: nur die Aufrollungsseite – Monat und Jahr aus ihren eigenen Angaben', () => {
+  const nurRollung = seiteRollung.map((z) => (z[0][0] === 'Summe aller Rollungsmonate 2026' ? [['Summe aller Rollungsmonate 2026', [50, 250]]] : z))
+  nurRollung.splice(2, 0, [['Abrechnungsmonat März', [50, 200]]])
+  const e = werteAusDokument(beleg([nurRollung]), SOLL_FEB, { arbeitsMonat: { key: '2026-02' } })
+  assert.equal(feld(e, '1520').wert, 160)
+  assert.equal(feld(e, '5040').wert, 100)
+  assert.deepEqual(e.zeitraeume.map((z) => z.key), ['2026-03'])
+})
+
+test('Auswahl: ein PDF oder mehrere Fotos, Grenzen werden geprüft', async () => {
+  const { pruefeAuswahl } = await import('../lohnzettel/ocr.mjs')
+  const datei = (name, type, mb = 1) => ({ name, type, size: mb * 1024 * 1024 })
+  assert.equal(pruefeAuswahl([datei('a.pdf', 'application/pdf')]).typ, 'pdf')
+  assert.equal(pruefeAuswahl([datei('s1.jpg', 'image/jpeg'), datei('s2.jpg', 'image/jpeg')]).liste.length, 2)
+  assert.match(pruefeAuswahl([datei('a.pdf', 'application/pdf'), datei('s1.jpg', 'image/jpeg')]).fehler, /entweder/)
+  assert.match(pruefeAuswahl(Array.from({ length: 6 }, (_, i) => datei(i + '.png', 'image/png'))).fehler, /Höchstens 5/)
+  assert.match(pruefeAuswahl([datei('a.jpg', 'image/jpeg', 10), datei('b.jpg', 'image/jpeg', 10)]).fehler, /zusammen größer/)
+  assert.match(pruefeAuswahl([datei('a.docx', 'application/msword')]).fehler, /Nur PDF/)
+  assert.match(pruefeAuswahl([]).fehler, /Keine Datei/)
+})
+
+test('Beleg: nur eine von zwei Seiten gelesen → Hinweis, Summen eingeschränkt', () => {
+  const e = werteAusDokument(beleg([seiteLaufend]), SOLL_FEB, { arbeitsMonat: { key: '2026-02' } })
+  assert.match(e.hinweise.join(' '), /Aufrollungsseite wurde aber nicht gelesen/)
+  assert.equal(feld(e, 'brutto').eingeschraenkt, true)
+})
+
+test('Beleg: verlesene Abschnittsüberschrift „Jahres sa“ beendet den Monatsbereich', () => {
+  const gestoert = seiteLaufend.map((z) => (z[0][0] === 'Dienstgeberanteile' ? [['Jahres sa', [53, 130]]] : z))
+  assert.equal(feld(werteAusDokument(beleg([gestoert]), SOLL_FEB, { arbeitsMonat: { key: '2026-03' } }), 'sv').wert, 540)
+})
+
+test('Beleg: Zeilen unter „Summe Bezüge“ sind keine Positionen', () => {
+  const mitWertzeile = [...seiteLaufend]
+  mitWertzeile.splice(mitWertzeile.findIndex((z) => z[0][0] === 'Summe Bezüge') + 1, 0, [['742', 'code'], ['134,11', [200, 240]], ['134,11-', 'bezuege']])
+  const e = werteAusDokument(beleg([mitWertzeile]), SOLL_FEB, { arbeitsMonat: { key: '2026-03' } })
+  assert.ok(!e.unzugeordnet.some((u) => u.code === '742'))
+})

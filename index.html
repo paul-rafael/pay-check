@@ -1008,7 +1008,7 @@ input.lz-ungueltig{border-color:var(--pr-red);box-shadow:0 0 0 3px var(--pr-red-
       </div>
       <div class="pr-card">
         <h3>Lohnzettel einlesen</h3>
-        <p>Unter Ergebnis → Soll-Ist-Vergleich kannst du deinen Lohnzettel als PDF, Scan oder Foto einlesen. Die Datei wird nur in diesem Browser gelesen – nichts wird hochgeladen oder gespeichert. Prüfe jeden erkannten Wert, bevor du vergleichst: Die Funktion ist noch nicht an echten Lohnzetteln geprüft. In der heruntergeladenen Einzeldatei steht sie nicht zur Verfügung.</p>
+        <p>Unter Ergebnis → Soll-Ist-Vergleich kannst du deinen Lohnzettel als PDF, Scan oder Foto einlesen. Die Datei wird nur in diesem Browser gelesen – nichts wird hochgeladen oder gespeichert. Mehrseitige Belege am besten als PDF oder alle Seiten als Fotos gemeinsam auswählen. Prüfe jeden erkannten Wert, bevor du vergleichst. Abgestimmt ist die Funktion auf den Abrechnungsbeleg mit den Spalten Lohnart, Einheiten, Satz/BMG, Abzüge und Bezüge; andere Lohnzettel werden nur allgemein zugeordnet. In der heruntergeladenen Einzeldatei steht sie nicht zur Verfügung.</p>
       </div>
       <div class="pr-card">
         <h3>Was nicht berücksichtigt wird</h3>
@@ -1550,7 +1550,8 @@ function lohnzettelApi(){
     soll(){
       const {lz}=state._res,{monat,jahr}=state,lzKey=monat===12?monatKey(1,jahr+1):monatKey(monat+1,jahr)
       return{zeilen:lohnartZeilen(lz).map(({la,bez,betrag})=>({la,bez,betrag})),brutto:lz.summeBrutto,sv:r(lz.svB+lz.szSV),lst:r(lz.ls+lz.szLS6+lz.szLSUeber),netto:lz.netto,
-        arbeitsMonat:{key:curKey(),name:monatName(curKey())},lohnzettelMonat:{key:lzKey,name:monatName(lzKey)},monatName}
+        arbeitsMonat:{key:curKey(),name:monatName(curKey())},lohnzettelMonat:{key:lzKey,name:monatName(lzKey)},monatName,
+        leer:!monatHatInhalt(snapshot())}
     },
     toleranz:()=>settings.toleranz,
     // Nur auf ausdrücklichen Wunsch: bestätigte Werte in den Soll-Ist-Vergleich des Monats schreiben
@@ -1558,7 +1559,9 @@ function lohnzettelApi(){
       const vorh=istWerte(),n=Object.keys(vorh.werte||{}).length+(vorh.zusatz||[]).length
       if(n&&!confirm('Für '+monatName(curKey())+' sind bereits '+n+' Ist-Werte eingetragen. Durch die Werte aus dem Lohnzettel ersetzen?'))return false
       const werte={...ist.werte};delete werte.brutto
-      updateIst(x=>{x.werte=werte;x.zusatz=(ist.zusatz||[]).map(z=>({name:z.name,betrag:z.betrag,kat:'sonder'}))})
+      updateIst(x=>{x.werte=werte;x.zusatz=(ist.zusatz||[]).map(z=>({name:z.name,betrag:z.betrag,kat:'sonder'}))
+        // Hinweise aus dem Beleg (z.B. Summen inkl. Aufrollung) als Notiz, falls noch keine vorhanden
+        x.notiz=x.notiz||{};Object.entries(ist.hinweise||{}).forEach(([k,t])=>{if(['sv','lst','netto'].includes(k)&&!x.notiz[k])x.notiz[k]='Laut Beleg: '+t})})
       renderSollIst();$('si-card').open=true;toast('Werte übernommen – Soll-Ist-Vergleich aktualisiert')
     }
   }

@@ -1,6 +1,7 @@
 // Konfiguration für das Auslesen eines Lohnzettels.
 //
-// WICHTIG: Diese Ausgangskonfiguration ist noch NICHT an einem echten Lohnzettel geprüft.
+// Allgemeine Zuordnung (KONFIGURATION): noch NICHT an einem echten Lohnzettel geprüft.
+// Layout „Abrechnungsbeleg“ (LAYOUTS): an einem echten, digitalen Beleg geprüft (nicht im Repository).
 // Sie enthält bewusst keine Seitenkoordinaten und keine erfundenen Positionsbezeichnungen:
 //  - Lohnart-Codes stammen ausschließlich aus der Berechnung des Einsatzrechners (lohnartZeilen),
 //    erkannt wird nur ein Code am Zeilenanfang, der im berechneten Lohnzettel des Monats vorkommt.
@@ -44,5 +45,42 @@ export const KONFIGURATION = {
   // Tesseract: Seitensegmentierung 6 = einheitlicher Textblock (hält Tabellenzeilen zusammen)
   ocr: { sprache: 'deu', psm: '6' },
 }
+
+// ── Bekannte Beleg-Layouts ───────────────────────────────────────────────────
+// Abgeleitet aus einem echten (nicht im Repository enthaltenen) Abrechnungsbeleg.
+// Spalten werden über die Überschriften im Dokument bestimmt, nicht über feste Koordinaten.
+export const LAYOUTS = [{
+  id: 'abrechnungsbeleg',
+  name: 'Abrechnungsbeleg (Lohnart · Einheiten · Satz/BMG · Abzüge · Bezüge)',
+  // alle Muster müssen im Dokument vorkommen
+  // Beschriftungen tolerieren typische OCR-Verwechslungen (ü/u, l/I); Beträge werden davon nicht berührt
+  erkennung: [/A\s*B\s*R\s*E\s*C\s*H\s*N\s*U\s*N\s*G\s*S\s*B\s*E\s*L\s*E\s*G/i, /Lohnart\s+Bezeichnung/i, /Bez[üu]ge/i],
+  kopfzeile: /Lohnart\s+Bezeichnung/i,
+  spalten: { einheiten: /^Einheiten$/i, satz: /^Satz\s*\/\s*BMG$/i, abzuege: /^Abz[üu]ge$/i, bezuege: /^Bez[üu]ge$/i },
+  // Monatskennung vor der Bezeichnung bei aufgerollten Positionen, z.B. „02*“ = Februar
+  rollung: /^(\d{2})\s?[*°"'’‘]\s*/,   // OCR liest den Stern teils als ° oder Anführungszeichen
+  rollungsSeite: /Summe aller Rollungsmonate/i,
+  laufenderMonat: /für den Zeitraum\s+(\S+)\s+(20\d{2})/i,
+  // Aufrollungsseite allein: Monat und Jahr stehen getrennt
+  abrechnungsmonat: /Abrechnungsmonat\s+(\S+)/i,
+  rollungsJahr: /Rollungsmonate\s+(20\d{2})/i,
+  // ab diesen Überschriften folgen Jahres- bzw. Dienstgeberwerte – nicht auswerten
+  ende: [/\bJahres(summen)?\b/i, /\bDienstgeberanteile\b/i],   // als Wort(anfang), auch bei OCR-Fehlern wie „Jahres sa“
+  // Summenfelder: Beschriftung (exakt) → Wert in derselben Zeile rechts oder direkt darunter
+  summen: {
+    bezuege: /^Summe\s*Bez[üu]ge$/i,
+    sv: /^SV\s*Gesamt$/i,
+    lst: /^LSt\s*[lI1|]fd$/i,
+    auszahlung: /^Auszahlung$/i,
+    differenz: /^(Differenz aus Vormonaten|Auszahlungsdifferenz)$/i,
+  },
+  // Lohnart am Beleg → Lohnart der Berechnung (mehrere Zeilen derselben Ziel-Lohnart werden addiert)
+  aliase: {
+    1060: '9010',   // Homeoffice-Pauschale
+    5041: '5040',   // Taggeld, steuerpflichtiger Teil – der Rechner führt das Taggeld gesamt unter 5040
+  },
+  // Dienstgeber- bzw. Informationszeilen ohne Bezug
+  ignorieren: ['9200', '9210'],
+}]
 
 export const MONATSNAMEN = ['jänner|januar', 'februar|feber', 'märz|maerz', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'dezember']

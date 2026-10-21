@@ -10,7 +10,9 @@ Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](htt
   - bearbeitbares Kontrollfenster: unsichere, mehrdeutige und fehlende Werte sind gekennzeichnet, nichts wird geraten
   - Vergleich von Soll, Ist und Differenz je Position und für das Netto, Hinweis bei abweichendem Abrechnungsmonat
   - Datei und erkannte Werte werden nicht gespeichert; übernommen wird nur auf ausdrücklichen Klick
-  - Zuordnung noch nicht an echten Lohnzetteln geprüft
+  - Layout „Abrechnungsbeleg“ (Lohnart · Einheiten · Satz/BMG · Abzüge · Bezüge) mit Aufrollung von Vormonaten, an einem echten Beleg geprüft (PDF, Scan, Fotos)
+  - mehrseitige Belege als PDF oder mehrere Fotos; Bilder werden begradigt und von Tabellenlinien befreit
+  - andere Lohnzettel: allgemeine Zuordnung, noch nicht an echten Belegen geprüft
 - Statische Prüfung: Lohnzettel-Module ohne externe Adressen, Bibliotheken in `vendor/` mit Prüfsummen
 
 ### Geändert

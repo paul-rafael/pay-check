@@ -35,7 +35,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Feiertage | Österreich; an Montage-Tagen im Ausland nur die Feiertage des Einsatzlandes: DE (je Bundesland), CH, FR, IT, NL, BE, LU, ES |
 | Netto | SV mit Höchstbeitragsgrundlage, Lohnsteuer-Tarif, steuerfreie Zuschläge nach §68, Taggeld, Urlaubsgeld nach §67 – Werte je Steuerjahr (2025, 2026) |
 | Soll-Ist-Vergleich | Beträge des echten Lohnzettels je Lohnart eintragen, Differenzen nach Bereichen mit möglichen Ursachen, Abweichungen als geklärt markieren |
-| Lohnzettel einlesen | PDF, Scan oder Foto lokal im Browser auslesen (PDF-Textebene bzw. Texterkennung), Werte im Kontrollfenster prüfen und mit der Berechnung vergleichen – Vorschau-Funktion, siehe unten |
+| Lohnzettel einlesen | PDF, Scan oder Fotos lokal im Browser auslesen (PDF-Textebene bzw. Texterkennung), Werte im Kontrollfenster prüfen und mit der Berechnung vergleichen – inkl. Aufrollung von Vormonaten; Vorschau-Funktion, siehe unten |
 | Jahresübersicht | Jahresbrutto, -netto, Taggeld, SV, Lohnsteuer, Zuschläge; Netto je Monat, Zeitkonten-Verlauf, Monatstabelle; fehlende Monate zählen nicht als 0 € |
 | Gespeicherte Monate | Jahresübersicht und alle Monate mit Status offen / gespeichert / abgerechnet / geändert / veraltet; Monate vergleichen; bewusste Neuberechnung mit Verlauf |
 | Hinweise | Warnungen bei über 12 h am Tag, über 60 h pro Woche, vollem ZA-Topf, fehlendem Taggeld; alle Annahmen sichtbar |
@@ -85,10 +85,12 @@ npm run vendor   # nach einem Versionswechsel von Tesseract.js oder PDF.js: vend
 
 ### Lohnzettel einlesen (Vorschau)
 
-- Läuft vollständig im Browser: PDF.js liest digitale PDFs über ihre Textebene, gescannte Seiten und Fotos erkennt Tesseract.js (deutsch, LSTM). Es gibt keinen Server, keinen Upload und keine externen Dienste; alle Bibliotheken, Worker und Sprachdaten kommen aus `vendor/`.
+- Läuft vollständig im Browser: PDF.js liest digitale PDFs über ihre Textebene, gescannte Seiten und Fotos erkennt Tesseract.js (deutsch, LSTM). Vor der Texterkennung werden Bilder begradigt, in Graustufen mit Kontrastspreizung umgewandelt und Tabellenlinien entfernt. Mehrseitige Belege: ein PDF oder bis zu fünf Fotos gemeinsam. Es gibt keinen Server, keinen Upload und keine externen Dienste; alle Bibliotheken, Worker und Sprachdaten kommen aus `vendor/`.
 - Module in `lohnzettel/`: `konfiguration.mjs` (Zuordnungsregeln), `parser.mjs` (Zahlenformat, Zeilen, Zuordnung, Vergleich – ohne Browser testbar), `ocr.mjs` (Laden, Bildaufbereitung, Texterkennung, Freigabe), `ui.mjs` (Kontrollfenster und Vergleich).
-- Zuordnung: Lohnart-Codes am Zeilenanfang, die auch im berechneten Lohnzettel vorkommen; für Brutto, Sozialversicherung, Lohnsteuer und Netto allgemeine Begriffe. Keine Seitenkoordinaten. Mehrdeutige, unsichere oder fehlende Werte werden gekennzeichnet, nie geraten.
-- **Noch nicht an echten Lohnzetteln geprüft.** Getestet ist der Ablauf mit synthetischen Testdokumenten. Für die Anpassung von `lohnzettel/konfiguration.mjs` wird ein geschwärzter echter Lohnzettel benötigt (Namen, Adresse, SV-Nummer, Bankdaten unkenntlich; Positionsbezeichnungen und Beträge lesbar).
+- **Layout „Abrechnungsbeleg“** (Spalten Lohnart · Einheiten · Satz/BMG · Abzüge · Bezüge): Spalten werden über die Überschriften im Dokument bestimmt, nicht über feste Koordinaten. Aufgerollte Positionen mit Monatskennung (`02*` = Februar) werden dem Arbeitsmonat zugeordnet, andere Monate nicht verglichen. Aliase: 1060 → 9010 (Homeoffice), 5041 + 5040 (Taggeld gesamt). Summen (Summe Bezüge, SV Gesamt, LSt lfd, Auszahlung) über alle Seiten; Jahres- und Dienstgeberwerte sind ausgeschlossen. Summen mit Aufrollung gelten als „eingeschränkt vergleichbar“.
+- **Andere Lohnzettel:** allgemeine Zuordnung über Lohnart-Codes am Zeilenanfang und allgemeine Begriffe – an echten Belegen anderer Lohnsoftware noch nicht geprüft.
+- **Geprüft** an einem echten Abrechnungsbeleg (nicht im Repository): digitales PDF, gescanntes PDF und zwei Handyfotos – alle 11 Werte korrekt, keine externen Anfragen. Stark verkleinerte, unscharfe Fotos werden nicht gelesen; dabei wird aber auch kein falscher Wert angezeigt. Die Tests in `tests/lohnzettel.test.mjs` verwenden ausschließlich synthetische Daten mit gleicher Struktur.
+- Mehrdeutige, unsichere oder fehlende Werte werden gekennzeichnet, nie geraten. Eindeutige OCR-Fehler (Punkt statt Komma, Störzeichen nach dem Betrag) werden gelesen, aber immer als „unsicher“ markiert.
 
 Tests laufen bei jedem Push über GitHub Actions. Hinweise zum Mitwirken stehen in [CONTRIBUTING.md](CONTRIBUTING.md).
 
