@@ -11,7 +11,7 @@ Einsätze erfassen. Lohn nachrechnen. Lohnzettel prüfen.
 
 **[Einsatzrechner öffnen →](https://paul-rafael.github.io/einsatzrechner/)**
 
-<img alt="Einsatzrechner – Netto-Ergebnis, Kalender und Zeitkonten" src="docs/screenshot.png" width="760">
+<img alt="Einsatzrechner – Netto-Ergebnis, Arbeitskalender und Zeitkonten" src="docs/screenshot.png" width="760">
 
 </div>
 
@@ -25,7 +25,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 
 | Bereich | Beschreibung |
 | --- | --- |
-| Erfassen | Kalender mit Tagesdetails, Arbeitsmodelle, Einsatzland, Bezahlung und Zeitkonten – das geschätzte Netto steht immer oben |
+| Erfassen | Kalender über die volle Breite mit Tagesdetails, Arbeitsmodell und Einsatzland; Zeitkonten direkt darunter, Bezahlung kompakt – Netto und Arbeitsstunden stehen immer oben |
 | Ergebnis | Netto als Hauptzahl, Brutto, Abzüge und steuerfreie Anteile; vollständiger Lohnzettel, Brutto-Netto-Rechnung und Soll-Ist-Vergleich |
 | Kalender | Büro, Homeoffice, Montage, Montage mit Reise, Zeitausgleich und Ruhezeit mit Farbe und Kürzel; Tage kopieren und einfügen |
 | Arbeitsmodelle | 5/2, 10/4, 6/1/4/3 und eigene Modelle; einmalig oder fortlaufend über Monatsgrenzen; früheren Monat als Vorlage |
@@ -41,6 +41,8 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Hinweise | Warnungen bei über 12 h am Tag, über 60 h pro Woche, vollem ZA-Topf, fehlendem Taggeld; alle Annahmen sichtbar |
 | Daten | Automatisches Speichern im Browser, CSV und PDF für Monat und Jahr, Gesamtsicherung, Import, vollständiges Löschen |
 | Lehrlinge | Reduzierter SV-Satz per Schalter |
+| Erklärungen | Ein kleines „i“ in der Ecke jeder Funktion und neben wichtigen Feldern erklärt per Klick, wofür sie da ist |
+| Darstellung | Ruhiges, helles Design mit Bordeaux als Akzent; dunkle Darstellung wählbar; am Handy eigene Navigationsleiste |
 
 ## Highlights
 
@@ -51,11 +53,20 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 - **Offline** – die Datei funktioniert auch ohne Internet, z. B. auf Montage.
 - **Geprüft** – Rechen-Tests laufen bei jeder Änderung automatisch.
 
-<details>
-<summary>Jahresübersicht</summary>
-<br>
-<img alt="Jahresübersicht mit Netto je Monat" src="docs/jahresuebersicht.png" width="760">
-</details>
+## Ansichten
+
+<table>
+<tr>
+<td width="50%"><b>Ergebnis</b> – berechneter Lohnzettel mit Brutto-Netto-Rechnung<br><br><img alt="Ergebnis mit berechnetem Lohnzettel" src="docs/ergebnis.png"></td>
+<td width="50%"><b>Gespeicherte Monate</b> – Jahreswerte und Netto je Monat<br><br><img alt="Jahresübersicht mit Netto je Monat" src="docs/jahresuebersicht.png"></td>
+</tr>
+<tr>
+<td><b>Info-Symbol</b> – jede Funktion erklärt sich per Klick auf „i“<br><br><img alt="Erklärung zum Arbeitskalender über das Info-Symbol" src="docs/info.png"></td>
+<td><b>Am Handy</b> – Ergebnis oben, Kalender und Zeitkonten untereinander<br><br><img alt="Einsatzrechner am Handy" src="docs/handy.png"></td>
+</tr>
+</table>
+
+<sub>Alle Screenshots zeigen Beispieldaten.</sub>
 
 ## Nutzung
 
@@ -64,7 +75,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 **Offline:** `einsatzrechner.html` aus dem [neuesten Release](https://github.com/paul-rafael/einsatzrechner/releases/latest) herunterladen und im Browser öffnen.
 
 1. In den **Einstellungen** (Zahnrad) einmal Grundgehalt, Taggeld, Standard-Stunden und Arbeitsmodell eintragen.
-2. Unter **Erfassen** Tage anklicken oder ein Arbeitsmodell setzen – Eingaben werden automatisch gespeichert, das Netto steht sofort oben.
+2. Unter **Erfassen** Tage anklicken oder ein Arbeitsmodell setzen – Eingaben werden automatisch gespeichert, das Netto steht sofort oben. Unklar, wofür etwas da ist? Auf das kleine **„i“** klicken.
 3. Bei Einsätzen im Ausland das **Einsatzland** wählen.
 4. Unter **Ergebnis** den Monat speichern, im **Soll-Ist-Vergleich** mit dem Lohnzettel prüfen und als **abgerechnet** markieren.
 5. Unter **Gespeicherte Monate** Jahr, Einkommen und Zeitkonten verfolgen.

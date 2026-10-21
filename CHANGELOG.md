@@ -2,6 +2,14 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [2.3.1] – 2026-10-21
+
+### Geändert
+- Wieder das bisherige Rot (#8A0B18) als Akzentfarbe, in hell und dunkel
+- Etwas dunkleres Grau für Hintergrund, Linien und Nebentexte – mehr Kontrast
+- Einsatzland und Bundesland stehen nebeneinander; am Handy nehmen die Kalender-Auswahlfelder die volle Breite ein
+- README mit neuen Screenshots (Erfassen, Ergebnis, Jahresübersicht, Info-Symbol, Handy) und neuem Vorschaubild
+
 ## [2.3.0] – 2026-10-21
 
 ### Geändert
