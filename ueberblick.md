@@ -1,6 +1,6 @@
 # Pay-Check – Funktionsüberblick
 
-Stand: Version 3.0.0 · Live: <https://paul-rafael.github.io/pay-check/>
+Stand: Version 3.1.0 · Live: <https://paul-rafael.github.io/pay-check/>
 
 Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichischem Recht, vollständig im Browser, ohne Konto und ohne Server.
 
@@ -19,6 +19,10 @@ Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichisc
 Jede Funktion hat rechts oben ein kleines **„i“**, das per Klick erklärt, wofür sie da ist; einzelne Felder haben ein eigenes „i“. Am Handy gibt es eine Navigationsleiste unten. Alte Adressen (`#rechner`, `#jahr`, `#abrechnungen`) leiten weiter.
 
 ---
+
+## Arbeitsmonat und Lohnzettel
+
+Alle Monate im Rechner sind **Arbeitsmonate** (wann gearbeitet wurde). Zuschläge, Überstunden und Taggeld daraus stehen meist am **Lohnzettel des Folgemonats**. Deshalb zeigt der Kopf in Erfassen und Ergebnis immer das Paar „Arbeitsmonat Oktober 2026 → Lohnzettel November 2026“, und die Jahresübersicht nennt unter jedem Arbeitsmonat den passenden Lohnzettel-Monat.
 
 ## Ergebnisleiste (Erfassen und Ergebnis)
 

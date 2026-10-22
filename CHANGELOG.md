@@ -2,6 +2,13 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.1.0] – 2026-10-22
+
+### Geändert
+- Arbeitsmonat und Lohnzettel klar getrennt: Oben in Erfassen und Ergebnis steht jetzt „Arbeitsmonat Oktober 2026 → Lohnzettel November 2026“ (mit Erklärung über das „i“). Das Feld „Lohnzettel für“ in der Bezahlung entfällt.
+- Gespeicherte Monate: kurze Erklärung, dass jede Zeile ein Arbeitsmonat ist und der Lohnzettel meist im Folgemonat kommt. Diagramm „Netto je Arbeitsmonat“ zeigt unter jedem Monat den Lohnzettel-Monat, die Tabelle und die Monatsliste ebenfalls; „Netto laut LZ“ heißt jetzt „Netto laut Lohnzettel“.
+- Ergebnis: Lohnzettel-Karte nennt „Lohnzettel November 2026“ statt „für November 2026“.
+
 ## [3.0.0] – 2026-10-21
 
 ### Geändert
