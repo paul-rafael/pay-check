@@ -31,13 +31,13 @@ export function ladeApp({ storage = {}, hash = '' } = {}) {
       return o
     },
     // Rechnet einen Monat mit dem Rechenkern und liefert das Lohnzettel-Ergebnis
-    rechne({ monat = 10, jahr = 2026, grundgehalt = 3000, taggeld = 0, tage = {}, lehrling = false, urlaubsgeld = 0, extras = [], teiler = 143 } = {}) {
-      dom.window.__in = { monat, jahr, grundgehalt, taggeld, tage, lehrling, urlaubsgeld, extras, teiler }
+    rechne({ monat = 10, jahr = 2026, grundgehalt = 3000, taggeld = 0, tage = {}, lehrling = false, urlaubsgeld = 0, extras = [], teiler = 143, saetze } = {}) {
+      dom.window.__in = { monat, jahr, grundgehalt, taggeld, tage, lehrling, urlaubsgeld, extras, teiler, saetze }
       return JSON.parse(run(`JSON.stringify((() => {
         const i = window.__in
         const res = rechneMonat({ monat: i.monat, jahr: i.jahr, grundgehalt: i.grundgehalt, taggeld: i.taggeld, lehrling: i.lehrling,
           zaTopfMax: 0, zaTopfStart: 0, ruheStart: 0, dayMap: i.tage, urlaubsgeldAktiv: i.urlaubsgeld > 0,
-          urlaubsgeldBetrag: i.urlaubsgeld, extras: i.extras }, { teiler: i.teiler })
+          urlaubsgeldBetrag: i.urlaubsgeld, extras: i.extras }, { teiler: i.teiler, saetze: i.saetze })
         res.tage.forEach((t) => { t.key = dateKey(t.datum) })
         return { lz: res.lz, ruhe: res.ruhe, tage: res.tage, werte: res.werte }
       })())`))

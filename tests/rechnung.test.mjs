@@ -104,3 +104,16 @@ test('Urlaubsgeld: eigener SV-Satz und 6 % nach 620 € Freibetrag', () => {
   assert.equal(lz.szSV, 597.45)       // 17,07 %
   assert.equal(lz.szLS6, 136.95)
 })
+
+test('Montageprämie: 500 € je 30 Tage aliquot je Montage-Tag, laufender Bezug (Lohnart 1050)', () => {
+  const tage = { '2026-10-06': montage(10), '2026-10-07': montage(10), '2026-10-08': montage(10),
+    '2026-10-09': { mode: 'montage_reise', stunden: 8, fahrzeit: 2 } }
+  const mit = app.rechne({ tage }).lz, ohne = app.rechne({ tage, saetze: { montagePraemie: 0 } }).lz
+  assert.equal(mit.mpB, 66.67)                       // 500 / 30 × 4
+  assert.equal(ohne.mpB, 0)
+  assert.equal(Math.round((mit.lfdBrutto - ohne.lfdBrutto) * 100) / 100, 66.67)
+  assert.ok(mit.svB > ohne.svB && mit.ls > ohne.ls, 'steuer- und SV-pflichtig')
+  const zeile = JSON.parse(app.run(`JSON.stringify(lohnartZeilen(rechneMonat({monat:10,jahr:2026,grundgehalt:3000,dayMap:${JSON.stringify(tage)}},{}).lz).find(z=>z.la==='1050'))`))
+  assert.equal(zeile.betrag, 66.67)
+  assert.equal(app.rechne({ tage: { '2026-10-06': { mode: 'buero', stunden: 8.25, fahrzeit: 0 } } }).lz.mpB, 0)
+})

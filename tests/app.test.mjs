@@ -6,11 +6,12 @@ import { ladeApp } from './helpers.mjs'
 const montage = (h, extra = {}) => ({ mode: 'montage', stunden: h, fahrzeit: 0, ...extra })
 
 // ── Rechenkern ────────────────────────────────────────────────────────────────
+// Die Montageprämie (ab 3.1.1) ist bewusst neu – ohne sie muss alles andere gleich bleiben
 test('Referenzwerte: Berechnung 2026 unverändert gegenüber v1.1', () => {
   const app = ladeApp()
   const ref = JSON.parse(readFileSync(new URL('./fixtures/referenz-v1.json', import.meta.url), 'utf8'))
   for (const [name, { input, lz, ruhe }] of Object.entries(ref)) {
-    const res = app.rechne(input)
+    const res = app.rechne({ ...input, saetze: { montagePraemie: 0 } })
     for (const k of Object.keys(lz)) assert.deepEqual(res.lz[k], lz[k], `${name}: lz.${k}`)
     assert.deepEqual(res.ruhe, ruhe, `${name}: ruhe`)
   }

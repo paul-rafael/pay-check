@@ -1,6 +1,6 @@
 # Pay-Check – Funktionsüberblick
 
-Stand: Version 3.1.0 · Live: <https://paul-rafael.github.io/pay-check/>
+Stand: Version 3.1.1 · Live: <https://paul-rafael.github.io/pay-check/>
 
 Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichischem Recht, vollständig im Browser, ohne Konto und ohne Server.
 
@@ -50,6 +50,13 @@ Alle Monate im Rechner sind **Arbeitsmonate** (wann gearbeitet wurde). Zuschläg
 - Tage kopieren und auf beliebige Tage einfügen
 - Heutiger Tag, ausgewählter Tag, Wochenenden und Feiertage sind hervorgehoben; Sa/So/Feiertag mit Zuschlag tragen einen roten Punkt
 
+### Zeiten importieren
+- Im Arbeitskalender „Zeiten importieren“ (auch im Menü „Kalender“): Zeitnachweis aus der Zeiterfassung als PDF oder Foto wählen
+- Gelesen werden je Tag Datum, Tagesprogramm (TP), Abwesenheit (ABW), Kommt/Geht, Gesamt und Soll; Stunden im Format Stunden,Minuten („8,15“ = 8 h 15 min)
+- Jeder Code wird einmal einer Tagesart zugeordnet (Vorschlag: M… = Montage, F… = frei), die Zuordnung wird gemerkt
+- Stunden aus „Gesamt“ bzw. Kommt/Geht, sonst Standardzeit der Tagesart; vor dem Einfügen änderbar; bestehende Einträge nur nach Rückfrage überschrieben
+- Tage anderer Monate lassen sich mit einem Klick im passenden Monat einfügen; alles läuft lokal, die Datei wird nicht gespeichert
+
 ### Arbeitsmodelle
 - 5/2, 10/4, 6/1/4/3, „Eigenes x/y“ und frei definierte eigene Modelle (z. B. `12/2`, `6/1/4/3`)
 - Einmal setzen (ein Durchgang) oder **fortlaufend** bis Monatsende – der Rhythmus wird in Folgemonaten fortgeführt
@@ -67,6 +74,9 @@ Alle Monate im Rechner sind **Arbeitsmonate** (wann gearbeitet wurde). Zuschläg
 - Lehrlings-Schalter (reduzierter SV-Satz)
 - Einklappbar: Urlaubsgeld und Prämien/Zulagen (steuerpflichtig, steuerfrei oder §67 begünstigt)
 - Fragezeichen-Erklärungen direkt an den Feldern
+
+### Montageprämie
+- 500 € je 30 Tage aliquot je Montage-Tag (auch Montage + Reise), Lohnart 1050, laufender steuer- und SV-pflichtiger Bezug; Betrag unter Einstellungen → Erweiterte Optionen
 
 ### Zeitkonten
 - **ZA-Topf**: Start, Zugänge, Entnahmen, Ende; Maximum mit Auszahlung des Überlaufs
