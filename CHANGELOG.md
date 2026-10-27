@@ -2,6 +2,12 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.1.1] – 2026-10-27
+
+### Neu
+- Zeiten importieren: Zeitnachweis aus der Zeiterfassung (PDF oder Foto) lokal einlesen und die Tage in den Kalender einfügen. Gelesen werden Datum, Tagesprogramm, Abwesenheit, Kommt/Geht und Stunden (Format Stunden,Minuten). Codes werden einmal einer Tagesart zugeordnet und gemerkt; Stunden lassen sich vor dem Einfügen ändern, bestehende Einträge werden nur nach Rückfrage überschrieben.
+- Montageprämie: 500 € je 30 Tage aliquot je Montage-Tag als laufender Bezug (Lohnart 1050), einstellbar unter Einstellungen → Erweiterte Optionen. Gespeicherte Monate mit Montage-Tagen zeigen dadurch „veraltet“ und lassen sich bewusst neu berechnen.
+
 ## [3.1.0] – 2026-10-22
 
 ### Geändert

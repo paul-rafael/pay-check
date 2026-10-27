@@ -363,3 +363,56 @@ test('Beleg: Zeilen unter „Summe Bezüge“ sind keine Positionen', () => {
   const e = werteAusDokument(beleg([mitWertzeile]), SOLL_FEB, { arbeitsMonat: { key: '2026-03' } })
   assert.ok(!e.unzugeordnet.some((u) => u.code === '742'))
 })
+
+// ── Zeitnachweis – SYNTHETISCHE Testdaten mit der Struktur eines Zeitnachweises ──
+import { werteZeitnachweisAus, parseStdMin, parseUhrzeit } from '../lohnzettel/zeitnachweis.mjs'
+const ZK = { tag: [50, 73], kommt: [71, 92], geht: [100, 114], tp: [119, 139], gesamt: [147, 169], soll: [180, 191], saldo: [200, 213], u50: [224, 235], abw: [307, 321], komm: [335, 371] }
+function zeitnachweis(zeilen) {
+  const w = []
+  zeilen.forEach((z, zi) => {
+    const y = 100 + zi * 8
+    for (const [text, sp] of z) { const [a, b] = Array.isArray(sp) ? sp : ZK[sp]; w.push({ text, conf: 100, seite: 1, bbox: { x0: a, y0: y - 6, x1: b, y1: y } }) }
+  })
+  return w
+}
+const zKopf = [[['Zeitnachweis', [294, 329]]], [['Periode:', [267, 289]], ['01-03-2026', [291, 322]], ['-', [324, 326]], ['31-03-2026', [327, 358]]],
+  [['Kommt', 'kommt'], ['Geht', 'geht'], ['TP', [119, 127]], ['Gesamt', 'gesamt'], ['Soll', 'soll'], ['+/-', [206, 213]], ['U50', 'u50'], ['ABW', 'abw'], ['§68/2Komm.', 'komm']]]
+
+test('Zeitnachweis: Stunden als Stunden,Minuten und Uhrzeiten', () => {
+  assert.equal(parseStdMin('8,15'), 8.25)
+  assert.equal(parseStdMin('-8,15'), -8.25)
+  assert.equal(parseStdMin('10,30'), 10.5)
+  assert.equal(parseStdMin('8,75'), null)          // keine gültige Minutenangabe
+  assert.equal(parseUhrzeit('07:30'), 7.5)
+  assert.equal(parseUhrzeit('25:00'), null)
+})
+
+test('Zeitnachweis: Tage, Tagesprogramm, Kommt/Geht und Gesamt werden über die Spaltenköpfe gelesen', () => {
+  const r = werteZeitnachweisAus(zeitnachweis([...zKopf,
+    [['Mo02.03', 'tag'], ['MT10A', 'tp']],
+    [['Di', [50, 56]], ['03.03', [58, 73]], ['07:00', 'kommt'], ['12:00', 'geht'], ['MT10A', 'tp'], ['10,30', 'gesamt'], ['8,15', 'soll'], ['2,15', 'saldo'], ['-9,99', 'komm']],
+    [['13:00', 'kommt'], ['18:30', 'geht']],
+    [['Mi 04.03', [50, 73]], ['UR', 'abw']],                         // PDF-Textebene: Tag und Datum als ein Wort
+    [['Do', [50, 58]], ['05.03', [58, 73]], ['08:00', 'kommt'], ['14:30', 'geht']],
+    [['Fr', [50, 56]], ['06.03', [58, 73]], ['8,75', 'gesamt']],
+    [['Wochensumme', [50, 92]], ['10,30', 'gesamt']]]))
+  assert.equal(r.erkannt, true)
+  assert.deepEqual(r.periode, { von: { t: 1, m: 3, j: 2026 }, bis: { t: 31, m: 3, j: 2026 } })
+  assert.deepEqual(r.tage.map((t) => t.key), ['2026-03-02', '2026-03-03', '2026-03-04', '2026-03-05', '2026-03-06'])
+  const [mo, di, mi, d, fr] = r.tage
+  assert.equal(mo.tp, 'MT10A'); assert.equal(mo.stunden, null)
+  assert.equal(di.stunden, 10.5)                    // Spalte Gesamt hat Vorrang
+  assert.deepEqual(di.kommt, [7, 13]); assert.deepEqual(di.geht, [12, 18.5])   // zweites Paar aus der Folgezeile
+  assert.equal(di.soll, 8.25); assert.equal(di.saldo, 2.25)
+  assert.equal(di.abw, '')                          // Wert der Spalte „§68/2Komm.“ landet nirgends
+  assert.equal(mi.abw, 'UR')
+  assert.equal(d.stunden, 6.5)                      // ohne Gesamt: Geht − Kommt
+  assert.equal(fr.stunden, null); assert.ok(fr.unsicher.length)   // „8,75“ wird nicht geraten
+})
+
+test('Zeitnachweis: Jahr über den Zeitraum, andere Dokumente werden nicht erkannt', () => {
+  const kopf = [zKopf[0], [['Periode:', [267, 289]], ['28-12-2026', [291, 322]], ['-', [324, 326]], ['03-01-2027', [327, 358]]], zKopf[2]]
+  const r = werteZeitnachweisAus(zeitnachweis([...kopf, [['Mo28.12', 'tag'], ['MT10A', 'tp']], [['Fr', [50, 56]], ['01.01', [58, 73]], ['FT8', 'tp']]]))
+  assert.deepEqual(r.tage.map((t) => t.key), ['2026-12-28', '2027-01-01'])
+  assert.equal(werteZeitnachweisAus(zeitnachweis([[['Abrechnungsbeleg', [50, 120]]], [['Gehalt', [60, 90]], ['3.000,00', [530, 570]]]])).erkannt, false)
+})

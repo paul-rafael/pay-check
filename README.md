@@ -28,9 +28,11 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Erfassen | Kalender über die volle Breite mit Tagesdetails, Arbeitsmodell und Einsatzland; Zeitkonten direkt darunter, Bezahlung kompakt – Netto und Arbeitsstunden stehen immer oben |
 | Ergebnis | Netto als Hauptzahl, Brutto, Abzüge und steuerfreie Anteile; vollständiger Lohnzettel, Brutto-Netto-Rechnung und Soll-Ist-Vergleich |
 | Kalender | Büro, Homeoffice, Montage, Montage mit Reise, Zeitausgleich und Ruhezeit mit Farbe und Kürzel; Tage kopieren und einfügen |
+| Zeiten importieren | Zeitnachweis aus der Zeiterfassung (PDF oder Foto) lokal einlesen: Datum, Tagesprogramm, Abwesenheit, Kommt/Geht und Stunden (Format Stunden,Minuten). Codes einmal einer Tagesart zuordnen – die Zuordnung wird gemerkt – und die Tage in den Kalender einfügen |
 | Arbeitsmodelle | 5/2, 10/4, 6/1/4/3 und eigene Modelle; einmalig oder fortlaufend über Monatsgrenzen; früheren Monat als Vorlage |
 | Arbeitszeit | Normalarbeitszeit Mo–Do 8,25 h, Fr 5,5 h; Mehrstunden in den ZA-Topf; Überstunden über 10 h/Tag und 50 h/Woche |
 | Zuschläge | Samstag 50 %, Sonntag und Feiertag 100 %, Lenkzeit, Zulagen, Prämien; Sätze in den erweiterten Einstellungen änderbar |
+| Montageprämie | 500 € je 30 Tage, aliquot je Montage-Tag (Lohnart 1050, laufender Bezug); Betrag in den erweiterten Einstellungen änderbar |
 | Zeitkonten | ZA- und Ruhezeit-Topf mit Start, Zugängen, Entnahmen und Ende; automatischer Übertrag in den Folgemonat |
 | Feiertage | Österreich; an Montage-Tagen im Ausland nur die Feiertage des Einsatzlandes: DE (je Bundesland), CH, FR, IT, NL, BE, LU, ES |
 | Netto | SV mit Höchstbeitragsgrundlage, Lohnsteuer-Tarif, steuerfreie Zuschläge nach §68, Taggeld, Urlaubsgeld nach §67 – Werte je Steuerjahr (2025, 2026) |
@@ -105,7 +107,7 @@ Deutsch ist die Quelle: Alle Texte stehen deutsch im Code. Für Englisch liegt i
 ### Lohnzettel einlesen (Vorschau)
 
 - Läuft vollständig im Browser: PDF.js liest digitale PDFs über ihre Textebene, gescannte Seiten und Fotos erkennt Tesseract.js (deutsch, LSTM). Vor der Texterkennung werden Bilder begradigt, in Graustufen mit Kontrastspreizung umgewandelt und Tabellenlinien entfernt. Mehrseitige Belege: ein PDF oder bis zu fünf Fotos gemeinsam. Es gibt keinen Server, keinen Upload und keine externen Dienste; alle Bibliotheken, Worker und Sprachdaten kommen aus `vendor/`.
-- Module in `lohnzettel/`: `stream-polyfill.mjs` und `pdf-worker.mjs` (Safari-Kompatibilität für PDF.js), `konfiguration.mjs` (Zuordnungsregeln), `parser.mjs` (Zahlenformat, Zeilen, Zuordnung, Vergleich – ohne Browser testbar), `ocr.mjs` (Laden, Bildaufbereitung, Texterkennung, Freigabe), `ui.mjs` (Kontrollfenster und Vergleich).
+- Module in `lohnzettel/`: `zeitnachweis.mjs` (Zeitnachweis auswerten – Spalten über die Überschriften, Stunden als Stunden,Minuten) und `zeiten-ui.mjs` (Zeiten importieren), `stream-polyfill.mjs` und `pdf-worker.mjs` (Safari-Kompatibilität für PDF.js), `konfiguration.mjs` (Zuordnungsregeln), `parser.mjs` (Zahlenformat, Zeilen, Zuordnung, Vergleich – ohne Browser testbar), `ocr.mjs` (Laden, Bildaufbereitung, Texterkennung, Freigabe), `ui.mjs` (Kontrollfenster und Vergleich).
 - **Layout „Abrechnungsbeleg“** (Spalten Lohnart · Einheiten · Satz/BMG · Abzüge · Bezüge): Spalten werden über die Überschriften im Dokument bestimmt, nicht über feste Koordinaten. Aufgerollte Positionen mit Monatskennung (`02*` = Februar) werden dem Arbeitsmonat zugeordnet, andere Monate nicht verglichen. Aliase: 1060 → 9010 (Homeoffice), 5041 + 5040 (Taggeld gesamt). Summen (Summe Bezüge, SV Gesamt, LSt lfd, Auszahlung) über alle Seiten; Jahres- und Dienstgeberwerte sind ausgeschlossen. Summen mit Aufrollung gelten als „eingeschränkt vergleichbar“.
 - **Andere Lohnzettel:** allgemeine Zuordnung über Lohnart-Codes am Zeilenanfang und allgemeine Begriffe – an echten Belegen anderer Lohnsoftware noch nicht geprüft.
 - **Geprüft** an einem echten Abrechnungsbeleg (nicht im Repository): digitales PDF, gescanntes PDF und zwei Handyfotos – alle 11 Werte korrekt, keine externen Anfragen. Stark verkleinerte, unscharfe Fotos werden nicht gelesen; dabei wird aber auch kein falscher Wert angezeigt. Die Tests in `tests/lohnzettel.test.mjs` verwenden ausschließlich synthetische Daten mit gleicher Struktur.
@@ -140,6 +142,7 @@ scripts/vendor.mjs      Kopiert die Bibliotheken aus node_modules nach vendor/
 | Taggeld | Steuer- und SV-frei bis zum Inlandssatz (30 €) bzw. Auslandsreisesatz |
 | Sonderzahlungen §67 | 6 % nach Abzug der SV, 620 € Freibetrag, 2.100 € Freigrenze |
 | Stundensatz | Grundgehalt ÷ 143 (einstellbar) |
+| Montageprämie | 500 € ÷ 30 × Montage-Tage, steuer- und SV-pflichtig (einstellbar) |
 
 Quellen: [ÖGK – Veränderliche Werte 2026](https://www.oegk.at/cdscontent/?contentid=10007.908421&portal=oegkdgportal) · [WKO – Beitragswesen 2026](https://www.wko.at/entlohnung/beitragswesen-dienstnehmer-2026) · [WKO – Auslandsreisesätze](https://www.wko.at/entlohnung/auslandsreise-kostensaetze) · [Sozialversicherung – Lehrlinge](https://www.sozialversicherung.gv.at/cdscontent/?contentid=10007.905068)
 
