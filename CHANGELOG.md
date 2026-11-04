@@ -2,6 +2,13 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.2.0] – 2026-11-04
+
+### Neu
+- Einsatzland: alle Länder Europas, z. B. Tschechien, Slowakei, Ungarn, Polen, Slowenien, Kroatien, Skandinavien, Baltikum, Balkan, Großbritannien, Türkei – mit ihren landesweiten Feiertagen. Orthodoxe Feiertage werden nach dem orthodoxen Ostertermin berechnet.
+- Steuerfreies Taggeld je Land nach den österreichischen Auslandsreisesätzen (Länder-Grundsatz). Wo noch kein Satz hinterlegt ist (Serbien, Montenegro, Nordmazedonien, Weißrussland, Kosovo, Andorra, San Marino), gilt vorsichtig der Inlandssatz und die App warnt.
+- Hinweise bei Ländern mit regionalen oder jährlich wechselnden islamischen Feiertagen; englische Namen für alle Länder und Feiertage.
+
 ## [3.1.1] – 2026-10-27
 
 ### Neu

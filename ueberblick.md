@@ -1,6 +1,6 @@
 # Pay-Check – Funktionsüberblick
 
-Stand: Version 3.1.1 · Live: <https://paul-rafael.github.io/pay-check/>
+Stand: Version 3.2.0 · Live: <https://paul-rafael.github.io/pay-check/>
 
 Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen – nach österreichischem Recht, vollständig im Browser, ohne Konto und ohne Server.
 
@@ -65,7 +65,8 @@ Alle Monate im Rechner sind **Arbeitsmonate** (wann gearbeitet wurde). Zuschläg
 - **Früheren Monat als Vorlage**: Wochenmuster, Grunddaten und Prämien übernehmen
 
 ### Einsatzland und Feiertage
-- Österreich, Deutschland (je Bundesland), Schweiz, Frankreich, Italien, Niederlande, Belgien, Luxemburg, Spanien
+- Alle 45 Länder Europas, Deutschland je Bundesland; orthodoxe Feiertage (z. B. Rumänien, Bulgarien, Griechenland, Serbien) nach dem orthodoxen Ostertermin
+- Hinweise bei Ländern mit regionalen oder jährlich wechselnden (islamischen) Feiertagen und bei Ländern ohne hinterlegten Auslandsreisesatz
 - Österreichische Feiertage; an **Montage-Tagen im Ausland nur die Feiertage des Einsatzlandes**
 - Land auf alle Montage-Tage des Monats anwenden (mit Rückfrage)
 

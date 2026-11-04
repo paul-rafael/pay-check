@@ -34,7 +34,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Zuschläge | Samstag 50 %, Sonntag und Feiertag 100 %, Lenkzeit, Zulagen, Prämien; Sätze in den erweiterten Einstellungen änderbar |
 | Montageprämie | 500 € je 30 Tage, aliquot je Montage-Tag (Lohnart 1050, laufender Bezug); Betrag in den erweiterten Einstellungen änderbar |
 | Zeitkonten | ZA- und Ruhezeit-Topf mit Start, Zugängen, Entnahmen und Ende; automatischer Übertrag in den Folgemonat |
-| Feiertage | Österreich; an Montage-Tagen im Ausland nur die Feiertage des Einsatzlandes: DE (je Bundesland), CH, FR, IT, NL, BE, LU, ES |
+| Feiertage | Österreich; an Montage-Tagen im Ausland nur die Feiertage des Einsatzlandes – alle 45 Länder Europas mit ihren landesweiten Feiertagen (Deutschland je Bundesland, orthodoxe Feiertage eigens berechnet); regionale und islamische Feiertage werden als Hinweis angezeigt |
 | Netto | SV mit Höchstbeitragsgrundlage, Lohnsteuer-Tarif, steuerfreie Zuschläge nach §68, Taggeld, Urlaubsgeld nach §67 – Werte je Steuerjahr (2025, 2026) |
 | Soll-Ist-Vergleich | Beträge des echten Lohnzettels je Lohnart eintragen, Differenzen nach Bereichen mit möglichen Ursachen, Abweichungen als geklärt markieren |
 | Lohnzettel einlesen | PDF, Scan oder Fotos lokal im Browser auslesen (PDF-Textebene bzw. Texterkennung), Werte im Kontrollfenster prüfen und mit der Berechnung vergleichen – inkl. Aufrollung von Vormonaten; Vorschau-Funktion, siehe unten |
@@ -139,7 +139,7 @@ scripts/vendor.mjs      Kopiert die Bibliotheken aus node_modules nach vendor/
 | Lohnsteuer | Tarif 2026 (0 / 20 / 30 / 40 / 48 / 50 / 55 %), Verkehrsabsetzbetrag 496 €, Werbungskostenpauschale |
 | §68 Abs. 1 EStG | Sonn- und Feiertagszuschläge inkl. Feiertagsarbeitsentgelt bis 400 € steuerfrei |
 | §68 Abs. 2 EStG | Überstundenzuschläge der ersten 15 Stunden, höchstens 170 € steuerfrei |
-| Taggeld | Steuer- und SV-frei bis zum Inlandssatz (30 €) bzw. Auslandsreisesatz |
+| Taggeld | Steuer- und SV-frei bis zum Inlandssatz (30 €) bzw. Auslandsreisesatz des Landes (Länder-Grundsatz, ohne Sondersätze für Städte und Grenzorte); für Serbien, Montenegro, Nordmazedonien, Weißrussland, Kosovo, Andorra und San Marino ist noch kein Satz hinterlegt – dort gilt vorsichtig der Inlandssatz mit Warnung |
 | Sonderzahlungen §67 | 6 % nach Abzug der SV, 620 € Freibetrag, 2.100 € Freigrenze |
 | Stundensatz | Grundgehalt ÷ 143 (einstellbar) |
 | Montageprämie | 500 € ÷ 30 × Montage-Tage, steuer- und SV-pflichtig (einstellbar) |
