@@ -117,3 +117,36 @@ test('Montageprämie: 500 € je 30 Tage aliquot je Montage-Tag, laufender Bezug
   assert.equal(zeile.betrag, 66.67)
   assert.equal(app.rechne({ tage: { '2026-10-06': { mode: 'buero', stunden: 8.25, fahrzeit: 0 } } }).lz.mpB, 0)
 })
+
+test('Europa: orthodoxes Ostern und bewegliche Feiertage', () => {
+  const d = (y) => app.run(`(()=>{const x=easterOrthodox(${y});return x.getFullYear()+'-'+(x.getMonth()+1)+'-'+x.getDate()})()`)
+  assert.equal(d(2024), '2024-5-5'); assert.equal(d(2025), '2025-4-20'); assert.equal(d(2026), '2026-4-12'); assert.equal(d(2027), '2027-5-2')
+  const ft = (y, land) => JSON.parse(app.run(`JSON.stringify(landFeiertage(${y},'${land}',''))`))
+  assert.equal(ft(2026, 'RO')['4-13'], 'Ostermontag (orthodox)')
+  assert.equal(ft(2026, 'GR')['2-23'], 'Rosenmontag (orthodox)')
+  assert.equal(ft(2026, 'SE')['6-19'], 'Mittsommerabend')
+  assert.equal(ft(2026, 'SE')['10-31'], 'Allerheiligen')
+  assert.equal(ft(2026, 'IE')['2-2'], 'St. Brigid’s Day')
+  assert.equal(ft(2026, 'GB')['5-25'], 'Feiertag Ende Mai')
+  assert.equal(ft(2026, 'CZ')['10-28'], 'Staatsgründung')
+  assert.equal(ft(2026, 'SK')['5-8'], undefined)       // 2026 ausnahmsweise kein arbeitsfreier Tag
+  assert.equal(ft(2027, 'SK')['5-8'], 'Sieg über den Faschismus')
+  assert.equal(ft(2026, 'PL')['12-24'], 'Heiligabend')
+})
+
+test('Europa: alle Länder wählbar, Tschechien mit eigenem Feiertag und Taggeld-Satz', () => {
+  const laender = JSON.parse(app.run('JSON.stringify(Object.keys(LAENDER))'))
+  assert.ok(laender.length >= 45)
+  for (const l of laender) assert.ok(l === 'AT' || app.run(`!!LAND_FT['${l}']`), 'Feiertage fehlen: ' + l)
+  // 28.10.2026: Staatsgründung in Tschechien, in Österreich ein normaler Mittwoch
+  const { lz } = app.rechne({ taggeld: 40, tage: { '2026-10-28': montage(10, { land: 'CZ' }) } })
+  assert.equal(lz.ue68_2Std, 10)
+  assert.equal(lz.tgFrei, 31)                         // Auslandsreisesatz Tschechien
+})
+
+test('Europa: Land ohne hinterlegten Satz → Inlandssatz und Warnung', () => {
+  const { lz } = app.rechne({ taggeld: 40, tage: { '2026-10-06': montage(10, { land: 'RS' }) } })
+  assert.equal(lz.tgFrei, 30)
+  const w = app.run(`pruefeMonat({jahr:2026,monat:10,grundgehalt:3000,taggeld:40},rechneMonat({monat:10,jahr:2026,grundgehalt:3000,taggeld:40,dayMap:{'2026-10-06':{mode:'montage',stunden:10,fahrzeit:0,land:'RS'}}})).map(h=>h.text).join('|')`)
+  assert.match(w, /kein österreichischer Auslandsreisesatz/)
+})
