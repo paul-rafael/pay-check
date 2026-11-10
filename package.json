@@ -1,6 +1,6 @@
 {
   "name": "pay-check",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Einsätze erfassen, Lohn nachrechnen, Lohnzettel prüfen.",
   "private": true,
   "license": "PolyForm-Noncommercial-1.0.0",
