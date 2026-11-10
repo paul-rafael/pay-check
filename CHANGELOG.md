@@ -2,6 +2,11 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.3.0] – 2026-11-10
+
+### Geändert
+- Neutrales Design: Der dunkelrote Akzent entfällt. Hauptbuttons, Auswahl, Links und aktive Reiter sind jetzt dunkel (im Dunkelmodus hell) mit hellgrauen Flächen. Rot bleibt als gedämpftes Signal nur für Warnungen, Abweichungen, negative Werte und Feiertage.
+
 ## [3.2.0] – 2026-11-04
 
 ### Neu

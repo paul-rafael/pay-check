@@ -4,7 +4,7 @@
 
 Einsätze erfassen. Lohn nachrechnen. Lohnzettel prüfen.
 
-<a href="https://paul-rafael.github.io/pay-check/"><img alt="Live-Demo" src="https://img.shields.io/badge/Live--Demo-%C3%B6ffnen-8a0b18?style=for-the-badge"></a>
+<a href="https://paul-rafael.github.io/pay-check/"><img alt="Live-Demo" src="https://img.shields.io/badge/Live--Demo-%C3%B6ffnen-0a0a0a?style=for-the-badge"></a>
 <a href="https://github.com/paul-rafael/pay-check/releases/latest"><img alt="Version" src="https://img.shields.io/github/v/release/paul-rafael/pay-check?style=for-the-badge&color=0a0a0a&label=Version"></a>
 <a href="https://github.com/paul-rafael/pay-check/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/paul-rafael/pay-check/ci.yml?branch=main&style=for-the-badge&label=Tests&color=0a0a0a"></a>
 <a href="LICENSE"><img alt="Lizenz: nicht kommerziell" src="https://img.shields.io/badge/Lizenz-nicht%20kommerziell-0a0a0a?style=for-the-badge"></a>
