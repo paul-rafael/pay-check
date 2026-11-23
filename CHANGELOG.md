@@ -2,6 +2,11 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.4.0] – 2026-11-23
+
+### Neu
+- Sichtschutz: Das Auge oben rechts (neben Hell/Dunkel) verwischt Beträge, Stunden und Prozentwerte auf dem Bildschirm, z. B. wenn jemand mitschaut. Über den kleinen Pfeil daneben gibt es drei Stufen: Aus, Privacy und Streng (zusätzlich Diagrammbeschriftungen und Monatsnamen in der Tabelle). Eingabefelder werden beim Anklicken lesbar, Datumsangaben und Hilfetexte bleiben sichtbar, Druck und PDF sind nicht betroffen. Die Stufe bleibt gespeichert. Es ist ein Sichtschutz, keine Zugriffssicherung: die Daten bleiben unverändert.
+
 ## [3.3.0] – 2026-11-10
 
 ### Geändert
