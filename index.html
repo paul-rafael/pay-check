@@ -941,7 +941,18 @@
 "– auf den ersten Arbeitstag klicken": "– click the first working day",
 "– der Monat, in dem du gearbeitet hast. Zuschläge und Taggeld daraus stehen meist am": "– the month in which you worked. Its premiums and daily allowance usually appear on the",
 "→ Lohnzettel": "→ payslip",
-"→ Lohnzettel {} {}": "→ payslip {} {}"
+"→ Lohnzettel {} {}": "→ payslip {} {}",
+"Sichtschutz": "Privacy screen",
+"Aus": "Off",
+"Sichtschutz: Stufen": "Privacy screen: levels",
+"Sichtschutz: aus (klicken, um Beträge zu verbergen)": "Privacy screen: off (click to hide amounts)",
+"Sichtschutz: Privacy (klicken, um alles zu zeigen)": "Privacy screen: Privacy (click to show everything)",
+"Sichtschutz: Streng (klicken, um alles zu zeigen)": "Privacy screen: Strict (click to show everything)",
+"Alles sichtbar": "Everything visible",
+"Beträge, Stunden und Prozentwerte verwischt": "Amounts, hours and percentages blurred",
+"Streng": "Strict",
+"Zusätzlich Namen und Diagrammbeschriftungen": "Also names and chart labels",
+"Sichtschutz, keine Zugriffssicherung. Er verdeckt nur auf dem Bildschirm (nicht im Druck), die Daten bleiben unverändert gespeichert. Balken und Linien in Diagrammen bleiben sichtbar.": "A privacy screen, not access protection. It only hides values on screen (not in print); the data stays stored unchanged. Bars and lines in charts stay visible."
 }</script>
 <script>
 (function(){
@@ -1091,6 +1102,29 @@ button{font-family:inherit;}
 .pr-tools{display:flex;align-items:center;gap:4px;}
 .icon-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;padding:0 8px;border:1px solid transparent;border-radius:8px;background:none;color:var(--pr-text-2);font:inherit;font-size:14px;cursor:pointer;text-decoration:none;transition:color .2s,border-color .2s;}
 .icon-btn:hover,.icon-btn.active{color:var(--pr-text);border-color:var(--pr-border-strong);}
+/* Sichtschutz: Verwischen per Klasse .pv; Stufen über html[data-privacy] */
+.pv-wrap{position:relative;display:inline-flex;align-items:center;}
+.pv-btn[aria-pressed="true"]{color:var(--pr-text);border-color:var(--pr-border-strong);}
+.pv-more{min-width:18px;width:18px;padding:0;margin-left:-6px;}
+.pv-more svg{width:14px;height:14px;}
+.pv-pop{position:absolute;right:0;top:calc(100% + 6px);width:290px;max-width:calc(100vw - 32px);background:var(--pr-surface);border:1px solid var(--pr-border-strong);border-radius:var(--pr-radius);box-shadow:0 10px 30px rgba(0,0,0,.14);padding:6px;z-index:70;}
+.pv-pop[hidden]{display:none;}
+@media print{html[data-privacy] :is(.pv,input,svg text,b,td){filter:none !important;}}
+@media (max-width:600px){.pv-pop{position:fixed;left:16px;right:16px;top:58px;width:auto;max-width:none;}}
+.pv-titel{margin:4px 10px 4px;font-size:12px;font-weight:600;color:var(--pr-text-2);}
+.pv-opt{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;padding:8px 10px;border:none;background:none;border-radius:var(--pr-radius-sm);font:inherit;font-size:14px;color:var(--pr-text);cursor:pointer;}
+.pv-opt:hover{background:var(--pr-surface-2);}
+.pv-opt b{display:block;font-weight:600;}
+.pv-opt small{display:block;font-size:12px;color:var(--pr-text-2);}
+.pv-haken{flex:none;width:16px;height:16px;margin-top:2px;border:1.5px solid var(--pr-border-strong);border-radius:50%;}
+.pv-opt[aria-checked="true"] .pv-haken{border-color:var(--pr-accent);background:radial-gradient(circle,var(--pr-accent) 0 4px,transparent 5px);}
+.pv-hinweis{margin:6px 10px 6px;font-size:12px;color:var(--pr-text-2);line-height:1.4;}
+.pv{filter:blur(.42em);-webkit-filter:blur(.42em);-webkit-user-select:none;user-select:none;}
+/* Hülle um Treffer im Text: erbt alles vom Elternelement, damit Regeln wie „.res-item span{display:block}“ nicht greifen */
+span.pv[data-pv-a]{all:unset;filter:blur(.42em);-webkit-filter:blur(.42em);-webkit-user-select:none;user-select:none;}
+html[data-privacy] :is(#view-erfassen,#view-ergebnis,#view-monate,#view-einstellungen,#dropdown,.lz-bg) input:is([type="number"],[inputmode="decimal"]):not(:focus){filter:blur(.42em);}
+html[data-privacy="streng"] svg text:not([aria-hidden="true"]){filter:blur(.42em);}
+html[data-privacy="streng"] #view-monate tbody td:first-child{filter:blur(.42em);}
 .icon-btn svg,.ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none;}
 .bottom-nav{display:none;}
 .pr-logo{display:inline-block;height:1em;aspect-ratio:624/387;background:currentColor;-webkit-mask:var(--pr-logo-url) no-repeat center/contain;mask:var(--pr-logo-url) no-repeat center/contain;}
@@ -1659,6 +1693,16 @@ details.card.fold>summary>.info-ecke{right:28px;}
     </nav>
     <div class="pr-tools">
       <a class="icon-btn" href="#hilfe" data-view="hilfe" title="Hilfe" aria-label="Hilfe"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><path d="M12 17h.01"/></svg></a>
+      <span class="pv-wrap no-print">
+        <button type="button" class="icon-btn pv-btn" id="privacy-btn" aria-pressed="false" onclick="privacyKlick()"></button><button type="button" class="icon-btn pv-more" id="privacy-more" aria-haspopup="menu" aria-expanded="false" aria-controls="pv-pop" aria-label="Sichtschutz: Stufen" title="Sichtschutz: Stufen" onclick="privacyMenue()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="pv-pop" id="pv-pop" role="menu" aria-label="Sichtschutz" hidden>
+          <p class="pv-titel">Sichtschutz</p>
+          <button type="button" class="pv-opt" data-pv="normal" onclick="privacySetzen('normal');privacyMenue(false);$('privacy-more').focus()"><span class="pv-haken" aria-hidden="true"></span><span><b>Aus</b><small>Alles sichtbar</small></span></button>
+          <button type="button" class="pv-opt" data-pv="privacy" onclick="privacySetzen('privacy');privacyMenue(false);$('privacy-more').focus()"><span class="pv-haken" aria-hidden="true"></span><span><b>Privacy</b><small>Beträge, Stunden und Prozentwerte verwischt</small></span></button>
+          <button type="button" class="pv-opt" data-pv="streng" onclick="privacySetzen('streng');privacyMenue(false);$('privacy-more').focus()"><span class="pv-haken" aria-hidden="true"></span><span><b>Streng</b><small>Zusätzlich Namen und Diagrammbeschriftungen</small></span></button>
+          <p class="pv-hinweis">Sichtschutz, keine Zugriffssicherung. Er verdeckt nur auf dem Bildschirm (nicht im Druck), die Daten bleiben unverändert gespeichert. Balken und Linien in Diagrammen bleiben sichtbar.</p>
+        </div>
+      </span>
       <button type="button" class="icon-btn" id="theme-btn" onclick="cycleTheme()" title="Darstellung wechseln"></button>
     </div>
   </div>
@@ -2834,7 +2878,7 @@ function rhythmusMonat(modell,start,monat,jahr,t,land,region){
 // ═══════════════════════════════════════════════════════════════════════════
 // App – Oberfläche, Speicherung, Navigation
 // ═══════════════════════════════════════════════════════════════════════════
-const APP_VERSION='3.3.0'
+const APP_VERSION='3.4.0'
 
 // Quelltext der Seite im Originalzustand (vor jeder JS-Änderung) — Basis zum Zurückschreiben der Einstellungen
 const SOURCE_HTML=(()=>{const c=window.pcQuelle?window.pcQuelle():document.documentElement.cloneNode(true);c.removeAttribute('data-theme');return'<!DOCTYPE html>\n'+c.outerHTML})()
@@ -3906,7 +3950,7 @@ function allesLoeschen(){
   if(!confirm('Alle gespeicherten Monate, Lohnzettel-Vergleiche und Einstellungen auf diesem Gerät löschen?\n\nTipp: vorher „Alle Daten sichern“.'))return
   if(!confirm('Wirklich endgültig löschen? Das kann nicht rückgängig gemacht werden.'))return
   clearTimeout(autosaveT);autosaveT=null
-  ;[MON_KEY,AKTIV_KEY,'lzr_settings','lzr_datasets','lzr_migriert_v2'].forEach(lsDel)
+  ;[MON_KEY,AKTIV_KEY,'lzr_settings','lzr_datasets','lzr_migriert_v2',PV_KEY].forEach(lsDel)
   lsSet('lzr_migriert_v2',true)
   settings={...clone(DEFAULT_SETTINGS),_saved:Date.now()}
   state.vergleich=[]
@@ -4093,6 +4137,103 @@ darkMQ.addEventListener?.('change',applyTheme)
 function spracheWechseln(v){settings.lang=v==='en'?'en':'de';persistSettings();location.reload()}
 function cycleTheme(){settings.theme={auto:'light',light:'dark',dark:'auto'}[settings.theme||'auto'];persistSettings();applyTheme()}
 
+// ── Sichtschutz / Privacy-Blur ──────────────────────────────────────
+// Verwischt Beträge, Stunden und Prozentwerte nur auf dem Bildschirm. Keine Zugriffssicherung: Daten und Berechnung bleiben unverändert.
+// Technik: Ein MutationObserver ergänzt nach jedem Rendern in den Ansichts-Bereichen (PV_ZONEN) Treffer in <span class="pv">.
+// Er läuft vor dem nächsten Zeichnen, daher kein Aufblitzen. Texte ändern sich nie (textContent bleibt gleich).
+const PV_KEY='lzr_privacy',PV_MODI=['normal','privacy','streng']
+let pvModus='normal'
+const PV_ZONEN='#monat-kopf,#res-sticky,#view-erfassen,#view-ergebnis,#view-monate,#view-einstellungen,.chart-tip,#dropdown,.lz-bg,#toast'
+const PV_AUS='.pv,.help,.help-pop,[data-pv-aus],script,style,textarea,option,select,title'
+const PV_E='(?:[\\s\\u00a0\\u202f]?(?:€|EUR\\b|h(?![\\p{L}\\d])))'
+const PV_N='\\d(?:[\\d.,\\u00a0\\u202f]*\\d)?'
+const PV_RE=new RegExp('[\\u2212+\\-]?(?:(?<![\\d.,])\\d(?:[\\d.,\\u00a0\\u202f]*\\d)?[.,]\\d{2}(?![\\d]|[.,]\\d)(?:'+PV_E+'|[\\s\\u00a0\\u202f]?%)?|(?<![\\d.,\\u00a0\\u202f])'+PV_N+PV_E+'|(?<![\\d.,\\u00a0\\u202f])'+PV_N+'[\\s\\u00a0\\u202f]?%|€[\\s\\u00a0]?'+PV_N+')','gu')
+const PV_PROZ=/^[\s ]*[−+\-]?\d[\d.,]*[\s  ]?%[\s ]*$/
+const PV_ZAHL=/^[\s ]*[−+\-]?\d[\d.,  ]*[kK]?[\s ]*$/
+const PV_DATUM=/^\d{1,2}\.\d{1,2}\.\d{2,4}$/
+const PV_NULL=/^[\u2212+\-]?0[\s\u00a0\u202f]?(?:€|EUR|h)?$/ // „0 €“ in Erklärtexten verrät nichts
+function pvTreffer(s){return[...s.matchAll(PV_RE)].filter(m=>!PV_DATUM.test(m[0])&&!PV_NULL.test(m[0]))}
+function pvText(t){
+  const s=t.nodeValue
+  if(!s||!/\d/.test(s))return
+  const p=t.parentElement
+  if(!p||p.closest(PV_AUS)||!p.closest(PV_ZONEN))return
+  const svg=p.closest('svg')
+  if(svg){ // SVG-Text lässt keine HTML-Hülle zu: das ganze <text> bekommt die Klasse
+    const tx=p.closest('text')
+    if(tx&&!tx.classList.contains('pv')){const x=tx.textContent;if(pvTreffer(x).length||PV_PROZ.test(x)||PV_ZAHL.test(x)){tx.classList.add('pv');tx.setAttribute('data-pv-a','')}}
+    return
+  }
+  const tr=pvTreffer(s)
+  if(!tr.length&&PV_PROZ.test(s)){const sp=document.createElement('span');sp.className='pv';sp.setAttribute('data-pv-a','');t.replaceWith(sp);sp.appendChild(t);return}
+  if(!tr.length)return
+  const frag=document.createDocumentFragment();let last=0
+  for(const m of tr){
+    if(m.index>last)frag.append(s.slice(last,m.index))
+    const sp=document.createElement('span');sp.className='pv';sp.setAttribute('data-pv-a','');sp.textContent=m[0];frag.append(sp)
+    last=m.index+m[0].length
+  }
+  if(last<s.length)frag.append(s.slice(last))
+  t.replaceWith(frag)
+}
+function pvKnoten(n){
+  if(n.nodeType===3){pvText(n);return}
+  if(n.nodeType!==1||n.matches(PV_AUS))return
+  const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT),a=[]
+  for(let x=w.nextNode();x;x=w.nextNode())a.push(x)
+  a.forEach(pvText)
+}
+const pvObs=new MutationObserver(rs=>{
+  if(pvModus==='normal')return
+  for(const r of rs){if(r.type==='characterData')pvText(r.target);else r.addedNodes.forEach(pvKnoten)}
+  pvObs.takeRecords() // eigene Änderungen nicht erneut verarbeiten
+})
+function pvEntfernen(){
+  const eltern=new Set()
+  document.querySelectorAll('[data-pv-a]').forEach(e=>{
+    if(e.tagName==='SPAN'){eltern.add(e.parentNode);e.replaceWith(...e.childNodes)}
+    else{e.classList.remove('pv');e.removeAttribute('data-pv-a')}
+  })
+  eltern.forEach(p=>p&&p.normalize())
+}
+const PV_ICONS={
+  normal:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  privacy:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.5 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7c1.7 0 3.2-.4 4.5-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>',
+  streng:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.5 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7c1.7 0 3.2-.4 4.5-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><circle cx="19" cy="5" r="2.2" fill="currentColor" stroke="none"/></svg>'}
+const PV_NAME={normal:'aus',privacy:'Privacy',streng:'Streng'}
+function pvButton(){
+  const b=$('privacy-btn');if(!b)return
+  b.innerHTML=PV_ICONS[pvModus]
+  b.setAttribute('aria-pressed',pvModus!=='normal'?'true':'false')
+  const t='Sichtschutz: '+PV_NAME[pvModus]+(pvModus==='normal'?' (klicken, um Beträge zu verbergen)':' (klicken, um alles zu zeigen)')
+  b.title=t;b.setAttribute('aria-label',t)
+  document.querySelectorAll('#pv-pop .pv-opt').forEach(o=>{o.setAttribute('role','menuitemradio');o.setAttribute('aria-checked',o.dataset.pv===pvModus?'true':'false')})
+}
+function privacySetzen(m,speichern=true){
+  pvModus=PV_MODI.includes(m)?m:'normal'
+  if(speichern)lsSet(PV_KEY,pvModus)
+  const root=document.documentElement
+  if(pvModus==='normal'){root.removeAttribute('data-privacy');pvObs.disconnect();pvEntfernen()}
+  else{root.setAttribute('data-privacy',pvModus);pvObs.observe(document.body,{childList:true,subtree:true,characterData:true});pvKnoten(document.body)}
+  pvButton()
+}
+function privacyKlick(){privacyMenue(false);privacySetzen(pvModus==='normal'?'privacy':'normal')}
+function privacyMenue(auf){
+  const pop=$('pv-pop');if(!pop)return
+  const an=typeof auf==='boolean'?auf:pop.hidden
+  pop.hidden=!an;$('privacy-more').setAttribute('aria-expanded',an?'true':'false')
+  if(an){const o=pop.querySelector('.pv-opt[aria-checked="true"]');if(o)o.focus()}
+}
+document.addEventListener('click',e=>{const pop=$('pv-pop');if(pop&&!pop.hidden&&!e.target.closest('.pv-wrap'))privacyMenue(false)})
+document.addEventListener('keydown',e=>{const pop=$('pv-pop');if(e.key==='Escape'&&pop&&!pop.hidden){privacyMenue(false);$('privacy-more').focus()}})
+document.addEventListener('keydown',e=>{
+  const pop=$('pv-pop');if(!pop||pop.hidden||!['ArrowDown','ArrowUp'].includes(e.key))return
+  const o=[...pop.querySelectorAll('.pv-opt')],i=o.indexOf(document.activeElement);if(i<0&&e.key==='ArrowUp')return
+  e.preventDefault();o[(i+(e.key==='ArrowDown'?1:-1)+o.length)%o.length].focus()
+})
+$('pv-pop')&&$('pv-pop').addEventListener('focusout',e=>{if(e.relatedTarget&&!e.relatedTarget.closest('.pv-wrap'))privacyMenue(false)})
+function privacyInit(){const m=lsGet(PV_KEY,'normal');pvButton();if(PV_MODI.includes(m)&&m!=='normal')privacySetzen(m,false)}
+
 // ── Start ────────────────────────────────────────────────────────────────────
 $('app-version').textContent='v'+APP_VERSION
 applyTheme()
@@ -4105,6 +4246,7 @@ const migriert=migriereAlteDatensaetze()
 initInfos()
 zeigeView()
 zeigeIntro()
+privacyInit()
 if(migriert)toast(migriert+(migriert===1?' Datensatz':' Datensätze')+' aus der Vorversion übernommen')
 </script>
 </body>
