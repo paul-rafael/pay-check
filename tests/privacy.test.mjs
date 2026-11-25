@@ -19,15 +19,17 @@ const mitDaten = () => {
 const zeige = async (a, v) => { a.run(`location.hash='${v}';zeigeView()`); await warte() }
 
 // Alle sichtbaren Beträge (zwei Nachkommastellen oder mit € / % / h) außerhalb von .pv, ohne Datumsangaben
-const OFFEN = `(root)=>{
+const OFFEN = `(root,nurGeld)=>{
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),out=[]
   const re=/[\\u2212+-]?\\d[\\d.,\\u00a0\\u202f]*[.,]\\d{2}(?![\\d.,])|\\d[\\d.,\\u00a0\\u202f]*[\\s\\u00a0\\u202f]?(€|%|h(?![\\p{L}\\d]))/gu
   for(let x=w.nextNode();x;x=w.nextNode()){
     const p=x.parentElement
-    if(p.closest('.pv,script,style,option,select,.help,textarea,[hidden],[data-pv-aus]'))continue
-    if(p.closest('svg')&&p.closest('text.pv'))continue
+    const pv=p.closest('.pv')
+    if(pv&&!(nurGeld&&pv.dataset.pvK==='z'))continue
+    if(p.closest('script,style,option,select,.help,textarea,[hidden],[data-pv-aus]'))continue
+    if(nurGeld&&!/€/.test(x.nodeValue)&&!/€/.test(x.nextSibling?.textContent||p.nextElementSibling?.textContent||''))continue
     const t=x.nodeValue.replace(/\\d{1,2}\\.\\d{1,2}\\.\\d{2,4}/g,'')
-    for(const m of t.matchAll(re)){ if(/^[\\u2212+-]?0[\\s\\u00a0\\u202f]?(€|h)?$/u.test(m[0]))continue; out.push(x.nodeValue.trim().slice(0,50)); break }
+    for(const m of t.matchAll(re)){ if(nurGeld&&(/(h|%)$/.test(m[0])||/^[\\s\\u00a0\\u202f]*(h|%)/.test(t.slice(m.index+m[0].length))))continue; if(/^[\\u2212+-]?0[\\s\\u00a0\\u202f]?(€|h)?$/u.test(m[0]))continue; out.push(x.nodeValue.trim().slice(0,50)); break }
   }
   return out}`
 
@@ -48,20 +50,48 @@ test('Sichtschutz: Klick auf das Auge wechselt Normal und Privacy, speichert die
   assert.equal(d.querySelectorAll('.pv').length, 0, 'Beim Ausschalten bleibt nichts verwischt')
 })
 
-test('Sichtschutz: in allen Ansichten ist jeder sichtbare Betrag verwischt (Privacy und Streng)', async () => {
+test('Sichtschutz: Streng verwischt in allen Ansichten jeden Betrag, jede Stunde und jeden Prozentwert; Privacy alle Geldbeträge', async () => {
   for (const modus of ['privacy', 'streng']) {
-    const a = mitDaten()
+    const a = mitDaten(), nurGeld = modus === 'privacy'
     a.run(`privacySetzen('${modus}')`); await warte()
     for (const v of ANSICHTEN) {
       await zeige(a, v)
       const n = a.run(`document.getElementById('view-${v}').querySelectorAll('.pv').length`)
-      const offen = JSON.parse(a.run(`JSON.stringify((${OFFEN})(document.getElementById('view-${v}')))`))
-      assert.ok(n > 0, `${modus} ${v}: nichts verwischt`)
-      assert.deepEqual(offen, [], `${modus} ${v}: unverwischte Beträge`)
+      const offen = JSON.parse(a.run(`JSON.stringify((${OFFEN})(document.getElementById('view-${v}'),${nurGeld}))`))
+      assert.ok(n > 0, `${modus} ${v}: nichts erkannt`)
+      assert.deepEqual(offen, [], `${modus} ${v}: unverwischte Werte`)
     }
-    const kopf = JSON.parse(a.run(`JSON.stringify((${OFFEN})(document.getElementById('monat-kopf')))`))
+    const kopf = JSON.parse(a.run(`JSON.stringify((${OFFEN})(document.getElementById('monat-kopf'),${nurGeld}))`))
     assert.deepEqual(kopf, [], `${modus} Monatskopf`)
   }
+})
+
+test('Sichtschutz Privacy: Zeiten, Stunden, Zeitkonten und Prozentwerte bleiben lesbar, Geld nicht', async () => {
+  const a = mitDaten(), d = a.dom.window.document
+  a.run("privacySetzen('privacy')"); await warte()
+  await zeige(a, 'ergebnis')
+  const art = (sel) => JSON.parse(a.run(`JSON.stringify([...document.querySelectorAll('${sel} .pv')].map(e=>e.dataset.pvK))`))
+  // Kennzahlen: Netto ist Geld, Arbeitsstunden sind Zeit
+  assert.deepEqual(art('#res-netto'), ['g'])
+  assert.deepEqual(art('#res-stunden'), ['z'])
+  // Zeitkonten-Verlauf ohne Einheit zählt als Zeit
+  assert.ok(art('.konto-verlauf').length > 0 && art('.konto-verlauf').every((k) => k === 'z'))
+  // Lohnzettel: Einheiten (Stunden) sind Zeit, Satz und Betrag Geld
+  const lz = JSON.parse(a.run(`JSON.stringify([...document.querySelectorAll('#lz-table tbody tr')].map(tr=>[...tr.children].map(td=>[...td.querySelectorAll('.pv')].map(e=>e.dataset.pvK).join(''))))`))
+  assert.ok(lz.length > 0)
+  for (const z of lz) { assert.match(z[2], /^z*$/, 'Einheiten'); assert.match(z[4], /^g$/, 'Betrag') }
+  // Monatstabelle: Stunden, ZA Ende und Ruhezeit Ende sind Zeit, auch in der Summenzeile
+  await zeige(a, 'monate')
+  const jt = JSON.parse(a.run(`JSON.stringify([...document.querySelectorAll('#jahr-table tr')].map(tr=>[...tr.children].map(td=>[...td.querySelectorAll('.pv')].map(e=>e.dataset.pvK).join(''))))`))
+  for (const z of jt.filter((z) => z.length >= 7)) assert.match(z.slice(-3).join('') + z[z.length === 9 ? 6 : 0], /^z*$/, 'Zeitspalten: ' + z.join(','))
+  // Datum „Di 06.10.“ wird nie verwischt
+  await zeige(a, 'ergebnis')
+  assert.equal(a.run("[...document.querySelectorAll('#view-ergebnis .pv')].some(e=>/^\\d{1,2}\\.\\d{2}$/.test(e.textContent))"), false)
+  // CSS: Privacy hebt das Verwischen für Zeit-Treffer auf, Eingabefelder nur für Geld
+  assert.match(html, /html\[data-privacy="privacy"\] \.pv\[data-pv-k="z"\]\{filter:none/)
+  assert.match(html, /html\[data-privacy\] :is\(#grundgehalt,#stundensatz,#taggeld[^)]*\):not\(:focus\)\{filter:blur/)
+  assert.match(html, /html\[data-privacy="streng"\] :is\([^)]*\) input:is\(\[type="number"\],\[inputmode="decimal"\]\):not\(:focus\)\{filter:blur/)
+  void d
 })
 
 test('Sichtschutz: Texte bleiben unverändert (textContent mit und ohne Sichtschutz gleich)', async () => {
@@ -124,7 +154,7 @@ test('Sichtschutz: Datum und „0 €“ bleiben lesbar, Prozentwerte verwischt,
   a.run("privacySetzen('privacy')"); await warte()
   const t = d.createElement('p'); t.textContent = 'Fehlende Monate zählen nicht als 0 € und am 01.11.2026 gilt 12,50 € bei 24,6 % und 7 %.'
   d.getElementById('view-monate').appendChild(t); await warte()
-  assert.deepEqual([...t.querySelectorAll('.pv')].map((e) => e.textContent), ['12,50 €', '24,6 %', '7 %'])
+  assert.deepEqual([...t.querySelectorAll('.pv')].map((e) => e.textContent + ':' + e.dataset.pvK), ['12,50 €:g', '24,6 %:z', '7 %:z'])
   assert.match(html, /input:is\(\[type="number"\],\[inputmode="decimal"\]\):not\(:focus\)\{filter:blur/)
   assert.match(html, /PV_AUS='[^']*\.help/)
   assert.match(html, /@media print\{html\[data-privacy\] :is\(\.pv,input,svg text[^}]*\{filter:none !important;\}\}/)

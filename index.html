@@ -952,9 +952,9 @@
 "Sichtschutz: Privacy (klicken, um alles zu zeigen)": "Privacy screen: Privacy (click to show everything)",
 "Sichtschutz: Streng (klicken, um alles zu zeigen)": "Privacy screen: Strict (click to show everything)",
 "Alles sichtbar": "Everything visible",
-"Beträge, Stunden und Prozentwerte verwischt": "Amounts, hours and percentages blurred",
+"Geldbeträge verwischt, Zeiten bleiben sichtbar": "Money amounts blurred, times stay visible",
 "Streng": "Strict",
-"Zusätzlich Namen und Diagrammbeschriftungen": "Also names and chart labels",
+"Zusätzlich Stunden, Zeitkonten, Prozentwerte und Diagrammbeschriftungen": "Also hours, time accounts, percentages and chart labels",
 "Sichtschutz, keine Zugriffssicherung. Er verdeckt nur auf dem Bildschirm (nicht im Druck), die Daten bleiben unverändert gespeichert. Balken und Linien in Diagrammen bleiben sichtbar.": "A privacy screen, not access protection. It only hides values on screen (not in print); the data stays stored unchanged. Bars and lines in charts stay visible."
 }</script>
 <script>
@@ -1125,7 +1125,10 @@ button{font-family:inherit;}
 .pv{filter:blur(.42em);-webkit-filter:blur(.42em);-webkit-user-select:none;user-select:none;}
 /* Hülle um Treffer im Text: erbt alles vom Elternelement, damit Regeln wie „.res-item span{display:block}“ nicht greifen */
 span.pv[data-pv-a]{all:unset;filter:blur(.42em);-webkit-filter:blur(.42em);-webkit-user-select:none;user-select:none;}
-html[data-privacy] :is(#view-erfassen,#view-ergebnis,#view-monate,#view-einstellungen,#dropdown,.lz-bg) input:is([type="number"],[inputmode="decimal"]):not(:focus){filter:blur(.42em);}
+/* Privacy: nur Geldbeträge (data-pv-k="g"); Streng zusätzlich Zeiten, Stunden, Tage und Prozent (data-pv-k="z") */
+html[data-privacy="privacy"] .pv[data-pv-k="z"]{filter:none;-webkit-filter:none;-webkit-user-select:auto;user-select:auto;}
+html[data-privacy] :is(#grundgehalt,#stundensatz,#taggeld,#urlaubsgeldBetrag,#extras-list input[type="number"],#s-grundgehalt,#s-taggeld,#s-toleranz,#z-onSite,#z-ho,#z-montagePraemie,.lz-bg input[data-i]):not(:focus){filter:blur(.42em);}
+html[data-privacy="streng"] :is(#view-erfassen,#view-ergebnis,#view-monate,#view-einstellungen,#dropdown,.lz-bg) input:is([type="number"],[inputmode="decimal"]):not(:focus){filter:blur(.42em);}
 html[data-privacy="streng"] svg text:not([aria-hidden="true"]){filter:blur(.42em);}
 html[data-privacy="streng"] #view-monate tbody td:first-child{filter:blur(.42em);}
 .icon-btn svg,.ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none;}
@@ -1701,8 +1704,8 @@ details.card.fold>summary>.info-ecke{right:28px;}
         <div class="pv-pop" id="pv-pop" role="menu" aria-label="Sichtschutz" hidden>
           <p class="pv-titel">Sichtschutz</p>
           <button type="button" class="pv-opt" data-pv="normal" onclick="privacySetzen('normal');privacyMenue(false);$('privacy-more').focus()"><span class="pv-haken" aria-hidden="true"></span><span><b>Aus</b><small>Alles sichtbar</small></span></button>
-          <button type="button" class="pv-opt" data-pv="privacy" onclick="privacySetzen('privacy');privacyMenue(false);$('privacy-more').focus()"><span class="pv-haken" aria-hidden="true"></span><span><b>Privacy</b><small>Beträge, Stunden und Prozentwerte verwischt</small></span></button>
-          <button type="button" class="pv-opt" data-pv="streng" onclick="privacySetzen('streng');privacyMenue(false);$('privacy-more').focus()"><span class="pv-haken" aria-hidden="true"></span><span><b>Streng</b><small>Zusätzlich Namen und Diagrammbeschriftungen</small></span></button>
+          <button type="button" class="pv-opt" data-pv="privacy" onclick="privacySetzen('privacy');privacyMenue(false);$('privacy-more').focus()"><span class="pv-haken" aria-hidden="true"></span><span><b>Privacy</b><small>Geldbeträge verwischt, Zeiten bleiben sichtbar</small></span></button>
+          <button type="button" class="pv-opt" data-pv="streng" onclick="privacySetzen('streng');privacyMenue(false);$('privacy-more').focus()"><span class="pv-haken" aria-hidden="true"></span><span><b>Streng</b><small>Zusätzlich Stunden, Zeitkonten, Prozentwerte und Diagrammbeschriftungen</small></span></button>
           <p class="pv-hinweis">Sichtschutz, keine Zugriffssicherung. Er verdeckt nur auf dem Bildschirm (nicht im Druck), die Daten bleiben unverändert gespeichert. Balken und Linien in Diagrammen bleiben sichtbar.</p>
         </div>
       </span>
@@ -2881,7 +2884,7 @@ function rhythmusMonat(modell,start,monat,jahr,t,land,region){
 // ═══════════════════════════════════════════════════════════════════════════
 // App – Oberfläche, Speicherung, Navigation
 // ═══════════════════════════════════════════════════════════════════════════
-const APP_VERSION='3.4.1'
+const APP_VERSION='3.5.0'
 
 // Quelltext der Seite im Originalzustand (vor jeder JS-Änderung) — Basis zum Zurückschreiben der Einstellungen
 const SOURCE_HTML=(()=>{const c=window.pcQuelle?window.pcQuelle():document.documentElement.cloneNode(true);c.removeAttribute('data-theme');return'<!DOCTYPE html>\n'+c.outerHTML})()
@@ -3435,9 +3438,9 @@ function renderZeitkonten(){
   const max=lz.zaTopfMax,pct=max>0?Math.min(100,Math.max(0,lz.zaTopfEnde/max*100)):0
   $('za-pot').innerHTML=`<div class="konto-kopf"><span>ZA-Guthaben</span><b class="${lz.zaTopfEnde<0?'neg':''}">${lz.zaTopfEnde<0?'−':''}${fmtH(Math.abs(lz.zaTopfEnde))}<small>h</small></b></div>`+
     (max>0?`<div class="pot-bar" title="${fmtH(Math.max(0,lz.zaTopfEnde))} von ${fmtH(max)} h"><div class="fill" style="width:${pct}%"></div></div>`:'')+
-    `<p class="konto-verlauf">Übertrag ${fmtH(lz.zaTopfStart)} · Zugänge ${sg(lz.zaZugang)} · Entnahmen ${sg(-lz.zaEntnahme)}${lz.zaUeberlauf>0?` · <span class="warn-count">${fmtH(lz.zaUeberlauf)} h ausbezahlt</span>`:''}</p>`
+    `<p class="konto-verlauf" data-pv-art="z">Übertrag ${fmtH(lz.zaTopfStart)} · Zugänge ${sg(lz.zaZugang)} · Entnahmen ${sg(-lz.zaEntnahme)}${lz.zaUeberlauf>0?` · <span class="warn-count">${fmtH(lz.zaUeberlauf)} h ausbezahlt</span>`:''}</p>`
   $('ruhe-pot').innerHTML=`<div class="konto-kopf"><span>Ruhezeitkonto</span><b>${fmtH(ruhe.ruheEnde)}<small>h</small></b></div>`+
-    `<p class="konto-verlauf">Übertrag ${fmtH(ruhe.ruheStart)} · Sonntagsarbeit ${sg(ruhe.ruheNeu)} · genommen ${sg(-ruhe.ruheVerbrauch)}</p>`
+    `<p class="konto-verlauf" data-pv-art="z">Übertrag ${fmtH(ruhe.ruheStart)} · Sonntagsarbeit ${sg(ruhe.ruheNeu)} · genommen ${sg(-ruhe.ruheVerbrauch)}</p>`
 }
 
 function renderDetail(){
@@ -4160,7 +4163,7 @@ function spracheWechseln(v){settings.lang=v==='en'?'en':'de';persistSettings();l
 function cycleTheme(){settings.theme={auto:'light',light:'dark',dark:'auto'}[settings.theme||'auto'];persistSettings();applyTheme()}
 
 // ── Sichtschutz / Privacy-Blur ──────────────────────────────────────
-// Verwischt Beträge, Stunden und Prozentwerte nur auf dem Bildschirm. Keine Zugriffssicherung: Daten und Berechnung bleiben unverändert.
+// Verwischt nur auf dem Bildschirm: Privacy die Geldbeträge, Streng zusätzlich Stunden, Zeitkonten und Prozentwerte. Keine Zugriffssicherung: Daten und Berechnung bleiben unverändert.
 // Technik: Ein MutationObserver ergänzt nach jedem Rendern in den Ansichts-Bereichen (PV_ZONEN) Treffer in <span class="pv">.
 // Er läuft vor dem nächsten Zeichnen, daher kein Aufblitzen. Texte ändern sich nie (textContent bleibt gleich).
 const PV_KEY='lzr_privacy',PV_MODI=['normal','privacy','streng']
@@ -4174,7 +4177,38 @@ const PV_PROZ=/^[\s ]*[−+\-]?\d[\d.,]*[\s  ]?%[\s ]*$/
 const PV_ZAHL=/^[\s ]*[−+\-]?\d[\d.,  ]*[kK]?[\s ]*$/
 const PV_DATUM=/^\d{1,2}\.\d{1,2}\.\d{2,4}$/
 const PV_NULL=/^[\u2212+\-]?0[\s\u00a0\u202f]?(?:€|EUR|h)?$/ // „0 €“ in Erklärtexten verrät nichts
-function pvTreffer(s){return[...s.matchAll(PV_RE)].filter(m=>!PV_DATUM.test(m[0])&&!PV_NULL.test(m[0]))}
+// Art eines Treffers: 'g' = Geldbetrag (ab Privacy verwischt), 'z' = Zeit, Stunden, Tage oder Prozent (nur Streng)
+const PV_GELD_NACH=/^[\s\u00a0\u202f]*(?:€|EUR\b|\/[\s\u00a0]*h\b)/
+const PV_ZEIT_NACH=/^[\s\u00a0\u202f]*(?:h(?![\p{L}\d])|Std\b|Tage?\b|%)/u
+const PV_ZEIT_KOPF=/^\s*(?:Einheit|Stunden|Std|ZA\b|Ruhezeit|Montage-Tage|Units|Hours|Time off|Rest)/i
+function pvNaechsterText(t){
+  const box=t.parentElement&&t.parentElement.closest('b,td,th,li,p,div,span,small,strong')||t.parentElement
+  if(!box)return''
+  const w=document.createTreeWalker(box,NodeFilter.SHOW_TEXT);w.currentNode=t
+  for(let x=w.nextNode();x;x=w.nextNode())if(x.nodeValue.trim())return x.nodeValue
+  return''
+}
+function pvSpalte(td){
+  const tab=td.closest('table'),tr=td.parentElement;if(!tab||!tr)return''
+  const kopf=tab.querySelector('thead tr');if(!kopf)return''
+  let i=0;for(const c of tr.children){if(c===td)break;i+=c.colSpan||1}
+  for(const c of kopf.children){if(i<(c.colSpan||1))return c.textContent;i-=c.colSpan||1}
+  return''
+}
+function pvArt(t,x,nach){
+  if(/€|EUR/.test(x))return'g'
+  if(/%|h$/.test(x.trim()))return'z'
+  if(!nach.trim())nach=pvNaechsterText(t)
+  if(PV_GELD_NACH.test(nach))return'g'
+  if(PV_ZEIT_NACH.test(nach))return'z'
+  const el=t.parentElement
+  const art=el.closest('[data-pv-art]');if(art)return art.dataset.pvArt
+  const td=el.closest('td,th')
+  if(td&&(PV_ZEIT_KOPF.test(pvSpalte(td))||PV_ZEIT_KOPF.test(td.parentElement.firstElementChild?.textContent||'')))return'z'
+  return'g'
+}
+// Tag und Monat wie „06.10.“ sind ein Datum, kein Betrag
+function pvTreffer(s){return[...s.matchAll(PV_RE)].filter(m=>!PV_DATUM.test(m[0])&&!PV_NULL.test(m[0])&&!(/^\d{1,2}\.\d{2}$/.test(m[0])&&s[m.index+m[0].length]==='.'))}
 function pvText(t){
   const s=t.nodeValue
   if(!s||!/\d/.test(s))return
@@ -4183,16 +4217,16 @@ function pvText(t){
   const svg=p.closest('svg')
   if(svg){ // SVG-Text lässt keine HTML-Hülle zu: das ganze <text> bekommt die Klasse
     const tx=p.closest('text')
-    if(tx&&!tx.classList.contains('pv')){const x=tx.textContent;if(pvTreffer(x).length||PV_PROZ.test(x)||PV_ZAHL.test(x)){tx.classList.add('pv');tx.setAttribute('data-pv-a','')}}
+    if(tx&&!tx.classList.contains('pv')){const x=tx.textContent;if(pvTreffer(x).length||PV_PROZ.test(x)||PV_ZAHL.test(x)){tx.classList.add('pv');tx.setAttribute('data-pv-a','');tx.setAttribute('data-pv-k',/%|h\b/.test(x)||tx.closest('[data-pv-art="z"]')?'z':'g')}}
     return
   }
   const tr=pvTreffer(s)
-  if(!tr.length&&PV_PROZ.test(s)){const sp=document.createElement('span');sp.className='pv';sp.setAttribute('data-pv-a','');t.replaceWith(sp);sp.appendChild(t);return}
+  if(!tr.length&&PV_PROZ.test(s)){const sp=document.createElement('span');sp.className='pv';sp.setAttribute('data-pv-a','');sp.setAttribute('data-pv-k','z');t.replaceWith(sp);sp.appendChild(t);return}
   if(!tr.length)return
   const frag=document.createDocumentFragment();let last=0
   for(const m of tr){
     if(m.index>last)frag.append(s.slice(last,m.index))
-    const sp=document.createElement('span');sp.className='pv';sp.setAttribute('data-pv-a','');sp.textContent=m[0];frag.append(sp)
+    const sp=document.createElement('span');sp.className='pv';sp.setAttribute('data-pv-a','');sp.setAttribute('data-pv-k',pvArt(t,m[0],s.slice(m.index+m[0].length)));sp.textContent=m[0];frag.append(sp)
     last=m.index+m[0].length
   }
   if(last<s.length)frag.append(s.slice(last))
@@ -4214,7 +4248,7 @@ function pvEntfernen(){
   const eltern=new Set()
   document.querySelectorAll('[data-pv-a]').forEach(e=>{
     if(e.tagName==='SPAN'){eltern.add(e.parentNode);e.replaceWith(...e.childNodes)}
-    else{e.classList.remove('pv');e.removeAttribute('data-pv-a')}
+    else{e.classList.remove('pv');e.removeAttribute('data-pv-a');e.removeAttribute('data-pv-k')}
   })
   eltern.forEach(p=>p&&p.normalize())
 }

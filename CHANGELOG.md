@@ -2,6 +2,14 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.5.0] – 2026-11-25
+
+### Geändert
+- Sichtschutz in zwei klaren Stufen: **Privacy** verwischt nur noch Geldbeträge (Netto, Brutto, Abzüge, Sätze, Beträge, Eingabefelder für Gehalt und Taggeld). Stunden, Zeitkonten, Tage und Prozentwerte bleiben lesbar. **Streng** verwischt zusätzlich alle Stunden, Zeitkonten, Prozentwerte, Diagrammbeschriftungen und die Monatsnamen in der Tabelle.
+
+### Behoben
+- Sichtschutz: Datumsangaben wie „Di 06.10.“ werden nicht mehr verwischt.
+
 ## [3.4.1] – 2026-11-25
 
 ### Behoben
