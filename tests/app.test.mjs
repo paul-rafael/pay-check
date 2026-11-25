@@ -223,3 +223,27 @@ test('Alle Seiten lassen sich ohne Fehler anzeigen', () => {
   a.run(`openDD('2026-10-06',document.querySelector('[data-key="2026-10-06"]'))`)
   assert.match(a.run(`document.getElementById('dd-content').textContent`), /ZA-Konto\+1,75 h/)
 })
+
+test('ZA-Maximum aus den Einstellungen gilt für alle Monate ohne gespeicherte Fassung, gespeicherte nur nach Rückfrage', () => {
+  const a = ladeApp()
+  a.run('confirm=()=>false')
+  // Februar und April angelegt, solange noch kein Maximum eingestellt war; Februar festgehalten
+  setzeMonat(a, 2, 2026, { '2026-02-03': montage(10) }); a.run('speichereMonat()')
+  setzeMonat(a, 4, 2026, { '2026-04-07': montage(10) }, 'state.zaTopfStart=160;')
+  a.run(`location.hash='einstellungen';zeigeView();document.getElementById('s-zaTopfMax').value='160';ladeMonat(2,2026);saveSettings()`)
+  // April (offen) folgt sofort dem neuen Maximum – auch nach dem Neuladen
+  a.run('ladeMonat(4,2026)')
+  assert.equal(a.run('state.zaTopfMax'), 160)
+  assert.equal(a.run('state._res.lz.zaTopfEnde'), 160)
+  assert.ok(a.run('state._res.lz.zaUeberlauf') > 0)
+  const b = ladeApp({ storage: a.storage() })
+  b.run('ladeMonat(4,2026)')
+  assert.equal(b.run('state._res.lz.zaTopfEnde'), 160)
+  // Februar (gespeichert) bleibt ohne Zustimmung unverändert
+  assert.equal(b.run(`recDaten(readMonate()['2026-02']).zaTopfMax`), 0)
+  // Mit Zustimmung: Eingabestand übernimmt, gespeicherte Fassung bleibt, Monat ist „geändert“
+  b.run(`confirm=()=>true;location.hash='einstellungen';zeigeView();saveSettings()`)
+  assert.equal(b.run(`recDaten(readMonate()['2026-02']).zaTopfMax`), 160)
+  assert.equal(b.run(`readMonate()['2026-02'].saved.data.zaTopfMax`), 0)
+  assert.equal(b.run(`recGeaendert(readMonate()['2026-02'])`), true)
+})
