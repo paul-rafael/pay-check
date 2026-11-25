@@ -16,7 +16,7 @@ let offen = null
 
 export function oeffne(api) {
   if (offen) return
-  const bg = document.createElement('div'); bg.className = 'lz-bg'
+  const bg = document.createElement('div'); bg.className = 'lz-bg'; bg.dataset.pvArt = 'z' // Sichtschutz: hier stehen nur Stunden
   bg.innerHTML = '<div class="lz-dlg" role="dialog" aria-modal="true" aria-labelledby="lz-titel"></div>'
   document.body.appendChild(bg)
   offen = { api, bg, dlg: bg.firstElementChild, ctrl: null, erg: null, zuordnung: {}, vorschlag: {}, stunden: {}, merken: true }

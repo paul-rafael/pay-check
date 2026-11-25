@@ -2,6 +2,12 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.5.1] – 2026-11-25
+
+### Behoben
+- Sichtschutz im Kalender: Die Stunden bei Büro und Homeoffice (z. B. „8,25“) wurden in Privacy wie Geldbeträge verwischt. Kalender-Stunden aller Tagesarten bleiben in Privacy jetzt lesbar und werden in Streng verwischt – auch ganze Zahlen wie „M 9“ und Werte wie „RZ 5,5“, die bisher in keiner Stufe verdeckt wurden.
+- Hinweise wie „ZA-Topf fast voll: 150,00 von 160,00 h“ und der Dialog „Zeiten importieren“ zählen als Zeit, nicht als Geld.
+
 ## [3.5.0] – 2026-11-25
 
 ### Geändert

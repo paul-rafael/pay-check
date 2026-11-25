@@ -157,7 +157,7 @@ test('Sichtschutz: Datum und „0 €“ bleiben lesbar, Prozentwerte verwischt,
   assert.deepEqual([...t.querySelectorAll('.pv')].map((e) => e.textContent + ':' + e.dataset.pvK), ['12,50 €:g', '24,6 %:z', '7 %:z'])
   assert.match(html, /input:is\(\[type="number"\],\[inputmode="decimal"\]\):not\(:focus\)\{filter:blur/)
   assert.match(html, /PV_AUS='[^']*\.help/)
-  assert.match(html, /@media print\{html\[data-privacy\] :is\(\.pv,input,svg text[^}]*\{filter:none !important;\}\}/)
+  assert.match(html, /@media print\{html\[data-privacy\] :is\(\.pv,\.dstd,input,svg text[^}]*\{filter:none !important;\}\}/)
 })
 
 test('Sichtschutz: Englisch übersetzt Schalter und Menü', async () => {
@@ -187,4 +187,21 @@ test('Sichtschutz: „Alle Daten löschen“ entfernt auch die Stufe', async () 
   a.run("privacySetzen('privacy')")
   a.run('allesLoeschen()')
   assert.equal(a.storage().lzr_privacy, undefined)
+})
+
+test('Sichtschutz: Kalender-Stunden aller Tagesarten bleiben in Privacy lesbar und sind in Streng verwischt', async () => {
+  const a = ladeApp()
+  const tag = (mode, stunden, x = {}) => ({ mode, stunden, fahrzeit: 0, ...x })
+  a.dom.window.__t = { '2026-11-02': tag('buero', 8.25), '2026-11-03': tag('homeoffice', 8.25), '2026-11-06': tag('ruhe', 5.5), '2026-11-12': tag('montage', 9), '2026-11-13': tag('za', 5.5), '2026-11-16': tag('montage_reise', 9, { fahrzeit: 2.5 }) }
+  a.run('ladeMonat(11,2026);state.grundgehalt=3000;state.zaTopfMax=160;state.zaTopfStart=158;state.dayMap=window.__t;render()')
+  a.run("privacySetzen('privacy')"); await warte()
+  await zeige(a, 'erfassen')
+  assert.equal(a.run("document.querySelectorAll('#cal-grid .pv').length"), 0, 'Kalender: nichts als Betrag verwischt')
+  assert.equal(a.run("document.querySelectorAll('#cal-grid .dstd').length"), 6)
+  assert.match(html, /html\[data-privacy="streng"\] #cal-grid \.dstd\{filter:blur/)
+  assert.doesNotMatch(html, /html\[data-privacy\] #cal-grid \.dstd/, 'Privacy verwischt die Kalender-Stunden nicht')
+  // „150,00 von 160,00 h“ ist ein Satz über Stunden
+  const p = a.dom.window.document.createElement('p'); p.textContent = 'ZA-Topf fast voll: 150,00 von 160,00 h.'
+  a.dom.window.document.getElementById('view-erfassen').appendChild(p); await warte()
+  assert.deepEqual([...p.querySelectorAll('.pv')].map((e) => e.dataset.pvK), ['z', 'z'])
 })
