@@ -1112,7 +1112,7 @@ button{font-family:inherit;}
 .pv-more svg{width:14px;height:14px;}
 .pv-pop{position:absolute;right:0;top:calc(100% + 6px);width:290px;max-width:calc(100vw - 32px);background:var(--pr-surface);border:1px solid var(--pr-border-strong);border-radius:var(--pr-radius);box-shadow:0 10px 30px rgba(0,0,0,.14);padding:6px;z-index:70;}
 .pv-pop[hidden]{display:none;}
-@media print{html[data-privacy] :is(.pv,input,svg text,b,td){filter:none !important;}}
+@media print{html[data-privacy] :is(.pv,.dstd,input,svg text,b,td){filter:none !important;}}
 @media (max-width:600px){.pv-pop{position:fixed;left:16px;right:16px;top:58px;width:auto;max-width:none;}}
 .pv-titel{margin:4px 10px 4px;font-size:12px;font-weight:600;color:var(--pr-text-2);}
 .pv-opt{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;padding:8px 10px;border:none;background:none;border-radius:var(--pr-radius-sm);font:inherit;font-size:14px;color:var(--pr-text);cursor:pointer;}
@@ -1130,6 +1130,8 @@ html[data-privacy="privacy"] .pv[data-pv-k="z"]{filter:none;-webkit-filter:none;
 html[data-privacy] :is(#grundgehalt,#stundensatz,#taggeld,#urlaubsgeldBetrag,#extras-list input[type="number"],#s-grundgehalt,#s-taggeld,#s-toleranz,#z-onSite,#z-ho,#z-montagePraemie,.lz-bg input[data-i]):not(:focus){filter:blur(.42em);}
 html[data-privacy="streng"] :is(#view-erfassen,#view-ergebnis,#view-monate,#view-einstellungen,#dropdown,.lz-bg) input:is([type="number"],[inputmode="decimal"]):not(:focus){filter:blur(.42em);}
 html[data-privacy="streng"] svg text:not([aria-hidden="true"]){filter:blur(.42em);}
+/* Kalender: Stunden je Tag sind Zeit – nur Streng verwischt sie (auch ganze Zahlen wie „9“) */
+html[data-privacy="streng"] #cal-grid .dstd{filter:blur(.42em);}
 html[data-privacy="streng"] #view-monate tbody td:first-child{filter:blur(.42em);}
 .icon-btn svg,.ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none;}
 .bottom-nav{display:none;}
@@ -2884,7 +2886,7 @@ function rhythmusMonat(modell,start,monat,jahr,t,land,region){
 // ═══════════════════════════════════════════════════════════════════════════
 // App – Oberfläche, Speicherung, Navigation
 // ═══════════════════════════════════════════════════════════════════════════
-const APP_VERSION='3.5.0'
+const APP_VERSION='3.5.1'
 
 // Quelltext der Seite im Originalzustand (vor jeder JS-Änderung) — Basis zum Zurückschreiben der Einstellungen
 const SOURCE_HTML=(()=>{const c=window.pcQuelle?window.pcQuelle():document.documentElement.cloneNode(true);c.removeAttribute('data-theme');return'<!DOCTYPE html>\n'+c.outerHTML})()
@@ -3361,7 +3363,7 @@ function renderKalender(){
       if(dd.mode==='frei')inner+='<span class="dempty">·</span>'
       else{
         const h=dd.mode==='montage_reise'?fmtK(dd.stunden)+'+'+fmtK(dd.fahrzeit||0):fmtK(dd.stunden)
-        inner+=`<span class="dinfo"><span class="code">${MODE_INFO[dd.mode].c}</span>${h}</span>`;label+=' '+h+' h'
+        inner+=`<span class="dinfo"><span class="code">${MODE_INFO[dd.mode].c}</span><span class="dstd">${h}</span></span>`;label+=' '+h+' h'
       }
       if(isMontageMode(dd.mode)&&dd.land&&dd.land!=='AT'){inner+=`<span class="lmark">${landLabel(dd.land,dd.region)}</span>`;label+=', '+pcT(LAENDER[dd.land])}
       let badge=''
@@ -4169,7 +4171,7 @@ function cycleTheme(){settings.theme={auto:'light',light:'dark',dark:'auto'}[set
 const PV_KEY='lzr_privacy',PV_MODI=['normal','privacy','streng']
 let pvModus='normal'
 const PV_ZONEN='#monat-kopf,#res-sticky,#view-erfassen,#view-ergebnis,#view-monate,#view-einstellungen,.chart-tip,#dropdown,.lz-bg,#toast'
-const PV_AUS='.pv,.help,.help-pop,[data-pv-aus],script,style,textarea,option,select,title'
+const PV_AUS='.dstd,.pv,.help,.help-pop,[data-pv-aus],script,style,textarea,option,select,title'
 const PV_E='(?:[\\s\\u00a0\\u202f]?(?:€|EUR\\b|h(?![\\p{L}\\d])))'
 const PV_N='\\d(?:[\\d.,\\u00a0\\u202f]*\\d)?'
 const PV_RE=new RegExp('[\\u2212+\\-]?(?:(?<![\\d.,])\\d(?:[\\d.,\\u00a0\\u202f]*\\d)?[.,]\\d{2}(?![\\d]|[.,]\\d)(?:'+PV_E+'|[\\s\\u00a0\\u202f]?%)?|(?<![\\d.,\\u00a0\\u202f])'+PV_N+PV_E+'|(?<![\\d.,\\u00a0\\u202f])'+PV_N+'[\\s\\u00a0\\u202f]?%|€[\\s\\u00a0]?'+PV_N+')','gu')
@@ -4195,7 +4197,7 @@ function pvSpalte(td){
   for(const c of kopf.children){if(i<(c.colSpan||1))return c.textContent;i-=c.colSpan||1}
   return''
 }
-function pvArt(t,x,nach){
+function pvArt(t,x,nach,ganz=''){
   if(/€|EUR/.test(x))return'g'
   if(/%|h$/.test(x.trim()))return'z'
   if(!nach.trim())nach=pvNaechsterText(t)
@@ -4203,6 +4205,8 @@ function pvArt(t,x,nach){
   if(PV_ZEIT_NACH.test(nach))return'z'
   const el=t.parentElement
   const art=el.closest('[data-pv-art]');if(art)return art.dataset.pvArt
+  // Satz mit Stundenangabe und ohne Euro, z.B. „150,00 von 160,00 h“
+  if(!/€|EUR/.test(ganz)&&/\d[\s\u00a0\u202f]?h(?![\p{L}\d])/u.test(ganz))return'z'
   const td=el.closest('td,th')
   if(td&&(PV_ZEIT_KOPF.test(pvSpalte(td))||PV_ZEIT_KOPF.test(td.parentElement.firstElementChild?.textContent||'')))return'z'
   return'g'
@@ -4226,7 +4230,7 @@ function pvText(t){
   const frag=document.createDocumentFragment();let last=0
   for(const m of tr){
     if(m.index>last)frag.append(s.slice(last,m.index))
-    const sp=document.createElement('span');sp.className='pv';sp.setAttribute('data-pv-a','');sp.setAttribute('data-pv-k',pvArt(t,m[0],s.slice(m.index+m[0].length)));sp.textContent=m[0];frag.append(sp)
+    const sp=document.createElement('span');sp.className='pv';sp.setAttribute('data-pv-a','');sp.setAttribute('data-pv-k',pvArt(t,m[0],s.slice(m.index+m[0].length),s));sp.textContent=m[0];frag.append(sp)
     last=m.index+m[0].length
   }
   if(last<s.length)frag.append(s.slice(last))
