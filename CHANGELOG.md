@@ -2,6 +2,11 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.4.1] – 2026-11-25
+
+### Behoben
+- ZA-Maximum gilt jetzt für alle Monate: Bisher übernahm nur der gerade geöffnete Monat einen neuen Wert aus den Einstellungen; Monate, die schon angelegt waren, rechneten weiter ohne Maximum. Monate ohne gespeicherte Fassung folgen jetzt immer dem Wert aus den Einstellungen. Für gespeicherte Monate fragt Pay-Check beim Speichern der Einstellungen, ob der Wert übernommen werden soll; die gespeicherte Fassung bleibt dabei erhalten und der Monat wird als „geändert“ markiert.
+
 ## [3.4.0] – 2026-11-23
 
 ### Neu

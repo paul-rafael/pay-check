@@ -942,6 +942,9 @@
 "– der Monat, in dem du gearbeitet hast. Zuschläge und Taggeld daraus stehen meist am": "– the month in which you worked. Its premiums and daily allowance usually appear on the",
 "→ Lohnzettel": "→ payslip",
 "→ Lohnzettel {} {}": "→ payslip {} {}",
+"ZA-Maximum {} h auch in gespeicherte Monate übernehmen?": "Apply ZA maximum of {} h to saved months as well?",
+"ZA-Maximum entfernen, auch in gespeicherten Monaten?": "Remove the ZA maximum in saved months as well?",
+"Die gespeicherte Fassung bleibt erhalten; die Monate werden als „geändert“ markiert und lassen sich neu speichern.": "The saved version is kept; the months are marked as “changed” and can be saved again.",
 "Sichtschutz": "Privacy screen",
 "Aus": "Off",
 "Sichtschutz: Stufen": "Privacy screen: levels",
@@ -2878,7 +2881,7 @@ function rhythmusMonat(modell,start,monat,jahr,t,land,region){
 // ═══════════════════════════════════════════════════════════════════════════
 // App – Oberfläche, Speicherung, Navigation
 // ═══════════════════════════════════════════════════════════════════════════
-const APP_VERSION='3.4.0'
+const APP_VERSION='3.4.1'
 
 // Quelltext der Seite im Originalzustand (vor jeder JS-Änderung) — Basis zum Zurückschreiben der Einstellungen
 const SOURCE_HTML=(()=>{const c=window.pcQuelle?window.pcQuelle():document.documentElement.cloneNode(true);c.removeAttribute('data-theme');return'<!DOCTYPE html>\n'+c.outerHTML})()
@@ -2926,7 +2929,11 @@ function monatHatInhalt(d){return Object.values(d.dayMap||{}).some(x=>x.mode!=='
 const MON_KEY='lzr_monate',AKTIV_KEY='lzr_aktiv'
 function readMonate(){return lsGet(MON_KEY,{})}
 function writeMonate(m){if(!lsSet(MON_KEY,m)){toast('Speichern im Browser nicht möglich – bitte „Alle Daten sichern“ nutzen');return false}return true}
-function recDaten(rec){return rec&&(rec.draft?rec.draft.data:rec.saved&&rec.saved.data)}
+// Das ZA-Maximum ist nur in den Einstellungen änderbar: Monate ohne festgehaltene Fassung folgen immer dem aktuellen Wert
+function recDaten(rec){
+  const d=rec&&(rec.draft?rec.draft.data:rec.saved&&rec.saved.data)
+  return d&&!rec.saved?{...d,zaTopfMax:settings.zaTopfMax}:d
+}
 function recGeaendert(rec){return!!(rec&&rec.saved&&rec.draft&&JSON.stringify(rec.draft.data)!==JSON.stringify(rec.saved.data))}
 // Veraltet: eine Neuberechnung der gespeicherten Eingaben mit aktuellen Regeln und Einstellungen ergibt andere Werte
 function recVeraltet(rec){if(!rec||!rec.saved)return false;try{return!ergGleich(rec.saved.erg,zusammenfassung(rechneMonat(rec.saved.data,cfg())))}catch(e){return false}}
@@ -4026,10 +4033,25 @@ function saveSettings(){
   // Grunddaten nur in Monate ohne gespeicherte Fassung übernehmen – gespeicherte bleiben unverändert
   const rec=readMonate()[curKey()]
   if(!rec||!rec.saved){state.grundgehalt=settings.grundgehalt;state.taggeld=settings.taggeld;state.lehrling=settings.lehrling}
-  state.zaTopfMax=(!rec||!rec.saved)?settings.zaTopfMax:state.zaTopfMax
+  if(!rec||!rec.saved)state.zaTopfMax=settings.zaTopfMax
+  zaMaxInGespeicherte()
   syncInputs();applyTheme();syncLandRow();renderPresets();render();fillSettingsForm(settings)
   if(settings.writeFile)writeSettingsToHtml()
   else toast('Einstellungen gespeichert'+(rec&&rec.saved?' – gespeicherte Monate bleiben unverändert':''))
+}
+
+// ZA-Maximum auf Wunsch auch in gespeicherte Monate übernehmen: nur der Eingabestand ändert sich,
+// die festgehaltene Fassung bleibt; der Monat zeigt danach „geändert“ und lässt sich bewusst neu speichern
+function zaMaxInGespeicherte(){
+  flushAutosave()
+  const recs=readMonate(),max=settings.zaTopfMax
+  const keys=Object.keys(recs).filter(k=>recs[k].saved&&(recDaten(recs[k]).zaTopfMax||0)!==max).sort()
+  if(!keys.length)return
+  const T=window.pcT,frage=max>0?'ZA-Maximum '+fmtH(max)+' h auch in gespeicherte Monate übernehmen?':'ZA-Maximum entfernen, auch in gespeicherten Monaten?'
+  if(!confirm(T(frage)+'\n\n'+keys.map(k=>T(monatName(k))).join(', ')+'\n\n'+T('Die gespeicherte Fassung bleibt erhalten; die Monate werden als „geändert“ markiert und lassen sich neu speichern.')))return
+  keys.forEach(k=>{const r=recs[k];r.draft={data:{...recDaten(r),zaTopfMax:max},at:Date.now()}})
+  writeMonate(recs)
+  if(keys.includes(curKey()))state.zaTopfMax=max
 }
 
 // ── Einstellungen fest in die HTML-Datei schreiben ───────────────────────────
