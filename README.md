@@ -13,6 +13,12 @@ Einsätze erfassen. Lohn nachrechnen. Lohnzettel prüfen.
 
 <img alt="Pay-Check – Netto-Ergebnis, Arbeitskalender und Zeitkonten" src="docs/screenshot.png" width="760">
 
+### Pay-Check in 60 Sekunden
+
+<a href="https://paul-rafael.github.io/pay-check/docs/pay-check-video.mp4"><img alt="Video: Pay-Check in 60 Sekunden – Tage anklicken, Lohn nachrechnen, mit dem echten Lohnzettel vergleichen" src="docs/video-vorschau.jpg" width="760"></a>
+
+<sub>Klick aufs Bild öffnet das Video im Browser · <a href="docs/pay-check-video.mp4">Video-Datei (MP4)</a></sub>
+
 </div>
 
 ---
@@ -122,7 +128,7 @@ Tests laufen bei jedem Push über GitHub Actions. Hinweise zum Mitwirken stehen 
 index.html              Der Rechner (eine Datei): Rechenkern und Oberfläche als getrennte Skripte, inkl. PRH Design Kit
 lohnzettel/             Lohnzettel einlesen: Konfiguration, Parser, OCR, Oberfläche (ES-Module, nur bei Bedarf geladen)
 vendor/                 Tesseract.js, Sprachdaten deu, PDF.js – feste Versionen, erzeugt von scripts/vendor.mjs
-docs/                   Screenshots und Vorschaubild
+docs/                   Screenshots, Vorschaubild und Video
 tests/                  Rechen- und Funktionstests (node:test + jsdom), Referenzwerte in tests/fixtures/
 scripts/check.mjs       Statische Prüfungen
 scripts/vendor.mjs      Kopiert die Bibliotheken aus node_modules nach vendor/
