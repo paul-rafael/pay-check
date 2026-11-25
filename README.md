@@ -45,7 +45,7 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | Lehrlinge | Reduzierter SV-Satz per Schalter |
 | Erklärungen | Ein kleines „i“ in der Ecke jeder Funktion und neben wichtigen Feldern erklärt per Klick, wofür sie da ist |
 | Darstellung | Ruhiges, neutrales Design; dunkle Darstellung wählbar; am Handy eigene Navigationsleiste |
-| Sichtschutz | Auge oben rechts verwischt Beträge, Stunden und Prozentwerte auf dem Bildschirm (Stufen Aus, Privacy, Streng); Druck und Daten bleiben unverändert |
+| Sichtschutz | Auge oben rechts verwischt auf dem Bildschirm Geldbeträge (Privacy) oder zusätzlich Stunden, Zeitkonten und Prozentwerte (Streng); Druck und Daten bleiben unverändert |
 | Sprache | Deutsch (Standard) oder Englisch, umschaltbar in den Einstellungen – inklusive Zahlenformat und CSV-Export |
 
 ## Highlights
