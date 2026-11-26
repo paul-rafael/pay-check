@@ -957,8 +957,11 @@
 "Montageprämie zählt zum Urlaubsentgelt": "Assignment bonus counts towards holiday pay",
 "Das Grundgehalt läuft weiter. Dazu kommt je Urlaubsstunde das Urlaubsentgelt aus dem Durchschnitt der Vormonate. Halber Tag: Stunden halbieren.": "Base salary continues. On top, each hour of leave earns holiday pay from the average of the previous months. Half day: halve the hours.",
 "{}: Urlaub an einem Wochenend- oder Feiertag zählt nicht als Urlaubstag.": "{}: leave on a weekend or public holiday does not count as a day of leave.",
-"Tage: Anspruch {} · genommen {} · diesen Monat {}": "Days: entitlement {} · taken {} · this month {}",
-"Tage: Anspruch {} · genommen {}": "Days: entitlement {} · taken {}",
+"Tage: Übertrag {} · Anspruch {} · genommen {} · geplant {} · danach {}": "Days: carried over {} · entitlement {} · taken {} · planned {} · then {}",
+"Tage: Übertrag {} · Anspruch {} · genommen {}": "Days: carried over {} · entitlement {} · taken {}",
+"Urlaub {} · Stand heute": "Leave {} · as of today",
+"Urlaub: Übertrag aus dem Vorjahr in Tagen": "Leave: carried over from the previous year in days",
+"Resturlaub aus dem Vorjahr. Du kannst ihn auch so einstellen, dass der Stand deinem Lohnzettel entspricht. Leer lassen = automatisch: der Rest des Vorjahres, sobald dort ein Übertrag eingetragen ist, sonst {}.": "Remaining leave from the previous year. You can also set it so the balance matches your payslip. Leave empty = automatic: the rest of the previous year once a carry-over is entered there, otherwise {}.",
 "Urlaubsentgelt: {} h × {} €/h (selbst eingetragen) = {} €.": "Holiday pay: {} h × {} €/h (entered manually) = {} €.",
 "Urlaubsentgelt: {} h × {} €/h = {} €.": "Holiday pay: {} h × {} €/h = {} €.",
 "Durchschnitt aus": "Average of",
@@ -971,7 +974,7 @@
 "Im Urlaub läuft das Grundgehalt weiter. Dazu kommt das": "Your base salary continues during leave. On top comes",
 "Urlaubsentgelt": "holiday pay",
 "(Ausfallprinzip, § {} Urlaubsgesetz): je Urlaubsstunde der Durchschnitt deiner Überstunden, Zuschläge und Zulagen aus den letzten erfassten Monaten (Standard {} Monate ≈ {} Wochen), geteilt durch die Sollstunden dieser Monate. Taggeld, Homeoffice-Pauschale und Prämien zählen nicht dazu. Welche Bestandteile genau einfließen, regelt dein Kollektivvertrag – steht der Satz am Lohnzettel, kannst du ihn im Monat unter Bezahlung eintragen.": "(loss-of-earnings principle, § {} Holiday Act): per hour of leave, the average of your overtime, premiums and allowances from the last recorded months (default {} months ≈ {} weeks), divided by the target hours of those months. Daily allowance, home office allowance and bonuses do not count. Your collective agreement defines exactly which components are included – if the rate is on your payslip, you can enter it in the month under Pay.",
-"Unter Zeitkonten siehst du den Urlaub im Kalenderjahr: Anspruch (Einstellungen), genommen und Rest. Resturlaub aus dem Vorjahr wird nicht übertragen.": "Under time accounts you see your leave for the calendar year: entitlement (settings), taken and remaining. Remaining leave from the previous year is not carried over.",
+"Unter Zeitkonten siehst du den Urlaub im Kalenderjahr mit dem Stand heute: Übertrag + Anspruch (Einstellungen) − bis heute genommene Tage. Später eingetragene Urlaubstage zählen als geplant. Den Übertrag (Resturlaub aus dem Vorjahr) trägst du einmal ein, zum Beispiel vom Lohnzettel; danach wandert der Rest automatisch ins nächste Jahr.": "Under time accounts you see your leave for the calendar year as of today: carried over + entitlement (settings) − days taken up to today. Days of leave entered later count as planned. Enter the carry-over (remaining leave from the previous year) once, for example from your payslip; after that the rest moves to the next year automatically.",
 "ZA-Maximum {} h auch in gespeicherte Monate übernehmen?": "Apply ZA maximum of {} h to saved months as well?",
 "ZA-Maximum entfernen, auch in gespeicherten Monaten?": "Remove the ZA maximum in saved months as well?",
 "Die gespeicherte Fassung bleibt erhalten; die Monate werden als „geändert“ markiert und lassen sich neu speichern.": "The saved version is kept; the months are marked as “changed” and can be saved again.",
@@ -1873,7 +1876,7 @@ details.card.fold>summary>.info-ecke{right:28px;}
         <div class="konten-row">
           <div class="konto"><div id="za-pot"></div><label class="pot-start">Übertrag <input type="number" id="zaTopfStart" value="0" step="0.25"> h</label></div>
           <div class="konto"><div id="ruhe-pot"></div><label class="pot-start">Übertrag <input type="number" id="ruheStart" value="0" step="0.25" min="0"> h</label></div>
-          <div class="konto" id="urlaub-konto"><div id="urlaub-pot"></div></div>
+          <div class="konto" id="urlaub-konto"><div id="urlaub-pot"></div><label class="pot-start">Übertrag <input type="number" id="urlaubUebertrag" step="0.5" aria-label="Urlaub: Übertrag aus dem Vorjahr in Tagen"> Tage <button type="button" class="help" data-help="Resturlaub aus dem Vorjahr. Du kannst ihn auch so einstellen, dass der Stand deinem Lohnzettel entspricht. Leer lassen = automatisch: der Rest des Vorjahres, sobald dort ein Übertrag eingetragen ist, sonst 0." aria-label="Info">i</button></label></div>
         </div>
       </div>
     </div>
@@ -2177,7 +2180,7 @@ details.card.fold>summary>.info-ecke{right:28px;}
         <h3>Urlaub</h3>
         <p>Urlaubstage trägst du im Kalender als <strong>U</strong> ein; jeder Tag zählt mit seiner Normalarbeitszeit (Mo–Do 8,25 h, Fr 5,5 h), ein halber Tag mit der Hälfte. Wochenenden und Feiertage verbrauchen keinen Urlaub, der ZA-Topf bleibt unberührt.</p>
         <p style="margin-top:8px;">Im Urlaub läuft das Grundgehalt weiter. Dazu kommt das <strong>Urlaubsentgelt</strong> (Ausfallprinzip, § 6 Urlaubsgesetz): je Urlaubsstunde der Durchschnitt deiner Überstunden, Zuschläge und Zulagen aus den letzten erfassten Monaten (Standard 3 Monate ≈ 13 Wochen), geteilt durch die Sollstunden dieser Monate. Taggeld, Homeoffice-Pauschale und Prämien zählen nicht dazu. Welche Bestandteile genau einfließen, regelt dein Kollektivvertrag – steht der Satz am Lohnzettel, kannst du ihn im Monat unter Bezahlung eintragen.</p>
-        <p style="margin-top:8px;">Unter Zeitkonten siehst du den Urlaub im Kalenderjahr: Anspruch (Einstellungen), genommen und Rest. Resturlaub aus dem Vorjahr wird nicht übertragen.</p>
+        <p style="margin-top:8px;">Unter Zeitkonten siehst du den Urlaub im Kalenderjahr mit dem Stand heute: Übertrag + Anspruch (Einstellungen) − bis heute genommene Tage. Später eingetragene Urlaubstage zählen als geplant. Den Übertrag (Resturlaub aus dem Vorjahr) trägst du einmal ein, zum Beispiel vom Lohnzettel; danach wandert der Rest automatisch ins nächste Jahr.</p>
       </div>
       <div class="pr-card">
         <h3>Lohnzettel einlesen</h3>
@@ -2958,7 +2961,7 @@ function rhythmusMonat(modell,start,monat,jahr,t,land,region){
 // ═══════════════════════════════════════════════════════════════════════════
 // App – Oberfläche, Speicherung, Navigation
 // ═══════════════════════════════════════════════════════════════════════════
-const APP_VERSION='3.6.0'
+const APP_VERSION='3.7.0'
 
 // Quelltext der Seite im Originalzustand (vor jeder JS-Änderung) — Basis zum Zurückschreiben der Einstellungen
 const SOURCE_HTML=(()=>{const c=window.pcQuelle?window.pcQuelle():document.documentElement.cloneNode(true);c.removeAttribute('data-theme');return'<!DOCTYPE html>\n'+c.outerHTML})()
@@ -2974,7 +2977,7 @@ const lsDel=k=>{try{localStorage.removeItem(k)}catch(e){}}
 const DEFAULT_SETTINGS={grundgehalt:0,teiler:143,land:'AT',region:'',taggeld:0,zaTopfMax:0,lehrling:false,
   buero:8.25,bueroFr:5.5,ho:8.25,hoFr:5.5,montage:10,reiseArbeit:10,reisezeit:0,theme:'light',
   turnus:{customOn:12,customOff:2,stunden:10,reise:false,reiseArbeit:0,reisezeit:8,za:true},
-  modell:'',modellStart:'',eigeneModelle:[],saetze:{...DEFAULT_SAETZE},toleranz:1,urlaubAnspruch:25,urlaubMonate:3,urlaubMitPraemie:false,writeFile:false,lang:'de',zeitCodes:{},_hellV23:true}
+  modell:'',modellStart:'',eigeneModelle:[],saetze:{...DEFAULT_SAETZE},toleranz:1,urlaubAnspruch:25,urlaubMonate:3,urlaubMitPraemie:false,urlaubUebertrag:{},writeFile:false,lang:'de',zeitCodes:{},_hellV23:true}
 function readEmbeddedSettings(){try{return JSON.parse($('embedded-settings').textContent||'{}')}catch(e){return{}}}
 function loadSettings(){
   const ls=lsGet('lzr_settings',{}),em=readEmbeddedSettings()
@@ -3033,14 +3036,26 @@ function urlaubDurchschnittFuer(d){
   return{satz:soll>0?r(summe/soll):0,summe,soll,monate:monate.reverse(),zeitraum:n}
 }
 // Urlaubstage in einem Kalenderjahr (gespeicherte und offene Monate, der aktuelle aus dem Eingabestand)
-function urlaubTageJahr(jahr){
-  const recs=readMonate();let t=0
+function urlaubTageJahr(jahr,heute=dateKey(new Date())){
+  const recs=readMonate();let genommen=0,geplant=0
   for(let m=1;m<=12;m++){
     const k=monatKey(m,jahr)
     const d=k===curKey()?snapshot():recs[k]&&recDatenRoh(recs[k]);if(!d||!hatUrlaub(d.dayMap))continue
-    t+=rechneMonat({...d,urlaubSatz:0},cfg()).lz.urlaubTage
+    // Bis einschließlich heute genommen, danach geplant
+    rechneMonat({...d,urlaubSatz:0},cfg()).tage.forEach(t=>{if(t.urlaubTag){if(dateKey(t.datum)<=heute)genommen+=t.urlaubTag;else geplant+=t.urlaubTag}})
   }
-  return r(t)
+  return{genommen:r(genommen),geplant:r(geplant),gesamt:r(genommen+geplant)}
+}
+// Übertrag (Resturlaub) in ein Jahr: selbst eingetragen, sonst der Rest des Vorjahres – aber nur, wenn es davor
+// einen eingetragenen Übertrag gibt (sonst wäre ein nicht erfasstes Jahr ein voller, ungenutzter Anspruch)
+function urlaubUebertragFuer(jahr){
+  const u=settings.urlaubUebertrag||{},manuell=y=>typeof u[y]==='number'
+  if(manuell(jahr))return u[jahr]
+  const start=Object.keys(u).map(Number).filter(y=>y<jahr&&y>=jahr-10&&manuell(y)).sort((a,b)=>b-a)[0]
+  if(start==null)return 0
+  let v=u[start]
+  for(let y=start;y<jahr;y++)v=r(v+(settings.urlaubAnspruch||0)-urlaubTageJahr(y).gesamt)
+  return v
 }
 function recGeaendert(rec){return!!(rec&&rec.saved&&rec.draft&&JSON.stringify(rec.draft.data)!==JSON.stringify(rec.saved.data))}
 // Veraltet: eine Neuberechnung der gespeicherten Eingaben mit aktuellen Regeln und Einstellungen ergibt andere Werte
@@ -3559,11 +3574,17 @@ function renderZeitkonten(){
 
 // Urlaubskonto (Kalenderjahr) und Satz des Urlaubsentgelts im Monat
 function renderUrlaub(){
-  const {lz}=state._res,jahr=state.jahr,anspruch=settings.urlaubAnspruch||0,genommen=urlaubTageJahr(jahr),rest=r(anspruch-genommen)
+  const {lz}=state._res,jahr=state.jahr,anspruch=settings.urlaubAnspruch||0
+  const ue=urlaubUebertragFuer(jahr),{genommen,geplant}=urlaubTageJahr(jahr),gesamt=r(ue+anspruch)
+  // Stand heute: Übertrag + Anspruch − bis heute genommen; geplante Tage (später im Kalender) zeigt der Verlauf
+  const stand=r(gesamt-genommen),danach=r(stand-geplant)
   const tg=v=>fmtK(v)+(v===1?' Tag':' Tage')
-  $('urlaub-pot').innerHTML=`<div class="konto-kopf"><span>Urlaub ${jahr}</span><b class="${rest<0?'neg':''}">${rest<0?'−':''}${fmtK(Math.abs(rest))}<small>${Math.abs(rest)===1?'Tag':'Tage'}</small></b></div>`+
-    (anspruch>0?`<div class="pot-bar" title="${tg(genommen)} von ${tg(anspruch)}"><div class="fill" style="width:${Math.min(100,Math.max(0,genommen/anspruch*100))}%"></div></div>`:'')+
-    `<p class="konto-verlauf" data-pv-art="z">Tage: Anspruch ${fmtK(anspruch)} · genommen ${fmtK(genommen)}${lz.urlaubTage>0?` · diesen Monat ${fmtK(lz.urlaubTage)}`:''}</p>`
+  $('urlaub-pot').innerHTML=`<div class="konto-kopf"><span>Urlaub ${jahr} · Stand heute</span><b class="${stand<0?'neg':''}">${stand<0?'−':''}${fmtK(Math.abs(stand))}<small>${Math.abs(stand)===1?'Tag':'Tage'}</small></b></div>`+
+    (gesamt>0?`<div class="pot-bar" title="${tg(genommen)} von ${tg(gesamt)}"><div class="fill" style="width:${Math.min(100,Math.max(0,genommen/gesamt*100))}%"></div></div>`:'')+
+    `<p class="konto-verlauf" data-pv-art="z">Tage: Übertrag ${fmtK(ue)} · Anspruch ${fmtK(anspruch)} · genommen ${fmtK(genommen)}${geplant>0?` · geplant ${fmtK(geplant)} · danach ${fmtK(danach)}`:''}</p>`
+  const ui=$('urlaubUebertrag'),eigen=typeof (settings.urlaubUebertrag||{})[jahr]==='number'
+  if(document.activeElement!==ui)ui.value=eigen?settings.urlaubUebertrag[jahr]:''
+  ui.placeholder=fmtK(ue)
   const aktiv=lz.urlaubStd>0||typeof state.urlaubSatz==='number'
   $('urlaubsatz-field').hidden=!aktiv
   const du=state.urlaubDurchschnitt,hint=$('urlaub-hint')
@@ -3796,6 +3817,12 @@ jahrSel.onchange=()=>ladeMonat(state.monat,+jahrSel.value)
 const numIn=(id,k)=>{$(id).oninput=function(){state[k]=parseFloat(this.value)||0;render()}}
 numIn('grundgehalt','grundgehalt');numIn('taggeld','taggeld');numIn('zaTopfStart','zaTopfStart');numIn('ruheStart','ruheStart');numIn('urlaubsgeldBetrag','urlaubsgeldBetrag')
 $('urlaubSatz').oninput=function(){const v=parseFloat(this.value);state.urlaubSatz=this.value.trim()===''||isNaN(v)?null:Math.max(0,v);render()}
+// Urlaubsübertrag gilt für das Jahr des geöffneten Monats; leer = automatisch
+$('urlaubUebertrag').oninput=function(){
+  const v=parseFloat(this.value),u={...(settings.urlaubUebertrag||{})}
+  if(this.value.trim()===''||isNaN(v))delete u[state.jahr];else u[state.jahr]=v
+  settings.urlaubUebertrag=u;persistSettings();render()
+}
 $('urlaubsgeldAktiv').onchange=function(){state.urlaubsgeldAktiv=this.checked;$('urlaubsgeld-fields').hidden=!this.checked;render()}
 function toggleLehrling(){state.lehrling=!state.lehrling;render()}
 function syncInputs(){
@@ -3872,7 +3899,7 @@ function renderJahr(){
   $('jahr-kpis2').innerHTML=
     kpiHtml('Sozialversicherung',euro(sum('sv')),'Summe')+kpiHtml('Lohnsteuer',euro(sum('lst')),'Summe inkl. Sonderzahlungen')+
     kpiHtml('Steuerfrei',euro(sum('steuerfrei')),'Taggeld, §68, Pauschalen')+kpiHtml('Zuschläge & Überstunden',euro(sum('zuschlaege')),'inkl. Grundvergütung')+
-    kpiHtml('Prämien & Sonderzahlungen',euro(r(sum('praemien')+sum('sonderzahlungen'))),'Prämien, Urlaubsgeld')+kpiHtml('Stunden',fmtH(sum('stunden'))+'<small>h</small>','gearbeitet inkl. Reise')+kpiHtml('Urlaub',fmtK(sum('urlaubTage'))+'<small>Tage</small>','von '+fmtK(settings.urlaubAnspruch||0)+' Tagen · Urlaubsentgelt '+fmtE(sum('urlaubsentgelt')))
+    kpiHtml('Prämien & Sonderzahlungen',euro(r(sum('praemien')+sum('sonderzahlungen'))),'Prämien, Urlaubsgeld')+kpiHtml('Stunden',fmtH(sum('stunden'))+'<small>h</small>','gearbeitet inkl. Reise')+kpiHtml('Urlaub',fmtK(sum('urlaubTage'))+'<small>Tage</small>','von '+fmtK(r((settings.urlaubAnspruch||0)+urlaubUebertragFuer(jahr)))+' Tagen · Urlaubsentgelt '+fmtE(sum('urlaubsentgelt')))
   renderNettoChart(daten);renderKontoChart(daten)
   const td=v=>`<td class="r">${v}</td>`
   $('jahr-table').innerHTML=`<table><thead><tr><th>Arbeitsmonat <span class="th-sub">→ Lohnzettel</span></th><th>Status</th><th class="r">Brutto</th><th class="r">Netto geschätzt</th><th class="r">Netto laut Lohnzettel</th><th class="r">Taggeld</th><th class="r">Stunden</th><th class="r">ZA Ende</th><th class="r">Ruhezeit Ende</th></tr></thead><tbody>${

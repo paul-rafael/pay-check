@@ -2,6 +2,12 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.7.0] – 2026-11-26
+
+### Neu
+- Urlaubskonto mit **Stand heute**: Übertrag + Anspruch − bis heute genommene Tage. Urlaubstage, die später im Kalender eingetragen sind, zählen als geplant; der Verlauf zeigt, was danach übrig bleibt.
+- Übertrag (Resturlaub aus dem Vorjahr) direkt unter dem Urlaubskonto eintragen, zum Beispiel vom Lohnzettel. Ab einem eingetragenen Übertrag wandert der Rest automatisch ins nächste Jahr; ein eigener Wert hat immer Vorrang.
+
 ## [3.6.0] – 2026-11-26
 
 ### Neu
