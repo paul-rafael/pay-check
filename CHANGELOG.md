@@ -2,6 +2,13 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.8.0] – 2026-11-26
+
+### Geändert
+- Urlaubskonto läuft jetzt je Monat wie das ZA-Konto: Unter Zeitkonten trägst du einmal ein, wie viele Urlaubstage du am Monatsanfang hast (z. B. vom Lohnzettel). Urlaubstage im Kalender gehen ab, der nächste Monat beginnt mit dem Rest, und am 1. Jänner kommt der Jahresanspruch dazu – nicht genommener Urlaub bleibt erhalten. Beispiel: Anfang Dezember 29, im Dezember 4 Tage Urlaub → Ende Dezember 25 → 1. Jänner 50.
+- Ein eigener Stand in einem späteren Monat hat Vorrang; leer heißt automatisch aus dem Vormonat. Der Stand gehört nicht zu den Lohndaten, gespeicherte Monate werden dadurch nicht „geändert“.
+- Ein in 3.7.0 eingetragener Übertrag wird zum Stand am 1. Jänner (Übertrag + Anspruch). „Stand heute“ und „geplant“ entfallen.
+
 ## [3.7.0] – 2026-11-26
 
 ### Neu
