@@ -110,37 +110,45 @@ test('Urlaub: gespeicherter Monat behält seinen Satz, offene folgen den Vormona
   assert.deepEqual(JSON.parse(a.run('JSON.stringify(state.urlaubDurchschnitt.monate)')), ['2026-09', '2026-10', '2026-11'])
 })
 
-test('Urlaubskonto: Stand heute = Übertrag + Anspruch − genommen; spätere Tage sind geplant', () => {
+test('Urlaubskonto je Monat: Stand am Monatsanfang, Urlaubstage gehen ab, am 1. Jänner kommt der Anspruch dazu', async () => {
   const a = ladeApp()
-  const j = (m, d) => `2024-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`
-  a.dom.window.__t = { [j(3, 4)]: ur(8.25), [j(3, 5)]: ur(8.25) }
-  a.run('ladeMonat(3,2024);state.grundgehalt=3600;state.dayMap=window.__t;render();flushAutosave()')
-  a.dom.window.__t = { [j(11, 4)]: ur(8.25), [j(11, 5)]: ur(4.125) }
-  a.run('ladeMonat(11,2024);state.grundgehalt=3600;state.dayMap=window.__t;render();flushAutosave()')
-  // Stichtag zwischen März und November: März genommen, November geplant
-  assert.deepEqual(JSON.parse(a.run(`JSON.stringify(urlaubTageJahr(2024,'2024-06-30'))`)), { genommen: 2, geplant: 1.5, gesamt: 3.5 })
-  // Übertrag eintragen (wie vom Lohnzettel)
-  a.run(`location.hash='erfassen';zeigeView();const i=document.getElementById('urlaubUebertrag');i.value='4.5';i.dispatchEvent(new Event('input'))`)
-  assert.equal(a.run('urlaubUebertragFuer(2024)'), 4.5)
-  // 2024 liegt in der Vergangenheit: alles genommen → Stand 4,5 + 25 − 3,5 = 26
+  const warte = () => new Promise((r) => setTimeout(r, 0))
+  // Beispiel: Anfang Dezember 29 Tage, im Dezember 4 Tage Urlaub
+  a.dom.window.__t = { [k(12, 21)]: ur(8.25), [k(12, 22)]: ur(8.25), [k(12, 23)]: ur(8.25), [k(12, 28)]: ur(8.25) }
+  a.run('ladeMonat(12,2026);state.grundgehalt=3600;state.dayMap=window.__t;render();flushAutosave()')
+  assert.equal(a.run('urlaubStand(12,2026)'), null, 'ohne eingetragenen Stand unbekannt')
+  a.run(`location.hash='erfassen';zeigeView();const i=document.getElementById('urlaubStart');i.value='29';i.dispatchEvent(new Event('input'))`)
+  assert.deepEqual(JSON.parse(a.run('JSON.stringify(urlaubStand(12,2026))')), { start: 29, tage: 4, ende: 25, eingetragen: true, anspruchDazu: 0 })
   const t = a.run("document.getElementById('urlaub-pot').textContent").replace(/\s+/g, ' ')
-  assert.match(t, /Urlaub 2024 · Stand heute ?26 ?Tage/)
-  assert.match(t, /Übertrag 4,5 · Anspruch 25 · genommen 3,5/)
-  // Rest wandert automatisch ins Folgejahr, eigener Wert hat Vorrang
-  assert.equal(a.run('urlaubUebertragFuer(2025)'), 26)
-  assert.equal(a.run('urlaubUebertragFuer(2023)'), 0, 'vor dem ersten Übertrag: 0')
-  a.run('settings.urlaubUebertrag={...settings.urlaubUebertrag,2025:2}')
-  assert.equal(a.run('urlaubUebertragFuer(2025)'), 2)
-  assert.equal(a.run('urlaubUebertragFuer(2026)'), 27, '2 + 25, 2025 ohne Urlaub')
-  // Ohne jeden Übertrag zählt ein nicht erfasstes Vorjahr nicht als voller Rest
-  const b = ladeApp()
-  assert.equal(b.run('urlaubUebertragFuer(2027)'), 0)
-  // Jahresübersicht
-  a.run(`location.hash='monate';zeigeView();document.getElementById('jahr-sel').value='2024';renderJahr()`)
-  assert.match(a.run("document.getElementById('jahr-kpis2').textContent").replace(/\s+/g, ' '), /Urlaub3,5Tagevon 29,5 Tagen/)
+  assert.match(t, /Urlaub ?25 ?Tage/)
+  assert.match(t, /Anfang 29 · genommen −4 · Ende Dezember: 25/)
+  // Jänner: Rest 25 + Jahresanspruch 25 = 50; Februar mit 2 Tagen Urlaub
+  assert.deepEqual(JSON.parse(a.run('JSON.stringify(urlaubStand(1,2027))')), { start: 50, tage: 0, ende: 50, eingetragen: false, anspruchDazu: 25 })
+  a.dom.window.__t = { '2027-02-15': ur(8.25), '2027-02-16': ur(8.25) }
+  a.run('ladeMonat(2,2027);state.grundgehalt=3600;state.dayMap=window.__t;render();flushAutosave()'); await warte()
+  assert.equal(a.run('urlaubStand(2,2027).ende'), 48, 'Monate ohne Datensatz dazwischen zählen mit 0 Tagen')
+  assert.equal(a.run("document.getElementById('urlaubStart').placeholder"), '50', 'automatischer Wert als Platzhalter')
+  // Eigener Stand in einem späteren Monat hat Vorrang (z.B. laut Lohnzettel)
+  a.run(`const i=document.getElementById('urlaubStart');i.value='40';i.dispatchEvent(new Event('input'))`)
+  assert.equal(a.run('urlaubStand(2,2027).ende'), 38)
+  assert.equal(a.run('urlaubStand(3,2027).start'), 38)
   // Leeren = wieder automatisch
-  a.run(`location.hash='erfassen';zeigeView();ladeMonat(11,2024);const i=document.getElementById('urlaubUebertrag');i.value='';i.dispatchEvent(new Event('input'))`)
-  assert.equal(a.run(`2024 in settings.urlaubUebertrag`), false)
+  a.run(`const i=document.getElementById('urlaubStart');i.value='';i.dispatchEvent(new Event('input'))`)
+  assert.equal(a.run('urlaubStand(2,2027).start'), 50)
+  // Stand gehört nicht zu den Lohndaten: gespeicherter Monat wird nicht „geändert“
+  a.run('ladeMonat(12,2026);speichereMonat()')
+  a.run(`const i=document.getElementById('urlaubStart');i.value='30';i.dispatchEvent(new Event('input'));flushAutosave()`)
+  assert.equal(a.run(`recGeaendert(readMonate()['2026-12'])`), false)
+  // Jahresübersicht
+  a.run(`location.hash='monate';zeigeView();document.getElementById('jahr-sel').value='2026';renderJahr()`)
+  assert.match(a.run("document.getElementById('jahr-kpis2').textContent").replace(/\s+/g, ' '), /Urlaub ?4 ?Tage ?Stand Ende Dezember: 26/)
+})
+
+test('Urlaubskonto: Übertrag aus Version 3.7.0 wird zum Stand am 1. Jänner (Übertrag + Anspruch)', () => {
+  const a = ladeApp({ storage: { lzr_settings: { urlaubUebertrag: { 2026: 6 }, urlaubAnspruch: 25, _saved: 5 } } })
+  assert.equal(a.run(`settings.urlaubStaende['2026-01']`), 31)
+  assert.equal(a.run(`'urlaubUebertrag' in settings`), false)
+  assert.equal(a.run('urlaubStand(11,2026).start'), 31)
 })
 
 test('Urlaub: Vorlage aus dem Vormonat übernimmt keine Urlaubstage; Kopieren passt die Stunden an', () => {
