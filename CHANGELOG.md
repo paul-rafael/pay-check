@@ -2,6 +2,14 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.6.0] – 2026-11-26
+
+### Neu
+- Urlaub als Tagesart **U** im Kalender: Jeder Tag zählt mit seiner Normalarbeitszeit (Mo–Do 8,25 h, Fr 5,5 h), ein halber Tag mit der Hälfte. Wochenenden und Feiertage verbrauchen keinen Urlaub, der ZA-Topf bleibt unberührt.
+- Urlaubsentgelt (Lohnart 1663) nach dem Ausfallprinzip: Das Grundgehalt läuft weiter, dazu kommt je Urlaubsstunde der Durchschnitt der Überstunden, Zuschläge, On-Site- und Lenkzeit-Zulage aus den letzten erfassten Monaten (Standard 3 Monate ≈ 13 Wochen), geteilt durch deren Sollstunden. Taggeld, Homeoffice-Pauschale und Prämien zählen nicht dazu, die Montageprämie auf Wunsch. Der Rechenweg steht unter Bezahlung; steht der Satz am Lohnzettel, lässt er sich dort eintragen.
+- Urlaubskonto unter Zeitkonten: Anspruch je Kalenderjahr (Einstellungen, Standard 25 Tage), genommen und Rest. Die Jahresübersicht zeigt Urlaubstage und Urlaubsentgelt.
+- Einstellungen: Urlaubsanspruch, Zeitraum für den Durchschnitt, Montageprämie im Urlaubsentgelt.
+
 ## [3.5.1] – 2026-11-25
 
 ### Behoben

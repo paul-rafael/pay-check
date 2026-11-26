@@ -942,6 +942,36 @@
 "– der Monat, in dem du gearbeitet hast. Zuschläge und Taggeld daraus stehen meist am": "– the month in which you worked. Its premiums and daily allowance usually appear on the",
 "→ Lohnzettel": "→ payslip",
 "→ Lohnzettel {} {}": "→ payslip {} {}",
+"Urlaub": "Leave",
+"Urlaub {}": "Leave {}",
+"Urlaubsentgelt (€/h)": "Holiday pay average (€/h)",
+"Urlaubsentgelt (Durchschnitt)": "Holiday pay (average)",
+"automatisch": "automatic",
+"automatisch: {}": "automatic: {}",
+"Im Urlaub läuft das Grundgehalt weiter. Dazu kommt je Urlaubsstunde der Durchschnitt deiner Überstunden, Zuschläge und Zulagen aus den Vormonaten (Ausfallprinzip). Leer lassen = automatisch berechnen; steht der Satz am Lohnzettel (Lohnart Urlaubsentgelt), kannst du ihn hier eintragen.": "Your base salary continues during leave. On top, each hour of leave earns the average of your overtime, premiums and allowances from the previous months (loss-of-earnings principle). Leave empty = calculate automatically; if the rate is on your payslip (wage type holiday pay), you can enter it here.",
+"Zeitkonten, Urlaub & Einsatz": "Time accounts, leave & assignment",
+"ZA-Maximum: darüber werden Stunden ausbezahlt (Grundvergütung + Zuschlag). Standard-Einsatzland: wird neuen Montage-Tagen zugewiesen. Urlaub: Anspruch je Kalenderjahr und der Zeitraum für den Durchschnitt im Urlaubsentgelt.": "ZA maximum: hours above it are paid out (basic pay + premium). Default country of assignment: assigned to new on-site assignment days. Leave: entitlement per calendar year and the period for the holiday pay average.",
+"Urlaubsanspruch (Tage/Jahr)": "Leave entitlement (days/year)",
+"Urlaubsentgelt: Durchschnitt aus (Monate)": "Holiday pay: average over (months)",
+"Zeitraum vor dem Urlaub, aus dem der Durchschnitt der Überstunden, Zuschläge und Zulagen gebildet wird. Viele Kollektivverträge nennen {} Wochen, das sind rund {} Monate. Gezählt werden nur erfasste Monate.": "Period before the leave from which the average of overtime, premiums and allowances is formed. Many collective agreements specify {} weeks, which is about {} months. Only recorded months count.",
+"Montageprämie zählt zum Urlaubsentgelt": "Assignment bonus counts towards holiday pay",
+"Das Grundgehalt läuft weiter. Dazu kommt je Urlaubsstunde das Urlaubsentgelt aus dem Durchschnitt der Vormonate. Halber Tag: Stunden halbieren.": "Base salary continues. On top, each hour of leave earns holiday pay from the average of the previous months. Half day: halve the hours.",
+"{}: Urlaub an einem Wochenend- oder Feiertag zählt nicht als Urlaubstag.": "{}: leave on a weekend or public holiday does not count as a day of leave.",
+"Tage: Anspruch {} · genommen {} · diesen Monat {}": "Days: entitlement {} · taken {} · this month {}",
+"Tage: Anspruch {} · genommen {}": "Days: entitlement {} · taken {}",
+"Urlaubsentgelt: {} h × {} €/h (selbst eingetragen) = {} €.": "Holiday pay: {} h × {} €/h (entered manually) = {} €.",
+"Urlaubsentgelt: {} h × {} €/h = {} €.": "Holiday pay: {} h × {} €/h = {} €.",
+"Durchschnitt aus": "Average of",
+": {} € Überstunden, Zuschläge und Zulagen ÷ {} h Sollzeit.": ": {} € overtime, premiums and allowances ÷ {} h target time.",
+"Urlaubsentgelt: Es ist kein Vormonat erfasst, aus dem sich ein Durchschnitt bilden lässt. Erfasse die Monate davor oder trage den Satz vom Lohnzettel ein.": "Holiday pay: no previous month is recorded to form an average. Record the months before or enter the rate from your payslip.",
+"Urlaub {} h": "Leave {} h",
+"von {} Tagen · Urlaubsentgelt {} €": "of {} days · holiday pay {} €",
+"Urlaubstage trägst du im Kalender als": "Enter days of leave in the calendar as",
+"ein; jeder Tag zählt mit seiner Normalarbeitszeit (Mo–Do {} h, Fr {} h), ein halber Tag mit der Hälfte. Wochenenden und Feiertage verbrauchen keinen Urlaub, der ZA-Topf bleibt unberührt.": "; each day counts with its normal working time (Mon–Thu {} h, Fri {} h), a half day with half of it. Weekends and public holidays use no leave; the ZA pot is not touched.",
+"Im Urlaub läuft das Grundgehalt weiter. Dazu kommt das": "Your base salary continues during leave. On top comes",
+"Urlaubsentgelt": "holiday pay",
+"(Ausfallprinzip, § {} Urlaubsgesetz): je Urlaubsstunde der Durchschnitt deiner Überstunden, Zuschläge und Zulagen aus den letzten erfassten Monaten (Standard {} Monate ≈ {} Wochen), geteilt durch die Sollstunden dieser Monate. Taggeld, Homeoffice-Pauschale und Prämien zählen nicht dazu. Welche Bestandteile genau einfließen, regelt dein Kollektivvertrag – steht der Satz am Lohnzettel, kannst du ihn im Monat unter Bezahlung eintragen.": "(loss-of-earnings principle, § {} Holiday Act): per hour of leave, the average of your overtime, premiums and allowances from the last recorded months (default {} months ≈ {} weeks), divided by the target hours of those months. Daily allowance, home office allowance and bonuses do not count. Your collective agreement defines exactly which components are included – if the rate is on your payslip, you can enter it in the month under Pay.",
+"Unter Zeitkonten siehst du den Urlaub im Kalenderjahr: Anspruch (Einstellungen), genommen und Rest. Resturlaub aus dem Vorjahr wird nicht übertragen.": "Under time accounts you see your leave for the calendar year: entitlement (settings), taken and remaining. Remaining leave from the previous year is not carried over.",
 "ZA-Maximum {} h auch in gespeicherte Monate übernehmen?": "Apply ZA maximum of {} h to saved months as well?",
 "ZA-Maximum entfernen, auch in gespeicherten Monaten?": "Remove the ZA maximum in saved months as well?",
 "Die gespeicherte Fassung bleibt erhalten; die Monate werden als „geändert“ markiert und lassen sich neu speichern.": "The saved version is kept; the months are marked as “changed” and can be saved again.",
@@ -1063,18 +1093,18 @@
 :root{
   --k-buero:#e4eee8;--k-buero-b:#b9d0c1;--k-ho:#e4eee8;--k-ho-b:#a9c6b4;
   --k-montage:#f1e4e6;--k-montage-b:#d8b9c0;--k-reise:#f1e4e6;--k-reise-b:#c99ea8;
-  --k-za:#e5eaf2;--k-za-b:#bdc8d9;--k-ruhe:#e5eaf2;--k-ruhe-b:#aab8cd;
+  --k-za:#e5eaf2;--k-za-b:#bdc8d9;--k-ruhe:#e5eaf2;--k-ruhe-b:#aab8cd;--k-urlaub:#f4eedd;--k-urlaub-b:#d8c79a;
   --ok:#2f6b3a;--ok-soft:#eaf3ec;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme='light']){
   --k-buero:#222d27;--k-buero-b:#3f5a49;--k-ho:#222d27;--k-ho-b:#4b6a57;
   --k-montage:#33262a;--k-montage-b:#6a4651;--k-reise:#33262a;--k-reise-b:#7d5360;
-  --k-za:#242a34;--k-za-b:#46536a;--k-ruhe:#242a34;--k-ruhe-b:#55647d;
+  --k-za:#242a34;--k-za-b:#46536a;--k-ruhe:#242a34;--k-ruhe-b:#55647d;--k-urlaub:#2f2a1e;--k-urlaub-b:#6b5d38;
   --ok:#7fbf8a;--ok-soft:#0f1c11;}}
 :root[data-theme='dark']{
   --k-buero:#222d27;--k-buero-b:#3f5a49;--k-ho:#222d27;--k-ho-b:#4b6a57;
   --k-montage:#33262a;--k-montage-b:#6a4651;--k-reise:#33262a;--k-reise-b:#7d5360;
-  --k-za:#242a34;--k-za-b:#46536a;--k-ruhe:#242a34;--k-ruhe-b:#55647d;
+  --k-za:#242a34;--k-za-b:#46536a;--k-ruhe:#242a34;--k-ruhe-b:#55647d;--k-urlaub:#2f2a1e;--k-urlaub-b:#6b5d38;
   --ok:#7fbf8a;--ok-soft:#0f1c11;}
 
 /* ===== Basis ===== */
@@ -1297,6 +1327,7 @@ input[type=checkbox],input[type=radio]{accent-color:var(--pr-accent);width:auto;
 .day-btn.reise{background:var(--k-reise);border-color:var(--k-reise-b);border-style:dashed;}
 .day-btn.za{background:var(--k-za);border-color:var(--k-za-b);}
 .day-btn.ruhe{background:var(--k-ruhe);border-color:var(--k-ruhe-b);border-style:dashed;}
+.day-btn.urlaub{background:var(--k-urlaub);border-color:var(--k-urlaub-b);}
 /* gearbeitet an Sa/So/Feiertag → Zuschlag: roter Eckpunkt + Zahl hervorgehoben */
 .day-btn.zuschlag::after{content:'';position:absolute;bottom:5px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--pr-accent);}
 .day-btn.zuschlag .dnum{color:var(--pr-text);font-weight:700;}
@@ -1315,6 +1346,7 @@ input[type=checkbox],input[type=radio]{accent-color:var(--pr-accent);width:auto;
 .leg-dot.reise{background:var(--k-reise);border-color:var(--k-reise-b);border-style:dashed;}
 .leg-dot.za{background:var(--k-za);border-color:var(--k-za-b);}
 .leg-dot.ruhe{background:var(--k-ruhe);border-color:var(--k-ruhe-b);border-style:dashed;}
+.leg-dot.urlaub{background:var(--k-urlaub);border-color:var(--k-urlaub-b);}
 .leg-dot.zuschlag{position:relative;background:var(--pr-surface);border-color:var(--pr-border-strong);}
 .leg-dot.zuschlag::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--pr-accent);}
 
@@ -1624,7 +1656,7 @@ input.lz-ungueltig{border-color:var(--pr-signal);box-shadow:0 0 0 3px var(--pr-s
 .konten{position:relative;margin-top:16px;padding-top:14px;border-top:1px solid var(--pr-border);}
 .konten-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding-right:26px;margin-bottom:8px;}
 .konten-head .section-label{margin:0;}
-.konten-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px;}
+.konten-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 24px;}
 .konto{min-width:0;}
 .konto-kopf{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px;}
 .konto-kopf span{font-size:13px;font-weight:600;color:var(--pr-text-2);}
@@ -1832,6 +1864,7 @@ details.card.fold>summary>.info-ecke{right:28px;}
           <div class="leg-item"><div class="leg-dot reise">M+R</div>Montage + Reise</div>
           <div class="leg-item"><div class="leg-dot za">ZA</div>Zeitausgleich</div>
           <div class="leg-item"><div class="leg-dot ruhe">RZ</div>Ruhezeit</div>
+          <div class="leg-item"><div class="leg-dot urlaub">U</div>Urlaub</div>
           <div class="leg-item"><div class="leg-dot zuschlag"></div>Sa / So / Feiertag mit Zuschlag</div>
         </div>
 
@@ -1840,6 +1873,7 @@ details.card.fold>summary>.info-ecke{right:28px;}
         <div class="konten-row">
           <div class="konto"><div id="za-pot"></div><label class="pot-start">Übertrag <input type="number" id="zaTopfStart" value="0" step="0.25"> h</label></div>
           <div class="konto"><div id="ruhe-pot"></div><label class="pot-start">Übertrag <input type="number" id="ruheStart" value="0" step="0.25" min="0"> h</label></div>
+          <div class="konto" id="urlaub-konto"><div id="urlaub-pot"></div></div>
         </div>
       </div>
     </div>
@@ -1853,8 +1887,9 @@ details.card.fold>summary>.info-ecke{right:28px;}
         <label class="field"><span id="grundgehalt-label">Grundgehalt (€/Monat)</span><input type="number" id="grundgehalt" value="0" step="10" min="0"></label>
         <label class="field"><span><span id="stundensatz-label">Stundensatz (€/h)</span> <button type="button" class="help" data-help="Grundgehalt geteilt durch den Stundenteiler aus den Einstellungen (üblich: 143). Basis für Überstunden, Zuschläge und Lenkzeit." aria-label="Info">i</button></span><input type="number" id="stundensatz" value="0" step="0.01" readonly tabindex="-1"></label>
         <label class="field"><span>Taggeld (€/Tag) <button type="button" class="help" data-help="Satz laut Kollektivvertrag pro Montage-Tag. Steuerfrei bis 30 € im Inland bzw. bis zum Auslandssatz des Einsatzlandes, der Rest ist steuerpflichtig." aria-label="Info">i</button></span><input type="number" id="taggeld" value="0" step="1" min="0"></label>
-        
+        <label class="field" id="urlaubsatz-field" hidden><span>Urlaubsentgelt (€/h) <button type="button" class="help" data-help="Im Urlaub läuft das Grundgehalt weiter. Dazu kommt je Urlaubsstunde der Durchschnitt deiner Überstunden, Zuschläge und Zulagen aus den Vormonaten (Ausfallprinzip). Leer lassen = automatisch berechnen; steht der Satz am Lohnzettel (Lohnart Urlaubsentgelt), kannst du ihn hier eintragen." aria-label="Info">i</button></span><input type="number" id="urlaubSatz" step="0.01" min="0" placeholder="automatisch"></label>
       </div>
+      <p class="hint" id="urlaub-hint" hidden></p>
       <p class="hint" id="lehrling-hint" hidden></p>
           <details class="fold subsec" id="sz-fold" style="margin-top:14px;padding-top:0;" data-info="Urlaubsgeld wird nach §67 EStG begünstigt besteuert (6 % bis zum Jahressechstel). Prämien und Zulagen trägst du mit ihrer steuerlichen Behandlung ein: steuerpflichtig (laufender Bezug), steuerfrei oder §67 begünstigt.">
             <summary>Sonderzahlungen &amp; Prämien <span class="sum-meta" id="sz-meta"></span></summary>
@@ -2033,14 +2068,19 @@ details.card.fold>summary>.info-ecke{right:28px;}
       </div>
     </div>
 
-    <div class="card" data-info="ZA-Maximum: darüber werden Stunden ausbezahlt (Grundvergütung + Zuschlag). Standard-Einsatzland: wird neuen Montage-Tagen zugewiesen.">
-      <h2 class="panel-title" style="margin-bottom:12px;">Zeitkonten &amp; Einsatz</h2>
+    <div class="card" data-info="ZA-Maximum: darüber werden Stunden ausbezahlt (Grundvergütung + Zuschlag). Standard-Einsatzland: wird neuen Montage-Tagen zugewiesen. Urlaub: Anspruch je Kalenderjahr und der Zeitraum für den Durchschnitt im Urlaubsentgelt.">
+      <h2 class="panel-title" style="margin-bottom:12px;">Zeitkonten, Urlaub &amp; Einsatz</h2>
       <div class="grid5">
         <label class="field"><span>ZA-Maximum (h, 0 = keins)</span><input type="number" id="s-zaTopfMax" step="1" min="0"></label>
         <label class="field"><span>Standard-Einsatzland</span><select id="s-land"></select></label>
         <label class="field" id="s-region-field"><span>Bundesland (DE)</span><select id="s-region"></select></label>
       </div>
       <p class="hint">Zeitkonten werden automatisch vom Vormonat übernommen. Über dem ZA-Maximum werden Stunden ausbezahlt (Grundvergütung + Zuschlag).</p>
+      <div class="grid5" style="margin-top:14px;">
+        <label class="field"><span>Urlaubsanspruch (Tage/Jahr)</span><input type="number" id="s-urlaubAnspruch" step="1" min="0"></label>
+        <label class="field"><span>Urlaubsentgelt: Durchschnitt aus (Monate) <button type="button" class="help" data-help="Zeitraum vor dem Urlaub, aus dem der Durchschnitt der Überstunden, Zuschläge und Zulagen gebildet wird. Viele Kollektivverträge nennen 13 Wochen, das sind rund 3 Monate. Gezählt werden nur erfasste Monate." aria-label="Info">i</button></span><input type="number" id="s-urlaubMonate" step="1" min="1" max="12"></label>
+      </div>
+      <label class="check" style="margin-top:8px;"><input type="checkbox" id="s-urlaubMitPraemie"> Montageprämie zählt zum Urlaubsentgelt</label>
     </div>
 
     <div class="card" data-info="Die hinterlegten Steuer- und SV-Werte je Jahr; das Jahr richtet sich nach dem Abrechnungsmonat. Die Toleranz bestimmt, ab wann eine Differenz im Soll-Ist-Vergleich als Abweichung gilt. Erweitert: Zulagen- und Zuschlagssätze, falls dein Kollektivvertrag andere vorsieht.">
@@ -2132,6 +2172,12 @@ details.card.fold>summary>.info-ecke{right:28px;}
         <p>Es zählen die österreichischen Feiertage. An Montage-Tagen im Ausland zählen nur die Feiertage des Einsatzlandes – in Deutschland je Bundesland. Hinterlegt sind alle Länder Europas mit ihren landesweiten Feiertagen; regionale Feiertage (z. B. Kantone, spanische Regionen) und jährlich wechselnde islamische Feiertage nicht – darauf weist der Rechner hin.</p>
         <p style="margin-top:8px;">Taggeld ist bis zu diesen Sätzen steuer- und SV-frei angenommen:</p>
         <div class="table-wrap" id="taggeld-table" style="margin-top:6px;"></div>
+      </div>
+      <div class="pr-card">
+        <h3>Urlaub</h3>
+        <p>Urlaubstage trägst du im Kalender als <strong>U</strong> ein; jeder Tag zählt mit seiner Normalarbeitszeit (Mo–Do 8,25 h, Fr 5,5 h), ein halber Tag mit der Hälfte. Wochenenden und Feiertage verbrauchen keinen Urlaub, der ZA-Topf bleibt unberührt.</p>
+        <p style="margin-top:8px;">Im Urlaub läuft das Grundgehalt weiter. Dazu kommt das <strong>Urlaubsentgelt</strong> (Ausfallprinzip, § 6 Urlaubsgesetz): je Urlaubsstunde der Durchschnitt deiner Überstunden, Zuschläge und Zulagen aus den letzten erfassten Monaten (Standard 3 Monate ≈ 13 Wochen), geteilt durch die Sollstunden dieser Monate. Taggeld, Homeoffice-Pauschale und Prämien zählen nicht dazu. Welche Bestandteile genau einfließen, regelt dein Kollektivvertrag – steht der Satz am Lohnzettel, kannst du ihn im Monat unter Bezahlung eintragen.</p>
+        <p style="margin-top:8px;">Unter Zeitkonten siehst du den Urlaub im Kalenderjahr: Anspruch (Einstellungen), genommen und Rest. Resturlaub aus dem Vorjahr wird nicht übertragen.</p>
       </div>
       <div class="pr-card">
         <h3>Lohnzettel einlesen</h3>
@@ -2498,6 +2544,16 @@ function berechneTag(date,dd){
       grundStd:0,lenkzeit:0,onSiteStunden:0,ruheNeu:0,ruheVerbrauch:0,abwStunden:abw,
       istMontage:false,isBuero:false,isHO:false,isZA:mode==='za',isRuhe:mode==='ruhe'}
   }
+  if(mode==='urlaub'){
+    // Urlaub: Grundgehalt läuft weiter, ZA bleibt unberührt. Urlaub zählt nur an Tagen mit Normalarbeitszeit
+    // (nicht am Wochenende oder Feiertag); urlaubTag ist der Anteil eines Tages (halber Tag = 0,5)
+    const u=naz>0?Math.min(Math.max(0,dd.stunden||0),24):0
+    return{...basis,
+      arbStunden:0,fahrzeit:0,gesamtStunden:0,nazStunden:0,
+      zaTopfStunden:0,ueStd50:0,ueStd100_68_1:0,ueStd100_68_2:0,ueStdFt:0,
+      grundStd:0,lenkzeit:0,onSiteStunden:0,ruheNeu:0,ruheVerbrauch:0,abwStunden:0,
+      istMontage:false,isBuero:false,isHO:false,isUrlaub:true,urlaubStunden:u,urlaubTag:naz>0?Math.min(1,u/naz):0}
+  }
   if(mode!=='montage'&&mode!=='montage_reise'){
     return{...basis,
       arbStunden:0,fahrzeit:0,gesamtStunden:0,nazStunden:0,
@@ -2608,6 +2664,10 @@ function berechneLohnzettel(alleTage,p){
   const ueGrundB=r(ueGrundStd*stundensatz),onSiteB=r(onSiteStd*s.onSite),tgB=r(mt.length*taggeld)
   const lkB=r(lenkzeit*stundensatz*s.lenkzeit),hoPauschale=r(hoTage.length*s.ho)
   const mpB=r(mt.length*(s.montagePraemie||0)/30)
+  // Urlaubsentgelt (Ausfallprinzip): Urlaubsstunden × Durchschnitt der variablen Bezüge je Stunde
+  const urlaubStd=r(alleTage.reduce((s,t)=>s+(t.urlaubStunden||0),0))
+  const urlaubTage=r(alleTage.reduce((s,t)=>s+(t.urlaubTag||0),0))
+  const urlaubSatz=r(Math.max(0,p.urlaubSatz||0)),urlaubB=r(urlaubStd*urlaubSatz)
 
   // ── Extras (Prämien & Zuschläge) ─────────────────────────────────────────
   // steuerfrei → steuer- und SV-frei; stpfl → zum laufenden Bezug; begünstigt → Sonderzahlung §67
@@ -2617,7 +2677,7 @@ function berechneLohnzettel(alleTage,p){
   const extrasBruttoTotal=r(extrasFrei+extrasLfd+extrasSZ)
 
   // ── Laufende Bezüge ──────────────────────────────────────────────────────
-  const lfdBrutto=r(grundgehalt+ue50B+ue68_1B+ue68_2B+ueGrundB+onSiteB+tgB+lkB+hoPauschale+mpB+zaUeberlaufZuschlagB+extrasLfd)
+  const lfdBrutto=r(grundgehalt+ue50B+ue68_1B+ue68_2B+ueGrundB+onSiteB+tgB+lkB+hoPauschale+mpB+zaUeberlaufZuschlagB+urlaubB+extrasLfd)
 
   // Taggeld: steuer-/SV-frei bis zum Satz des Einsatzlandes, Rest steuerpflichtig
   const tgFrei=r(mt.reduce((s,t)=>s+Math.min(taggeld,TAGGELD_FREI[t.land]??TAGGELD_FREI.AT),0))
@@ -2661,6 +2721,7 @@ function berechneLohnzettel(alleTage,p){
   const netto=r(summeBrutto-svB-szSV-ls-szLS6-szLSUeber)
   return{grundgehalt,ue50Std:ue50,ue50B,ue68_1Std:ue68_1,ue68_1B,ue68_2Std:ue68_2,ue68_2B,
     ueGrundStd,ueGrundStdBase,zaUeberlauf,zaUeberlaufZuschlagB,ueGrundB,onSiteStd,onSiteB,taggelder:mt.length,tgB,lkStd:lenkzeit,lkB,mpB,
+    urlaubStd,urlaubTage,urlaubSatz,urlaubB,
     hoTage:hoTage.length,hoPauschale,hoFrei,tgFrei,tgStpfl,
     topf68_1,frei68_1,topf68_2,topf68_2Std,frei68_2,
     ugBrutto,extrasSZ,szBrutto,szIn,szUeber,szSV,szSVR,szLS6,szLSUeber,jahressechstel,
@@ -2678,9 +2739,18 @@ function rechneMonat(d,cfg={}){
   const ruhe=verteileAbwesenheit(tage,d.ruheStart||0)
   const lz=berechneLohnzettel(tage,{grundgehalt:d.grundgehalt||0,stundensatz,taggeld:d.taggeld||0,
     zaTopfMax:d.zaTopfMax||0,zaTopfStart:d.zaTopfStart||0,urlaubsgeldAktiv:!!d.urlaubsgeldAktiv,
-    urlaubsgeldBetrag:d.urlaubsgeldBetrag||0,extras:d.extras||[],lehrling:!!d.lehrling,w:werte.w,saetze:cfg.saetze})
+    urlaubsgeldBetrag:d.urlaubsgeldBetrag||0,extras:d.extras||[],lehrling:!!d.lehrling,w:werte.w,saetze:cfg.saetze,urlaubSatz:urlaubSatzVon(d)})
   return{tage,ruhe,lz,werte,teiler}
 }
+
+// Satz des Urlaubsentgelts: selbst eingetragen (z.B. vom Lohnzettel) oder der beim Rechnen ermittelte Durchschnitt
+function urlaubSatzVon(d){return typeof d.urlaubSatz==='number'?d.urlaubSatz:(d.urlaubDurchschnitt&&d.urlaubDurchschnitt.satz)||0}
+// Variable Bezüge eines Monats, die ins Urlaubsentgelt einfließen: Überstunden samt Zuschlägen und Grundvergütung,
+// On-Site- und Lenkzeit-Zulage, auf Wunsch die Montageprämie. Nicht: Taggeld und HO-Pauschale (Aufwandsersatz),
+// Prämien, Sonderzahlungen und das Urlaubsentgelt selbst.
+function urlaubBasis(lz,mitPraemie){return r(lz.ue50B+lz.ue68_1B+lz.ue68_2B+lz.ueGrundB+lz.zaUeberlaufZuschlagB+lz.onSiteB+lz.lkB+(mitPraemie?lz.mpB||0:0))}
+// Sollstunden eines Monats: Normalarbeitszeit aller Wochentage Mo–Fr (wie „13 Wochen × Wochenstunden“)
+function sollStundenMonat(m,j){let s=0;const n=new Date(j,m,0).getDate();for(let d=1;d<=n;d++){const w=new Date(j,m-1,d).getDay();if(w>=1&&w<=5)s+=NAZ[w]}return r(s)}
 
 // Lohnarten-Zeilen des Lohnzettels. kat: Bereich für den Soll-Ist-Vergleich
 function lohnartZeilen(lz){
@@ -2698,6 +2768,7 @@ function lohnartZeilen(lz){
   if(lz.taggelder>0) add('5040','Taggeld',lz.taggelder+' Tage',fmt(lz.taggeld)+' €',lz.tgB,'taggeld')
   if(lz.lkStd>0) add('5550','Lenkzeit-Zulage '+pct(s.lenkzeit),fmtH(lz.lkStd)+' h',fmt(lz.stundensatz*s.lenkzeit)+' €/h',lz.lkB,'zulage')
   if(lz.hoTage>0) add('9010','Homeoffice-Pauschale',lz.hoTage+' Tage',fmt(s.ho)+' €',lz.hoPauschale,'zulage')
+  if(lz.urlaubStd>0) add('1663','Urlaubsentgelt (Durchschnitt)',fmtH(lz.urlaubStd)+' h',fmt(lz.urlaubSatz)+' €/h',lz.urlaubB,'zulage')
   if(lz.ugBrutto>0) add('8000','Urlaubsgeld (§67 EStG)','','',lz.ugBrutto,'sonder')
   ;(lz.extrasCalc||[]).forEach((ex,i)=>{
     if(ex.brutto>0){
@@ -2714,8 +2785,8 @@ function zusammenfassung(res){
   return{brutto:lz.summeBrutto,netto:lz.netto,sv:r(lz.svB+lz.szSV),lst:r(lz.ls+lz.szLS6+lz.szLSUeber),
     taggeld:lz.tgB,steuerfrei:r(lz.tgFrei+lz.frei68_1+lz.frei68_2+lz.hoFrei+lz.extrasFrei),
     zuschlaege:r(lz.ue50B+lz.ue68_1B+lz.ue68_2B+lz.ueGrundB+lz.zaUeberlaufZuschlagB),
-    zulagen:r(lz.onSiteB+lz.lkB+lz.hoPauschale+(lz.mpB||0)),praemien:lz.extrasBruttoTotal,sonderzahlungen:lz.ugBrutto,
-    stunden:lz.stundenGesamt,montageTage:lz.taggelder,
+    zulagen:r(lz.onSiteB+lz.lkB+lz.hoPauschale+(lz.mpB||0)+(lz.urlaubB||0)),praemien:lz.extrasBruttoTotal,sonderzahlungen:lz.ugBrutto,
+    stunden:lz.stundenGesamt,montageTage:lz.taggelder,urlaubTage:lz.urlaubTage||0,urlaubStd:lz.urlaubStd||0,urlaubsentgelt:lz.urlaubB||0,
     zaStart:lz.zaTopfStart,zaNeu:lz.zaTopfNeu,zaUeberlauf:lz.zaUeberlauf,zaEnde:lz.zaTopfEnde,
     ruheStart:ruhe.ruheStart,ruheNeu:ruhe.ruheNeu,ruheVerbrauch:ruhe.ruheVerbrauch,ruheEnde:ruhe.ruheEnde,
     werteJahr:werte.jahr,lohnarten:lohnartZeilen(lz)}
@@ -2733,6 +2804,7 @@ function pruefeMonat(d,res){
   tage.forEach(t=>{
     if(t.gesamtStunden>24)warn(tl(t)+': '+fmtH(t.gesamtStunden)+' h an einem Tag sind nicht möglich.')
     else if(t.gesamtStunden>12)warn(tl(t)+': '+fmtH(t.gesamtStunden)+' h – über der Tageshöchstarbeitszeit von 12 h (AZG). Bitte prüfen.')
+    if(t.isUrlaub&&t.nazTag===0)info(tl(t)+': Urlaub an einem Wochenend- oder Feiertag zählt nicht als Urlaubstag.')
     if((t.isZA||t.isRuhe)&&t.abwStunden===0)info(tl(t)+': '+(t.isZA?'Zeitausgleich':'Ruhezeit')+' an einem Tag ohne Normalarbeitszeit bucht 0 h.')
     if((t.isZA||t.isRuhe)&&t.abwStunden>0&&t.nazTag===0)warn(tl(t)+': '+(t.isZA?'Zeitausgleich':'Ruhezeit')+' an einem Wochenend- oder Feiertag – ist das gewollt?')
   })
@@ -2886,7 +2958,7 @@ function rhythmusMonat(modell,start,monat,jahr,t,land,region){
 // ═══════════════════════════════════════════════════════════════════════════
 // App – Oberfläche, Speicherung, Navigation
 // ═══════════════════════════════════════════════════════════════════════════
-const APP_VERSION='3.5.1'
+const APP_VERSION='3.6.0'
 
 // Quelltext der Seite im Originalzustand (vor jeder JS-Änderung) — Basis zum Zurückschreiben der Einstellungen
 const SOURCE_HTML=(()=>{const c=window.pcQuelle?window.pcQuelle():document.documentElement.cloneNode(true);c.removeAttribute('data-theme');return'<!DOCTYPE html>\n'+c.outerHTML})()
@@ -2902,7 +2974,7 @@ const lsDel=k=>{try{localStorage.removeItem(k)}catch(e){}}
 const DEFAULT_SETTINGS={grundgehalt:0,teiler:143,land:'AT',region:'',taggeld:0,zaTopfMax:0,lehrling:false,
   buero:8.25,bueroFr:5.5,ho:8.25,hoFr:5.5,montage:10,reiseArbeit:10,reisezeit:0,theme:'light',
   turnus:{customOn:12,customOff:2,stunden:10,reise:false,reiseArbeit:0,reisezeit:8,za:true},
-  modell:'',modellStart:'',eigeneModelle:[],saetze:{...DEFAULT_SAETZE},toleranz:1,writeFile:false,lang:'de',zeitCodes:{},_hellV23:true}
+  modell:'',modellStart:'',eigeneModelle:[],saetze:{...DEFAULT_SAETZE},toleranz:1,urlaubAnspruch:25,urlaubMonate:3,urlaubMitPraemie:false,writeFile:false,lang:'de',zeitCodes:{},_hellV23:true}
 function readEmbeddedSettings(){try{return JSON.parse($('embedded-settings').textContent||'{}')}catch(e){return{}}}
 function loadSettings(){
   const ls=lsGet('lzr_settings',{}),em=readEmbeddedSettings()
@@ -2918,9 +2990,9 @@ function persistSettings(){settings._saved=Date.now();lsSet('lzr_settings',setti
 function cfg(){return{teiler:settings.teiler>0?settings.teiler:143,saetze:settings.saetze}}
 
 // ── State des geöffneten Monats ──────────────────────────────────────────────
-const DS_FIELDS=['monat','jahr','grundgehalt','taggeld','zaTopfMax','zaTopfStart','ruheStart','lehrling','urlaubsgeldAktiv','urlaubsgeldBetrag','extras','dayMap']
+const DS_FIELDS=['monat','jahr','grundgehalt','taggeld','zaTopfMax','zaTopfStart','ruheStart','lehrling','urlaubsgeldAktiv','urlaubsgeldBetrag','extras','dayMap','urlaubSatz','urlaubDurchschnitt']
 let state={monat:new Date().getMonth()+1,jahr:new Date().getFullYear(),grundgehalt:0,stundensatz:0,taggeld:0,zaTopfMax:0,zaTopfStart:0,ruheStart:0,
-  lehrling:false,urlaubsgeldAktiv:false,urlaubsgeldBetrag:0,extras:[],dayMap:{},openKey:null,clipboard:null,place:null,vergleich:[]}
+  lehrling:false,urlaubsgeldAktiv:false,urlaubsgeldBetrag:0,extras:[],dayMap:{},urlaubSatz:null,urlaubDurchschnitt:null,openKey:null,clipboard:null,place:null,vergleich:[]}
 function snapshot(){const o={};DS_FIELDS.forEach(k=>o[k]=clone(state[k]));return o}
 function curKey(){return monatKey(state.monat,state.jahr)}
 function getDayData(key){return state.dayMap[key]||{mode:'frei',stunden:8.25,fahrzeit:0}}
@@ -2935,9 +3007,40 @@ const MON_KEY='lzr_monate',AKTIV_KEY='lzr_aktiv'
 function readMonate(){return lsGet(MON_KEY,{})}
 function writeMonate(m){if(!lsSet(MON_KEY,m)){toast('Speichern im Browser nicht möglich – bitte „Alle Daten sichern“ nutzen');return false}return true}
 // Das ZA-Maximum ist nur in den Einstellungen änderbar: Monate ohne festgehaltene Fassung folgen immer dem aktuellen Wert
-function recDaten(rec){
+function recDatenRoh(rec){
   const d=rec&&(rec.draft?rec.draft.data:rec.saved&&rec.saved.data)
   return d&&!rec.saved?{...d,zaTopfMax:settings.zaTopfMax}:d
+}
+// Monate ohne festgehaltene Fassung rechnen das Urlaubsentgelt immer mit dem aktuellen Durchschnitt der Vormonate
+function recDaten(rec){
+  const d=recDatenRoh(rec)
+  return d&&!rec.saved?{...d,urlaubDurchschnitt:urlaubDurchschnittFuer(d)}:d
+}
+const hatUrlaub=dayMap=>Object.values(dayMap||{}).some(x=>x&&x.mode==='urlaub')
+// Durchschnitt der variablen Bezüge je Sollstunde aus den letzten erfassten Monaten vor dem Monat d
+// (Zeitraum in den Einstellungen, Standard 3 Monate ≈ 13 Wochen). Nur für Monate mit Urlaub, sonst null.
+function urlaubDurchschnittFuer(d){
+  if(!d||!hatUrlaub(d.dayMap))return null
+  const recs=readMonate(),n=settings.urlaubMonate||3,monate=[]
+  let summe=0,soll=0,m=d.monat,j=d.jahr
+  for(let i=0;i<n;i++){
+    m--;if(m<1){m=12;j--}
+    const k=monatKey(m,j),rec=recs[k];if(!rec)continue
+    const vd=recDatenRoh(rec);if(!vd)continue
+    summe+=urlaubBasis(rechneMonat({...vd,urlaubSatz:0},cfg()).lz,settings.urlaubMitPraemie);soll+=sollStundenMonat(m,j);monate.push(k)
+  }
+  summe=r(summe);soll=r(soll)
+  return{satz:soll>0?r(summe/soll):0,summe,soll,monate:monate.reverse(),zeitraum:n}
+}
+// Urlaubstage in einem Kalenderjahr (gespeicherte und offene Monate, der aktuelle aus dem Eingabestand)
+function urlaubTageJahr(jahr){
+  const recs=readMonate();let t=0
+  for(let m=1;m<=12;m++){
+    const k=monatKey(m,jahr)
+    const d=k===curKey()?snapshot():recs[k]&&recDatenRoh(recs[k]);if(!d||!hatUrlaub(d.dayMap))continue
+    t+=rechneMonat({...d,urlaubSatz:0},cfg()).lz.urlaubTage
+  }
+  return r(t)
 }
 function recGeaendert(rec){return!!(rec&&rec.saved&&rec.draft&&JSON.stringify(rec.draft.data)!==JSON.stringify(rec.saved.data))}
 // Veraltet: eine Neuberechnung der gespeicherten Eingaben mit aktuellen Regeln und Einstellungen ergibt andere Werte
@@ -3023,10 +3126,12 @@ function uebertragVon(m,j){
 function neuerMonatDaten(m,j){
   const ue=uebertragVon(m,j)
   return{monat:m,jahr:j,grundgehalt:settings.grundgehalt,taggeld:settings.taggeld,zaTopfMax:settings.zaTopfMax,lehrling:!!settings.lehrling,
-    zaTopfStart:ue?ue.za:0,ruheStart:ue?ue.ruhe:0,urlaubsgeldAktiv:false,urlaubsgeldBetrag:0,extras:[],dayMap:{}}
+    zaTopfStart:ue?ue.za:0,ruheStart:ue?ue.ruhe:0,urlaubsgeldAktiv:false,urlaubsgeldBetrag:0,extras:[],dayMap:{},urlaubSatz:null,urlaubDurchschnitt:null}
 }
 function applySnapshot(d){
   DS_FIELDS.forEach(k=>{if(d[k]!==undefined)state[k]=clone(d[k])})
+  if(d.urlaubSatz===undefined)state.urlaubSatz=null
+  if(d.urlaubDurchschnitt===undefined)state.urlaubDurchschnitt=null
   state.extras=state.extras||[];state.dayMap=state.dayMap||{}
   extraIdCounter=state.extras.reduce((m,e)=>Math.max(m,e.id||0),0)
   state.openKey=null;state.clipboard=null;state.place=null
@@ -3038,6 +3143,7 @@ function ladeMonat(m,j){
   flushAutosave()
   const key=monatKey(m,j),rec=readMonate()[key]
   applySnapshot(rec?recDaten(rec):neuerMonatDaten(m,j))
+  state.urlaubDurchschnitt=urlaubDurchschnittFuer(snapshot())
   state.vorlageOffen=false
   lsSet(AKTIV_KEY,key)
   render()
@@ -3074,7 +3180,9 @@ function renderExtrasList(){
 // ── Tagesarten ───────────────────────────────────────────────────────────────
 const MODE_INFO={
   buero:{l:'Büro',c:'B'},homeoffice:{l:'Homeoffice',c:'HO'},montage:{l:'Montage',c:'M'},montage_reise:{l:'Montage + Reise',c:'M+R'},
-  za:{l:'Zeitausgleich',c:'ZA'},ruhe:{l:'Ruhezeit',c:'RZ'},frei:{l:'Frei',c:'–'}}
+  za:{l:'Zeitausgleich',c:'ZA'},ruhe:{l:'Ruhezeit',c:'RZ'},urlaub:{l:'Urlaub',c:'U'},frei:{l:'Frei',c:'–'}}
+// Tage ohne Arbeit, deren Stunden der Normalarbeitszeit folgen (Fr 5,5 h)
+const istAbwModus=m=>m==='za'||m==='ruhe'||m==='urlaub'
 const fmtK=h=>(+h||0).toLocaleString(window.PC_LOCALE||'de-AT',{maximumFractionDigits:2})
 function defaultStunden(mode,date){
   const fr=date.getDay()===5
@@ -3082,7 +3190,7 @@ function defaultStunden(mode,date){
   if(mode==='homeoffice') return fr?settings.hoFr:settings.ho
   if(mode==='montage') return settings.montage
   if(mode==='montage_reise') return settings.reiseArbeit
-  if(mode==='za'||mode==='ruhe') return nazForDate(date)
+  if(istAbwModus(mode)) return nazForDate(date)
   return 0
 }
 
@@ -3099,7 +3207,7 @@ function pasteDay(key){
   if(!state.clipboard)return
   const d={...state.clipboard}
   // ZA/Ruhezeit: Abwesenheit an die Normalarbeitszeit des Zieltages anpassen (z.B. Fr 5,5 h)
-  if(d.mode==='za'||d.mode==='ruhe') d.stunden=nazForDate(keyToDate(key))
+  if(istAbwModus(d.mode)) d.stunden=nazForDate(keyToDate(key))
   state.dayMap[key]=d
   render()
 }
@@ -3144,7 +3252,7 @@ function buildDDContent(key){
   cont.innerHTML=`<div class="dd-title">${WT_LABEL[date.getDay()]}, ${date.getDate()}. ${MONATE[date.getMonth()]}</div>
     <div class="dd-sub">${fd.name?esc(fd.name)+' · ':''}Normalarbeitszeit ${fmtK(nazForDate(date))} h</div>`
   const modes=document.createElement('div');modes.className='dd-modes'
-  ;['buero','homeoffice','montage','montage_reise','za','ruhe','frei'].forEach(v=>{
+  ;['buero','homeoffice','montage','montage_reise','za','ruhe','urlaub','frei'].forEach(v=>{
     const b=document.createElement('button');b.type='button';b.className='dd-mode'+(data.mode===v?' on':'')
     b.innerHTML=`<span class="code">${MODE_INFO[v].c}</span>${MODE_INFO[v].l}`
     b.onclick=()=>{
@@ -3159,7 +3267,7 @@ function buildDDContent(key){
   cont.appendChild(modes)
 
   if(data.mode!=='frei'){
-    const isAbw=data.mode==='za'||data.mode==='ruhe'
+    const isAbw=istAbwModus(data.mode)
     cont.insertAdjacentHTML('beforeend','<hr class="dd-sep">')
     const row=(label,val,on)=>{const r1=document.createElement('div');r1.className='dd-row';r1.innerHTML='<span>'+label+'</span>'
       const i=document.createElement('input');i.type='number';i.step='0.25';i.min='0';i.max='24';i.value=val;i.className='input-sm'
@@ -3190,6 +3298,7 @@ function buildDDContent(key){
     }
   }
   if(data.mode==='montage_reise')cont.insertAdjacentHTML('beforeend','<p class="dd-info">Reisezeit zählt als Arbeitszeit, aber ohne On-Site-Zulage. Reisezeit außerhalb der Normalarbeitszeit erhält den Lenkzeit-Zuschlag.</p>')
+  if(data.mode==='urlaub')cont.insertAdjacentHTML('beforeend','<p class="dd-info">Das Grundgehalt läuft weiter. Dazu kommt je Urlaubsstunde das Urlaubsentgelt aus dem Durchschnitt der Vormonate. Halber Tag: Stunden halbieren.</p>')
   if(data.mode==='za'||data.mode==='ruhe')cont.insertAdjacentHTML('beforeend','<p class="dd-info">'+(data.mode==='ruhe'?'Wird aus dem Ruhezeit-Topf genommen. Reicht er nicht, geht der Rest vom ZA-Topf ab.':'Zuerst wird der Ruhezeit-Topf geleert, danach der ZA-Topf.')+'</p>')
 
   // Tagesdetails: Auswirkung auf Stunden, Zuschläge und Zeitkonten
@@ -3219,6 +3328,8 @@ function buildDDContent(key){
 
 // ── Render: Lohnrechner ──────────────────────────────────────────────────────
 function render(){
+  if(!hatUrlaub(state.dayMap))state.urlaubDurchschnitt=null
+  else if(!state.urlaubDurchschnitt)state.urlaubDurchschnitt=urlaubDurchschnittFuer(snapshot())
   const snap=snapshot(),res=rechneMonat(snap,cfg())
   state.stundensatz=res.lz.stundensatz
   state._res=res
@@ -3441,12 +3552,32 @@ function renderZeitkonten(){
   $('za-pot').innerHTML=`<div class="konto-kopf"><span>ZA-Guthaben</span><b class="${lz.zaTopfEnde<0?'neg':''}">${lz.zaTopfEnde<0?'−':''}${fmtH(Math.abs(lz.zaTopfEnde))}<small>h</small></b></div>`+
     (max>0?`<div class="pot-bar" title="${fmtH(Math.max(0,lz.zaTopfEnde))} von ${fmtH(max)} h"><div class="fill" style="width:${pct}%"></div></div>`:'')+
     `<p class="konto-verlauf" data-pv-art="z">Übertrag ${fmtH(lz.zaTopfStart)} · Zugänge ${sg(lz.zaZugang)} · Entnahmen ${sg(-lz.zaEntnahme)}${lz.zaUeberlauf>0?` · <span class="warn-count">${fmtH(lz.zaUeberlauf)} h ausbezahlt</span>`:''}</p>`
+  renderUrlaub()
   $('ruhe-pot').innerHTML=`<div class="konto-kopf"><span>Ruhezeitkonto</span><b>${fmtH(ruhe.ruheEnde)}<small>h</small></b></div>`+
     `<p class="konto-verlauf" data-pv-art="z">Übertrag ${fmtH(ruhe.ruheStart)} · Sonntagsarbeit ${sg(ruhe.ruheNeu)} · genommen ${sg(-ruhe.ruheVerbrauch)}</p>`
 }
 
+// Urlaubskonto (Kalenderjahr) und Satz des Urlaubsentgelts im Monat
+function renderUrlaub(){
+  const {lz}=state._res,jahr=state.jahr,anspruch=settings.urlaubAnspruch||0,genommen=urlaubTageJahr(jahr),rest=r(anspruch-genommen)
+  const tg=v=>fmtK(v)+(v===1?' Tag':' Tage')
+  $('urlaub-pot').innerHTML=`<div class="konto-kopf"><span>Urlaub ${jahr}</span><b class="${rest<0?'neg':''}">${rest<0?'−':''}${fmtK(Math.abs(rest))}<small>${Math.abs(rest)===1?'Tag':'Tage'}</small></b></div>`+
+    (anspruch>0?`<div class="pot-bar" title="${tg(genommen)} von ${tg(anspruch)}"><div class="fill" style="width:${Math.min(100,Math.max(0,genommen/anspruch*100))}%"></div></div>`:'')+
+    `<p class="konto-verlauf" data-pv-art="z">Tage: Anspruch ${fmtK(anspruch)} · genommen ${fmtK(genommen)}${lz.urlaubTage>0?` · diesen Monat ${fmtK(lz.urlaubTage)}`:''}</p>`
+  const aktiv=lz.urlaubStd>0||typeof state.urlaubSatz==='number'
+  $('urlaubsatz-field').hidden=!aktiv
+  const du=state.urlaubDurchschnitt,hint=$('urlaub-hint')
+  $('urlaubSatz').placeholder=du?'automatisch: '+fmt(du.satz):'automatisch'
+  hint.hidden=!aktiv
+  if(!aktiv)return
+  const sp=t=>`<span>${t}</span>`
+  if(typeof state.urlaubSatz==='number')hint.innerHTML=sp('Urlaubsentgelt: '+fmtH(lz.urlaubStd)+' h × '+fmt(lz.urlaubSatz)+' €/h (selbst eingetragen) = '+fmtE(lz.urlaubB)+'.')
+  else if(du&&du.monate.length)hint.innerHTML=sp('Urlaubsentgelt: '+fmtH(lz.urlaubStd)+' h × '+fmt(du.satz)+' €/h = '+fmtE(lz.urlaubB)+'.')+' '+sp('Durchschnitt aus')+' '+sp(du.monate.map(monatName).join(', '))+sp(': '+fmtE(du.summe)+' Überstunden, Zuschläge und Zulagen ÷ '+fmtH(du.soll)+' h Sollzeit.')
+  else hint.innerHTML=sp('Urlaubsentgelt: Es ist kein Vormonat erfasst, aus dem sich ein Durchschnitt bilden lässt. Erfasse die Monate davor oder trage den Satz vom Lohnzettel ein.')
+}
+
 function renderDetail(){
-  const alleTage=state._res.tage,detailTage=alleTage.filter(t=>t.gesamtStunden>0||t.abwStunden>0),card=$('detail-card')
+  const alleTage=state._res.tage,detailTage=alleTage.filter(t=>t.gesamtStunden>0||t.abwStunden>0||t.urlaubStunden>0),card=$('detail-card')
   if(!detailTage.length){card.hidden=true;return}
   card.hidden=false
   const COLS=[{f:'gesamtStunden'},{f:'nazStunden'},{f:'zaTopfStunden',za:true},{f:'ruheNetto',za:true},{f:'ueStd50'},{f:'ueStd100_68_1'},{f:'ueStd100_68_2'},{f:'lenkzeit'}]
@@ -3469,8 +3600,9 @@ function renderDetail(){
         const teile=[];if(t.ruheVerbrauch>0)teile.push(fmtH(t.ruheVerbrauch)+' h aus Ruhezeit');if(t.zaTopfStunden<0)teile.push(fmtH(-t.zaTopfStunden)+' h aus ZA')
         if(teile.length)arb+=' · '+teile.join(' + ')
       }
+      if(t.isUrlaub)arb='Urlaub '+fmtH(t.urlaubStunden)+' h'
       if(t.tausch)arb+=' · 10/4: normaler Tag'
-      rows+=`<tr class="detail-row${zs?' zs':''}${t.isZA||t.isRuhe?' abw':''}"><td style="white-space:nowrap;"><b style="color:var(--pr-text);font-weight:600;">${dl}</b>${t.ftName?' <span style="color:var(--pr-signal-text);">'+esc(t.ftName)+'</span>':''}<br><span>${arb}</span></td>${COLS.map(c=>cell(t[c.f],c)).join('')}</tr>`
+      rows+=`<tr class="detail-row${zs?' zs':''}${t.isZA||t.isRuhe||t.isUrlaub?' abw':''}"><td style="white-space:nowrap;"><b style="color:var(--pr-text);font-weight:600;">${dl}</b>${t.ftName?' <span style="color:var(--pr-signal-text);">'+esc(t.ftName)+'</span>':''}<br><span>${arb}</span></td>${COLS.map(c=>cell(t[c.f],c)).join('')}</tr>`
     })
     rows+=`<tr class="week-row"><td>KW ${kw}</td>${COLS.map(c=>cell(sumOf(wt,c.f),c,true)).join('')}</tr>`
   })
@@ -3604,10 +3736,10 @@ function vorlageAnwenden(srcKey){
   const changes={}
   for(let d=1;d<=new Date(state.jahr,state.monat,0).getDate();d++){
     const date=new Date(state.jahr,state.monat-1,d),m=muster[date.getDay()];if(!m)continue
-    const e=JSON.parse(Object.entries(m).sort((a,b)=>b[1]-a[1])[0][0]);if(e.mode==='frei')continue
+    const e=JSON.parse(Object.entries(m).sort((a,b)=>b[1]-a[1])[0][0]);if(e.mode==='frei'||e.mode==='urlaub')continue
     // An österreichischen Feiertagen keine Büro-, Homeoffice- oder Abwesenheitstage übernehmen
     if(isFT(date)&&!isMontageMode(e.mode))continue
-    if(e.mode==='za'||e.mode==='ruhe')e.stunden=nazForDate(date)
+    if(istAbwModus(e.mode))e.stunden=nazForDate(date)
     if(!isMontageMode(e.mode)){delete e.land;delete e.region}
     changes[dateKey(date)]=e
   }
@@ -3663,6 +3795,7 @@ monatSel.onchange=()=>ladeMonat(+monatSel.value,state.jahr)
 jahrSel.onchange=()=>ladeMonat(state.monat,+jahrSel.value)
 const numIn=(id,k)=>{$(id).oninput=function(){state[k]=parseFloat(this.value)||0;render()}}
 numIn('grundgehalt','grundgehalt');numIn('taggeld','taggeld');numIn('zaTopfStart','zaTopfStart');numIn('ruheStart','ruheStart');numIn('urlaubsgeldBetrag','urlaubsgeldBetrag')
+$('urlaubSatz').oninput=function(){const v=parseFloat(this.value);state.urlaubSatz=this.value.trim()===''||isNaN(v)?null:Math.max(0,v);render()}
 $('urlaubsgeldAktiv').onchange=function(){state.urlaubsgeldAktiv=this.checked;$('urlaubsgeld-fields').hidden=!this.checked;render()}
 function toggleLehrling(){state.lehrling=!state.lehrling;render()}
 function syncInputs(){
@@ -3670,6 +3803,7 @@ function syncInputs(){
   jahrSel.innerHTML=[...jahre].sort().map(y=>`<option value="${y}">${y}</option>`).join('')
   monatSel.value=state.monat;jahrSel.value=state.jahr
   ;['grundgehalt','taggeld','zaTopfStart','ruheStart','urlaubsgeldBetrag'].forEach(id=>$(id).value=state[id])
+  $('urlaubSatz').value=typeof state.urlaubSatz==='number'?state.urlaubSatz:''
   $('urlaubsgeldAktiv').checked=!!state.urlaubsgeldAktiv
   $('urlaubsgeld-fields').hidden=!state.urlaubsgeldAktiv
 }
@@ -3738,7 +3872,7 @@ function renderJahr(){
   $('jahr-kpis2').innerHTML=
     kpiHtml('Sozialversicherung',euro(sum('sv')),'Summe')+kpiHtml('Lohnsteuer',euro(sum('lst')),'Summe inkl. Sonderzahlungen')+
     kpiHtml('Steuerfrei',euro(sum('steuerfrei')),'Taggeld, §68, Pauschalen')+kpiHtml('Zuschläge & Überstunden',euro(sum('zuschlaege')),'inkl. Grundvergütung')+
-    kpiHtml('Prämien & Sonderzahlungen',euro(r(sum('praemien')+sum('sonderzahlungen'))),'Prämien, Urlaubsgeld')+kpiHtml('Stunden',fmtH(sum('stunden'))+'<small>h</small>','gearbeitet inkl. Reise')
+    kpiHtml('Prämien & Sonderzahlungen',euro(r(sum('praemien')+sum('sonderzahlungen'))),'Prämien, Urlaubsgeld')+kpiHtml('Stunden',fmtH(sum('stunden'))+'<small>h</small>','gearbeitet inkl. Reise')+kpiHtml('Urlaub',fmtK(sum('urlaubTage'))+'<small>Tage</small>','von '+fmtK(settings.urlaubAnspruch||0)+' Tagen · Urlaubsentgelt '+fmtE(sum('urlaubsentgelt')))
   renderNettoChart(daten);renderKontoChart(daten)
   const td=v=>`<td class="r">${v}</td>`
   $('jahr-table').innerHTML=`<table><thead><tr><th>Arbeitsmonat <span class="th-sub">→ Lohnzettel</span></th><th>Status</th><th class="r">Brutto</th><th class="r">Netto geschätzt</th><th class="r">Netto laut Lohnzettel</th><th class="r">Taggeld</th><th class="r">Stunden</th><th class="r">ZA Ende</th><th class="r">Ruhezeit Ende</th></tr></thead><tbody>${
@@ -3972,12 +4106,13 @@ function allesLoeschen(){
 }
 
 // ── Einstellungen ────────────────────────────────────────────────────────────
-const SET_NUM=['grundgehalt','teiler','taggeld','zaTopfMax','buero','bueroFr','ho','hoFr','montage','reiseArbeit','reisezeit','toleranz']
+const SET_NUM=['grundgehalt','teiler','taggeld','zaTopfMax','buero','bueroFr','ho','hoFr','montage','reiseArbeit','reisezeit','toleranz','urlaubAnspruch','urlaubMonate']
 const T_NUM=['customOn','customOff','stunden','reiseArbeit','reisezeit'],T_BOOL=['reise','za']
 const Z_PCT=['samstag','lenkzeit','ueberlauf'],Z_EUR=['onSite','ho','montagePraemie']
 function fillSettingsForm(src){
   SET_NUM.forEach(k=>$('s-'+k).value=src[k]??DEFAULT_SETTINGS[k])
   $('s-lehrling').checked=!!src.lehrling
+  $('s-urlaubMitPraemie').checked=!!src.urlaubMitPraemie
   $('s-theme').value=src.theme||'auto'
   $('s-lang').value=window.PC_LANG||'de'
   $('s-writeFile').checked=!!src.writeFile
@@ -4024,6 +4159,8 @@ function resetSettings(){if(confirm('Formular auf die Standardwerte zurücksetze
 function saveSettings(){
   SET_NUM.forEach(k=>{const v=parseFloat($('s-'+k).value);settings[k]=isNaN(v)?DEFAULT_SETTINGS[k]:Math.max(0,v)})
   if(!(settings.teiler>0))settings.teiler=143
+  settings.urlaubMonate=Math.min(12,Math.max(1,Math.round(settings.urlaubMonate)||3))
+  settings.urlaubMitPraemie=$('s-urlaubMitPraemie').checked
   settings.lehrling=$('s-lehrling').checked
   settings.theme=$('s-theme').value
   settings.writeFile=$('s-writeFile').checked
@@ -4039,6 +4176,7 @@ function saveSettings(){
   const rec=readMonate()[curKey()]
   if(!rec||!rec.saved){state.grundgehalt=settings.grundgehalt;state.taggeld=settings.taggeld;state.lehrling=settings.lehrling}
   if(!rec||!rec.saved)state.zaTopfMax=settings.zaTopfMax
+  state.urlaubDurchschnitt=urlaubDurchschnittFuer(snapshot())
   zaMaxInGespeicherte()
   syncInputs();applyTheme();syncLandRow();renderPresets();render();fillSettingsForm(settings)
   if(settings.writeFile)writeSettingsToHtml()

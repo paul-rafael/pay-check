@@ -33,7 +33,8 @@ Der Rechner ist eine einzige HTML-Datei: ohne Installation, ohne Server, ohne Ko
 | --- | --- |
 | Erfassen | Kalender über die volle Breite mit Tagesdetails, Arbeitsmodell und Einsatzland; Zeitkonten direkt darunter, Bezahlung kompakt – Netto und Arbeitsstunden stehen immer oben |
 | Ergebnis | Netto als Hauptzahl, Brutto, Abzüge und steuerfreie Anteile; vollständiger Lohnzettel, Brutto-Netto-Rechnung und Soll-Ist-Vergleich |
-| Kalender | Büro, Homeoffice, Montage, Montage mit Reise, Zeitausgleich und Ruhezeit mit Farbe und Kürzel; Tage kopieren und einfügen |
+| Kalender | Büro, Homeoffice, Montage, Montage mit Reise, Zeitausgleich, Ruhezeit und Urlaub mit Farbe und Kürzel; Tage kopieren und einfügen |
+| Urlaub | Urlaubsentgelt aus dem Durchschnitt der Vormonate (Überstunden, Zuschläge, Zulagen), Urlaubskonto mit Anspruch und Rest je Kalenderjahr |
 | Zeiten importieren | Zeitnachweis aus der Zeiterfassung (PDF oder Foto) lokal einlesen: Datum, Tagesprogramm, Abwesenheit, Kommt/Geht und Stunden (Format Stunden,Minuten). Codes einmal einer Tagesart zuordnen – die Zuordnung wird gemerkt – und die Tage in den Kalender einfügen |
 | Arbeitsmodelle | 5/2, 10/4, 6/1/4/3 und eigene Modelle; einmalig oder fortlaufend über Monatsgrenzen; früheren Monat als Vorlage |
 | Arbeitszeit | Normalarbeitszeit Mo–Do 8,25 h, Fr 5,5 h; Mehrstunden in den ZA-Topf; Überstunden über 10 h/Tag und 50 h/Woche |
