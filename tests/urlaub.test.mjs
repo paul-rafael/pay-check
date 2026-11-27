@@ -160,3 +160,54 @@ test('Urlaub: Vorlage aus dem Vormonat übernimmt keine Urlaubstage; Kopieren pa
   a.run(`state.dayMap['${k(11, 2)}']={mode:'urlaub',stunden:8.25,fahrzeit:0};copyDay('${k(11, 2)}');pasteDay('${k(11, 6)}')`)
   assert.equal(a.run(`state.dayMap['${k(11, 6)}'].stunden`), 5.5, 'Freitag: 5,5 h')
 })
+
+test('Feiertagsentgelt: Feiertage Mo–Fr bringen ausfallende Normalarbeitszeit × Durchschnitt, automatisch (LA 1664)', () => {
+  const a = ladeApp()
+  for (const m of [9, 10, 11]) montageMonat(a, m)
+  // Dezember 2026: 8.12. (Di) und 25.12. (Fr) fallen auf Werktage, 26.12. ist ein Samstag
+  a.dom.window.__t = { [k(12, 1)]: mo(10) }
+  a.run('ladeMonat(12,2026);state.grundgehalt=3600;state.taggeld=40;state.dayMap=window.__t;render()')
+  const l = lz(a), satz = a.run('state.urlaubDurchschnitt.satz')
+  assert.ok(satz > 0)
+  assert.equal(l.feiertagStd, 13.75)
+  assert.equal(l.feiertagB, Math.round(13.75 * satz * 100) / 100)
+  assert.equal(l.urlaubStd, 0)
+  const z = JSON.parse(a.run('JSON.stringify(lohnartZeilen(state._res.lz).find(z=>z.la===\'1664\'))'))
+  assert.equal(z.bez, 'Feiertagsentgelt (Durchschnitt)')
+  assert.equal(z.ein, '13,75 h')
+  // laufender Bezug
+  const ohne = a.run('rechneMonat({...snapshot(),urlaubSatz:0},cfg()).lz.lfdBrutto')
+  assert.equal(l.lfdBrutto, Math.round((ohne + l.feiertagB) * 100) / 100)
+  // Satzfeld und Rechenweg auch ohne Urlaub sichtbar
+  a.run(`location.hash='erfassen';zeigeView()`)
+  assert.equal(a.run("document.getElementById('urlaubsatz-field').hidden"), false)
+  assert.match(a.run("document.getElementById('urlaub-hint').textContent"), /Feiertagsentgelt: 13,75 h × .* €\/h = .* €\. Durchschnitt aus September 2026, Oktober 2026, November 2026/)
+})
+
+test('Feiertagsentgelt: nicht am Wochenende; auch bei Arbeit am Feiertag; Auslandseinsatz nach Feiertagen des Einsatzlandes', () => {
+  const a = ladeApp()
+  for (const m of [7, 8, 9]) montageMonat(a, m)
+  // November 2026: Allerheiligen ist ein Sonntag → kein Feiertagsentgelt, kein Durchschnitt nötig
+  a.run('ladeMonat(11,2026);state.grundgehalt=3600;state.dayMap={};render()')
+  assert.equal(lz(a).feiertagStd, 0)
+  assert.equal(a.run('state.urlaubDurchschnitt'), null)
+  // Oktober 2026: 26.10. (Mo) Nationalfeiertag – gearbeitet: Feiertagsentgelt plus Feiertagsarbeit
+  a.dom.window.__t = { [k(10, 26)]: mo(8) }
+  a.run('ladeMonat(10,2026);state.grundgehalt=3600;state.dayMap=window.__t;render()')
+  const l = lz(a)
+  assert.equal(l.feiertagStd, 8.25)
+  assert.ok(l.feiertagB > 0)
+  assert.ok(l.ue68_2Std >= 8, 'Feiertagsarbeit wird weiter vergütet')
+  // Montage in Deutschland am 26.10.: dort kein Feiertag → kein Feiertagsentgelt für diesen Tag
+  a.dom.window.__t = { [k(10, 26)]: { ...mo(8), land: 'DE', region: 'BY' } }
+  a.run('state.dayMap=window.__t;render()')
+  assert.equal(lz(a).feiertagStd, 0)
+})
+
+test('Feiertagsentgelt: gespeicherte Monate ohne Satz bleiben unverändert (nicht veraltet)', () => {
+  const a = ladeApp()
+  // gespeicherter Dezember ohne Vormonate → Satz 0
+  a.dom.window.__t = { [k(12, 1)]: mo(10) }
+  a.run('ladeMonat(12,2026);state.grundgehalt=3600;state.dayMap=window.__t;render();flushAutosave();speichereMonat()')
+  assert.equal(a.run(`recVeraltet(readMonate()['2026-12'])`), false)
+})
