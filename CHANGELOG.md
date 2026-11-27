@@ -2,6 +2,12 @@
 
 Alle wichtigen Änderungen an diesem Projekt. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [Semantic Versioning](https://semver.org/lang/de/).
 
+## [3.9.0] – 2026-11-27
+
+### Neu
+- Feiertagsentgelt (Lohnart 1664, § 9 Arbeitsruhegesetz): Jeder Feiertag Mo–Fr bringt automatisch die ausfallende Normalarbeitszeit (8,25 h bzw. 5,5 h) × denselben Durchschnitt wie das Urlaubsentgelt. Wird am Feiertag gearbeitet, kommt es zusätzlich zum Feiertagsarbeitsentgelt. Feiertage am Wochenende bringen nichts; bei Montage im Ausland zählen die Feiertage des Einsatzlandes.
+- Der Satz unter Bezahlung heißt jetzt „Urlaubs- und Feiertagsentgelt“ und erscheint auch in Monaten mit Feiertag ohne Urlaub; der Hinweis zeigt beide Rechnungen.
+
 ## [3.8.0] – 2026-11-26
 
 ### Geändert
